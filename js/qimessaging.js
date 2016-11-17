@@ -15,7 +15,7 @@ var io="undefined"==typeof module?{}:module.exports;(function(){(function(a,b){v
 function QiSession(connected, disconnected, host)
 {
   var _socket = io.connect("https://sebastianopazo.github.io/NAOkita/js/socket.io.js",
-                             'force new connection': true });
+                             {'force new connection': true });
   var _dfd = new Array();
   var _sigs = new Array();
   var _idm = 0;
