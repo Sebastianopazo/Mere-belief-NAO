@@ -14,7 +14,7 @@ var io="undefined"==typeof module?{}:module.exports;(function(){(function(a,b){v
 
 function QiSession(connected, disconnected, host)
 {
-  var _socket = io.connect("http://" + (host ? host : window.location.host),
+  var _socket = io.connect("https://" + (host ? host : window.location.host),
                            { resource: "libs/qimessaging/2/socket.io",
                              'force new connection': true });
   var _dfd = new Array();
