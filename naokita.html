@@ -6,11 +6,24 @@
   </head>
   <body>
 
+    <button type="button" name="button"></button>
+
   <script src="js/jquery.min.js" type="text/javascript"></script>
   <script src="js/socket.io.min.js" type="text/javascript"></script>
-  <script src="js/qimessaging.min.js" type="text/javascript"></script>
+  <script src="js/qimessaging.js" type="text/javascript"></script>
   <script type="text/javascript">
-    
+    var session = new QiSession("192.168.0.5"); //TRY TO GET THIS DINAMICALLY
+    session.service("ALTextToSpeech").done(function (tts) {
+      // tts is a proxy to the ALTextToSpeech service
+    }).fail(function (error) {
+      console.log("An error occurred:", error);
+    });
+
+    tts.getLanguage().done(function (lang) {
+      console.log("I speak " + lang);
+    }).fail(function (error) {
+      console.log("An error occurred: " + error);
+    });
   </script>
   </body>
 </html>
