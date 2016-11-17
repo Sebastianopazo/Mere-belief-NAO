@@ -15,7 +15,7 @@ var io="undefined"==typeof module?{}:module.exports;(function(){(function(a,b){v
 function QiSession(connected, disconnected, host)
 {
   var _socket = io.connect("https://" + (host ? host : window.location.host),
-                           { resource: "js/socket.io.js",
+                           { resource: "NAOkita/js/socket.io.js",
                              'force new connection': true });
   var _dfd = new Array();
   var _sigs = new Array();
