@@ -1,4 +1,3 @@
-console.warn("This version of QiMessaging is now deprecated. Please consider upgrading with help from the documentation.");
 /*
 **  Copyright (C) Aldebaran Robotics
 **  See COPYING for the license
