@@ -1,29 +1,89 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <title>NAOkita Control</title>
-  </head>
-  <body>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <script type = "text/javascript" src = "http://nao:nao@169.254.6.238/libs/qimessaging/1.0/qimessaging.js"></script>
+</head>
 
-    <button type="button" name="button"></button>
+<body onload = "connect()">
 
-  <script src="js/jquery.min.js" type="text/javascript"></script>
-  <script src="js/socket.io.min.js" type="text/javascript"></script>
-  <script src="js/qimessaging.js" type="text/javascript"></script>
-  <script type="text/javascript">
-    var session = new QiSession("192.168.0.5"); //TRY TO GET THIS DINAMICALLY
-    session.service("ALTextToSpeech").done(function (tts) {
-      // tts is a proxy to the ALTextToSpeech service
-    }).fail(function (error) {
-      console.log("An error occurred:", error);
+<input type="button" onclick= "answer1()" value = "answer1"></button>
+
+<input type="button" onclick= "answer2()" value = "answer2"></button>
+
+<input type="button" onclick= "answer3()" value = "answer3"></button>
+
+<input type="button" onclick= "stop()" value = "stop"></button>
+
+
+<script>
+var textToSpeech;
+var session;
+
+function connect()
+{
+  session = new QiSession('169.254.6.238');
+  session.socket().on('connect', function()
+  {
+    console.log("QiSession connected!");
+  }).on('disconnect', function(){
+    console.log("QiSession disconnect");
+  });
+}
+
+function speak()
+{
+  session.service("ALTextToSpeech").done(function(tts)
+  {
+    tts.say("You just touched my head!");
+  });
+}
+function speak2(){
+  session.service("ALTextToSpeech").done(function(tts)
+  {
+    tts.say("bye bye!");
+  });
+}
+
+function touchHead() {
+  session.service("ALMemory").done(function (ALMemory) {
+    ALMemory.subscriber("FrontTactilTouched").done(function (subscriber) {
+      // subscriber.signal is a signal associated to "FrontTactilTouched"
+      subscriber.signal.connect(function (state) {
+        state == 1 ? speak() : speak2();
+      });
     });
+  });
+}
 
-    tts.getLanguage().done(function (lang) {
-      console.log("I speak " + lang);
-    }).fail(function (error) {
-      console.log("An error occurred: " + error);
-    });
-  </script>
-  </body>
+function answer1() {
+  session.service("ALBehaviorManager").done(function(tts)
+  {
+    tts.runBehavior("answer3");
+  });
+}
+
+function answer3() {
+  session.service("ALBehaviorManager").done(function(tts)
+  {
+    tts.runBehavior("answer1");
+  });
+}
+
+function answer2() {
+  session.service("ALBehaviorManager").done(function(tts)
+  {
+    tts.runBehavior("answer2");
+  });
+}
+
+function stop() {
+  session.service("ALBehaviorManager").done(function(tts)
+  {
+    tts.stopAllBehaviors();
+  });
+}
+
+</script>
+</body>
 </html>
