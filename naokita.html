@@ -3,23 +3,83 @@
 <head>
     <title>NAO CONTROL</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <script type = "text/javascript" src = "https://nao:nao@169.254.6.238/libs/qimessaging/1.0/qimessaging.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script type = "text/javascript" src = "http://nao:nao@169.254.6.238/libs/qimessaging/1.0/qimessaging.js"></script>
+    <style>
+    .btn-large {margin: 15px;}
+    .center {text-align: center;}
+    </style>
 </head>
 
-<h1>NAO CONTROL</h1>
+<body>
+    <nav class="purple darken-3">
+      <div class="nav-wrapper">
+        <a href="naokita.html" class="brand-logo center">NAOKITA Control</a>
+        <a href="#" data-activates="mobile-demo" class="button-collapse">
+          <i class="material-icons">menu</i>
+        </a>
+        <ul class="right hide-on-med-and-down">
+          <li><a href="#">Access Camera</a></li>
+          <li><a href="#">Manual Control</a></li>
+          <li><a href="#">Text to speech</a></li>
+        </ul>
+        <ul class="side-nav" id="mobile-demo">
+          <li><a href="#">Access Camera</a></li>
+          <li><a href="#">Manual Control</a></li>
+          <li><a href="#">Text to speech</a></li>
+        </ul>
+      </div>
+    </nav>
+  <div class="container">
+    <div>
+      <div id="succesfullConnect">
+      </div>
+    </div>
+    <div class="section">
+      <h4 class="purple-text text-darken-3 header center-align">Connection</h4>
+      <div class="row">
+        <div class="col s12 center">
+          <a id="connect" class="waves-effect waves-light btn-large  orange lighten-1" onclick= "connect()"><i class="material-icons left">settings_input_antenna</i>Connect to NAO</a>
+          <a id="disconnect" class="waves-effect waves-light btn-large red" onclick= "disconnect()"><i class="material-icons left">stop</i>Disconnect from NAO</a>
+        </div>
+      </div>
+    </div>
+    <div class="divider"></div>
+    <div class="section">
+      <h4 class="purple-text text-darken-3 center-align">Answers</h4>
+      <div class="row">
+        <div class="col s12 center">
+          <a class="waves-effect waves-purple btn-large  orange lighten-1" onclick= "answer1()"><i class="material-icons left">play_arrow</i>Answer 1</a>
+          <a class="waves-effect waves-purple btn-large  orange lighten-1" onclick= "answer2()"><i class="material-icons left">play_arrow</i>Answer 2</a>
+          <a class="waves-effect waves-purple btn-large  orange lighten-1" onclick= "answer3()"><i class="material-icons left">play_arrow</i>Answer 3</a>
+        </div>
+      </div>
+    </div>
+    <div class="divider"></div>
+    <div class="row">
+      <div class="col s12 center">
+        <a id="stopAll" class="waves-effect waves-light btn-large disabled red" onclick= "stop()"><i class="material-icons left">stop</i>Stop Answer</a>
+      </div>
+    </div>
+    <div class="divider"></div>
+    <div class="section">
+      <h4 class="purple-text text-darken-3 center-align"> Manual Control</h4>
+      <div class="row">
+        <div class="col s12 center">
+          <a class="waves-effect waves-purple btn-large  orange lighten-1" onclick= "sleep()"><i class="material-icons left">play_arrow</i>Sleep</a>
+          <a class="waves-effect waves-purple btn-large  orange lighten-1" onclick= "wakeUp()"><i class="material-icons left">play_arrow</i>Wake Up</a>
+        </div>
+      </div>
+    </div>
 
-<body onload = "connect()">
-
-<input type="button" onclick= "answer1()" value = "answer1"></button>
-
-<input type="button" onclick= "answer2()" value = "answer2"></button>
-
-<input type="button" onclick= "answer3()" value = "answer3"></button>
-
-<input type="button" onclick= "stop()" value = "stop"></button>
+  </div>
 
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/js/materialize.min.js"></script>
 <script>
+$(".button-collapse").sideNav();
 var textToSpeech;
 var session;
 
@@ -29,8 +89,17 @@ function connect()
   session.socket().on('connect', function()
   {
     console.log("QiSession connected!");
+    $("#connect").fadeOut('slow');
   }).on('disconnect', function(){
     console.log("QiSession disconnect");
+  });
+}
+
+function stop() {
+  session.service("ALBehaviorManager").done(function(tts)
+  {
+    tts.stopAllBehaviors();
+    $('#stopAll').addClass("disabled");
   });
 }
 
@@ -64,6 +133,7 @@ function answer1() {
   {
     tts.runBehavior("answer3");
   });
+  $('#stopAll').removeClass("disabled");
 }
 
 function answer3() {
@@ -80,10 +150,17 @@ function answer2() {
   });
 }
 
-function stop() {
-  session.service("ALBehaviorManager").done(function(tts)
+function sleep() {
+  session.service("ALMotion").done(function(tts)
   {
-    tts.stopAllBehaviors();
+    tts.rest();
+  });
+}
+
+function wakeUp() {
+  session.service("ALMotion").done(function(tts)
+  {
+    tts.wakeUp();
   });
 }
 
