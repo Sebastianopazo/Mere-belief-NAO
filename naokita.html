@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>NAO CONTROL</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/css/materialize.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body>
+    <nav class="purple darken-3">
+      <div class="nav-wrapper">
+        <a href="naokita.html" class="brand-logo center"><img id="logo" src="naokita.png" width="30px">NAOKITA Control</a>
+        <a href="#" data-activates="mobile-demo" class="button-collapse">
+          <i class="material-icons">menu</i>
+        </a>
+        <ul class="right hide-on-med-and-down">
+          <li><a href="#">Access Camera</a></li>
+          <li><a href="#">Manual Control</a></li>
+          <li><a href="#">Text to speech</a></li>
+        </ul>
+        <ul class="side-nav" id="mobile-demo">
+          <li><a href="#">Access Camera</a></li>
+          <li><a href="#">Manual Control</a></li>
+          <li><a href="#">Text to speech</a></li>
+        </ul>
+      </div>
+    </nav>
+  <div class="container">
+    <div class="section">
+      <h4 class="purple-text text-darken-3 header center-align">Connection</h4>
+      <div class="col s12 center">
+      </div>
+      <div class="row">
+        <div class="col s12 center">
+          <a id="connect" class="waves-effect waves-light btn-large green lighten-2"><i class="material-icons left">settings_input_antenna</i>Connect to NAO</a>
+          <div>STATUS: <span id="status">Disconnected</span><img id="greenLight" class="light" src="green_light.png" alt=""><img id="redLight"class="light" src="red_light.png" alt=""></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="controls" class="container">
+    <div class="divider"></div>
+    <div class="section">
+      <h4 class="purple-text text-darken-3 center-align">Answers</h4>
+      <div class="row">
+        <div class="col s12 center">
+          <a class="waves-effect waves-purple btn-large  orange lighten-1" onclick= "answer1()"><i class="material-icons left">play_arrow</i>Answer 1</a>
+          <a class="waves-effect waves-purple btn-large  orange lighten-1" onclick= "answer2()"><i class="material-icons left">play_arrow</i>Answer 2</a>
+          <a class="waves-effect waves-purple btn-large  orange lighten-1" onclick= "answer3()"><i class="material-icons left">play_arrow</i>Answer 3</a>
+        </div>
+      </div>
+    </div>
+    <div class="divider"></div>
+    <div class="row">
+      <div class="col s12 center">
+        <a id="stopAll" class="waves-effect waves-light btn-large disabled red" onclick= "stopBehavior()"><i class="material-icons left">stop</i>Stop Answer</a>
+      </div>
+    </div>
+    <div class="divider"></div>
+    <div class="section">
+      <h4 class="purple-text text-darken-3 center-align">Manual Control</h4>
+      <div class="row">
+        <div class="col s12 center">
+          <a id="sleep" class="waves-effect waves-purple btn-large purple darken-2" onclick= "sleep()"><i class="material-icons left">brightness_3</i>Sleep</a>
+          <a id="wakeUp" class="waves-effect waves-purple btn-large  yellow darken-1" onclick= "wakeUp()"><i class="material-icons left">brightness_7</i>Wake Up</a>
+        </div>
+      </div>
+        <!-- <div class="col 12 center">
+          <input id="inputText" type="text"/>
+          <input id="submitText" type="button" value="Submit"/>
+        </div> -->
+        <div class="grid-container">
+          <div class="grid">
+            <div class="cell"></div>
+            <div id="forward" onmousedown="moveForward();"onmouseup="stopMove();" class="cell"><img src="arrow_up.png" alt=""></div>
+            <div class="cell"></div>
+            <div id="left" onmousedown="moveLeft();"onmouseup="stopMove();" class="cell"><img src="arrow_left.png" alt=""></div>
+            <div class="cell"></div>
+            <div id="right" onmousedown="moveRight();"onmouseup="stopMove();" class="cell"><img src="arrow_right.png" alt=""></div>
+            <div class="cell"></div>
+            <div id="back" onmousedown="moveBackward();"onmouseup="stopMove();" class="cell"><img src="arrow_down.png" alt=""></div>
+            <div class="cell"></div>
+          </div>
+        </div>
+    </div>
+  </div>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/js/materialize.min.js"></script>
+<script>
+
+
+//Nav bar for mobile
+$(".button-collapse").sideNav();
+var textToSpeech;
+var session;
+var inputMessage;
+
+//Connecting to nao
+//declare function to start QiSession
+function connect()
+{
+  session = new QiSession('192.168.10.105');
+  session.socket().on('connect', function()
+  {
+    console.log("Connected!");
+    $("#connect").addClass('disabled');
+    $('#controls').slideDown('slow');
+    $('#redLight').fadeOut('fast');
+    $('#status').text('Connected');
+  }).on('disconnect', function(){
+    $("#connect").removeClass('disabled');
+    $('#controls').slideUp('slow');
+    $('#status').html('Disconnected');
+    $('#redLight').fadeIn('slow');
+    console.log("QiSession disconnect");
+  });
+}
+
+// Access the Robot
+$('#connect').on( 'click', function() {
+    $.getScript( 'http://nao:nao@192.168.10.105/libs/qimessaging/1.0/qimessaging.js', function( data, textStatus, jqxhr ) {
+      //Create QiSession
+      connect();
+      getStatus();
+    });
+} );
+
+
+
+//Robot behavior functions
+
+//text on form to speech
+function speak()
+{
+  session.service("ALTextToSpeech").done(function(tts)
+  {
+    tts.say(inputMessage);
+  });
+}
+
+$("#submitText").click(function() {
+  inputMessage = $("#inputText").val();
+  speak();
+})
+
+//stops all behaviors being executed
+function stopBehavior() {
+  session.service("ALBehaviorManager").done(function(tts)
+  {
+    tts.stopAllBehaviors();
+    $('#stopAll').addClass("disabled");
+  });
+}
+
+//just a test to acces memory
+function touchHead() {
+  session.service("ALMemory").done(function (ALMemory) {
+    ALMemory.subscriber("FrontTactilTouched").done(function (subscriber) {
+      // subscriber.signal is a signal associated to "FrontTactilTouched"
+      subscriber.signal.connect(function (state) {
+        state == 1 ? speak() : speak2();
+      });
+    });
+  });
+}
+
+
+//Loading behaviors from memory
+function answer1() {
+  session.service("ALBehaviorManager").done(function(tts)
+  {
+    tts.runBehavior("answer3");
+  });
+  $('#stopAll').removeClass("disabled");
+}
+
+function answer2() {
+  session.service("ALBehaviorManager").done(function(tts)
+  {
+    tts.runBehavior("answer2");
+  });
+}
+
+
+function answer3() {
+  session.service("ALBehaviorManager").done(function(tts)
+  {
+    tts.runBehavior("answer1");
+  });
+}
+
+//sleep and wake up.
+function sleep() {
+  session.service("ALMotion").done(function(tts)
+  {
+    tts.rest();
+    $('#wakeUp').removeClass("disabled");
+    $('#sleep').addClass("disabled");
+  });
+}
+
+function wakeUp() {
+  session.service("ALMotion").done(function(tts)
+  {
+    tts.wakeUp();
+    $('#sleep').removeClass("disabled");
+    $('#wakeUp').addClass("disabled");
+  });
+}
+
+//Detect robot status and enable/disable sleep/wakeUp buttons
+function getStatus() {
+  session.service("ALMotion").done(function(tts)
+  {
+    tts.getStiffnesses("body");
+    });
+  }
+
+
+//Movement keys
+function moveForward(){
+  //pressing on cell changes opacity
+  $("#forward").css('opacity', '0.4');
+  session.service("ALMotion").done(function(tts)
+  {
+    tts.move(.2, 0, 0);
+  });
+}
+
+function moveBackward(){
+  //pressing on cell changes opacity
+  $("#back").css('opacity', '0.4');
+  session.service("ALMotion").done(function(tts)
+  {
+    tts.move(-.2, 0, 0);
+  });
+}
+
+function moveLeft(){
+  //pressing on cell changes opacity
+  $("#left").css('opacity', '0.4');
+  session.service("ALMotion").done(function(tts)
+  {
+    tts.move(0, .2, 0);
+  });
+}
+
+function moveRight(){
+  //pressing on cell changes opacity
+  $("#right").css('opacity', '0.4');
+  session.service("ALMotion").done(function(tts)
+  {
+    tts.move(0, -.2, 0);
+  });
+}
+
+function stopMove() {
+  //pressing on cell changes opacity
+  $(".cell").css('opacity', '1');
+  session.service("ALMotion").done(function(tts)
+  {
+    tts.stopMove();
+  });
+}
+</script>
+</body>
+</html>
