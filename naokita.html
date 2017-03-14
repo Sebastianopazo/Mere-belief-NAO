@@ -116,6 +116,7 @@
               <a class="waves-effect waves-purple btn-large  orange lighten-1" onclick= "answer(7)"><i class="material-icons left">play_arrow</i>Answer 7</a>
               <a class="waves-effect waves-purple btn-large  orange lighten-1" onclick= "answer(8)"><i class="material-icons left">play_arrow</i>Answer 8</a>
               <a class="waves-effect waves-purple btn-large  orange lighten-1" onclick= "answer(9)"><i class="material-icons left">play_arrow</i>Answer 9</a>
+              <a class="waves-effect waves-purple btn-large  purple lighten-1" onclick= "hello()"><i class="material-icons left">play_arrow</i>Hello!</a>
             </div>
           </div>
           <div class="divider"></div>
@@ -314,6 +315,13 @@ document.getElementById('inputText').onkeydown = function(e){
    }
 };
 
+function hello () {
+  session.service("ALBehaviorManager").done(function(tts)
+  {
+    tts.runBehavior("hello");
+  });
+  $('#stopAll').removeClass("disabled");
+}
 
 
 //stops all behaviors being executed
@@ -418,6 +426,7 @@ function stopMove() {
   session.service("ALMotion").done(function(tts)
   {
     tts.stopMove();
+    tts.wakeUp();
   });
 }
 
