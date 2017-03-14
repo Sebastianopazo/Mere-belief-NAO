@@ -8,10 +8,10 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body>
-  <div class="container">
+
     <nav class="nav-extended purple darken-3">
       <div class="nav-wrapper">
-        <a href="naokita.html" class="brand-logo center"><img id="logo" src="naokita.png" width="30px">NAOKITA Control</a>
+        <a class="brand-logo center"><img id="logo" src="naokita.png" width="30px">NAOKITA Control</a>
       </div>
       <div class="nav-content purple darken-3">
         <ul class="tabs tabs-transparent">
@@ -21,6 +21,7 @@
         </ul>
       </div>
       </nav>
+    <div class="container">
       <!-- FIRST TAB  -->
       <div id="manualControl" class="col s10">
         <div class="section">
@@ -93,30 +94,28 @@
                     </form>
                   </div>
                   <div class="col s6 center">
-                    <a id="test" class="waves-effect waves-purple btn-large green" onclick="testVoice()"><i class="material-icons left">chat</i>Test</a>
+                    <a id="test" class="waves-effect waves-purple btn-large green" onclick="testVoice()"><i class="material-icons left"></i>Test</a>
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
         <!-- SECOND TAB  -->
       <div id="mereBelief" class="col s12">
         <div class="section">
           <h4 class="purple-text text-darken-3 center-align">Mere Belief Answers</h4>
           <div class="row">
             <div class="col s12 center">
-              <a class="waves-effect waves-purple btn-large  orange lighten-1" onclick= "answer1()"><i class="material-icons left">play_arrow</i>Answer 1</a>
-              <a class="waves-effect waves-purple btn-large  orange lighten-1" onclick= "answer2()"><i class="material-icons left">play_arrow</i>Answer 2</a>
-              <a class="waves-effect waves-purple btn-large  orange lighten-1" onclick= "answer3()"><i class="material-icons left">play_arrow</i>Answer 3</a>
-              <a class="waves-effect waves-purple btn-large  orange lighten-1" onclick= "answer4()"><i class="material-icons left">play_arrow</i>Answer 4</a>
-              <a class="waves-effect waves-purple btn-large  orange lighten-1" onclick= "answer5()"><i class="material-icons left">play_arrow</i>Answer 5</a>
-              <a class="waves-effect waves-purple btn-large  orange lighten-1" onclick= "answer6()"><i class="material-icons left">play_arrow</i>Answer 6</a>
-              <a class="waves-effect waves-purple btn-large  orange lighten-1" onclick= "answer7()"><i class="material-icons left">play_arrow</i>Answer 7</a>
-              <a class="waves-effect waves-purple btn-large  orange lighten-1" onclick= "answer8()"><i class="material-icons left">play_arrow</i>Answer 8</a>
-              <a class="waves-effect waves-purple btn-large  orange lighten-1" onclick= "answer9()"><i class="material-icons left">play_arrow</i>Answer 9</a>
-              <a class="waves-effect waves-purple btn-large  orange lighten-1" onclick= "answer10()"><i class="material-icons left">play_arrow</i>Answer 10</a>
+              <a class="waves-effect waves-purple btn-large  orange lighten-1" onclick= "answer(1)"><i class="material-icons left">play_arrow</i>Answer 1</a>
+              <a class="waves-effect waves-purple btn-large  orange lighten-1" onclick= "answer(2)"><i class="material-icons left">play_arrow</i>Answer 2</a>
+              <a class="waves-effect waves-purple btn-large  orange lighten-1" onclick= "answer(3)"><i class="material-icons left">play_arrow</i>Answer 3</a>
+              <a class="waves-effect waves-purple btn-large  orange lighten-1" onclick= "answer(4)"><i class="material-icons left">play_arrow</i>Answer 4</a>
+              <a class="waves-effect waves-purple btn-large  orange lighten-1" onclick= "answer(5)"><i class="material-icons left">play_arrow</i>Answer 5</a>
+              <a class="waves-effect waves-purple btn-large  orange lighten-1" onclick= "answer(6)"><i class="material-icons left">play_arrow</i>Answer 6</a>
+              <a class="waves-effect waves-purple btn-large  orange lighten-1" onclick= "answer(7)"><i class="material-icons left">play_arrow</i>Answer 7</a>
+              <a class="waves-effect waves-purple btn-large  orange lighten-1" onclick= "answer(8)"><i class="material-icons left">play_arrow</i>Answer 8</a>
+              <a class="waves-effect waves-purple btn-large  orange lighten-1" onclick= "answer(9)"><i class="material-icons left">play_arrow</i>Answer 9</a>
             </div>
           </div>
           <div class="divider"></div>
@@ -149,7 +148,7 @@
           </div>
         </div>
       </div>
-
+    </div>
 
 
 
@@ -187,7 +186,7 @@ var session;
 //declare function to start QiSession
 function connect()
 {
-  session = new QiSession('192.168.10.102:80');
+  session = new QiSession('192.168.10.106:80');
   session.socket().on('connect', function()
   {
     console.log("Connected!");
@@ -201,7 +200,7 @@ function connect()
     $('#status').text('Connected');
     session.service("ALTextToSpeech").done(function(tts)
     {
-      tts.say("Link established");
+       tts.say("Link established");
     });
   }).on('disconnect', function(){
     $("#disconnect").addClass('disabled');
@@ -222,7 +221,7 @@ function disconnect(){
 
 // Access the Robot
 $('#connect').on( 'click', function() {
-    $.getScript( 'http://nao:nao@192.168.10.102/libs/qimessaging/1.0/qimessaging.js', function( data, textStatus, jqxhr ) {
+    $.getScript( 'http://nao:nao@192.168.10.106/libs/qimessaging/1.0/qimessaging.js', function( data, textStatus, jqxhr ) {
       //Create QiSession
       connect();
       // openCamera();
@@ -308,6 +307,15 @@ $("#submitText").click(function() {
   speak();
 })
 
+document.getElementById('inputText').onkeydown = function(e){
+   if ( (window.event ? event.keyCode : e.which) == 13) {
+     inputMessage = $("#inputText").val();
+     speak();
+   }
+};
+
+
+
 //stops all behaviors being executed
 function stopBehavior() {
   session.service("ALBehaviorManager").done(function(tts)
@@ -317,41 +325,12 @@ function stopBehavior() {
   });
 }
 
-//just a test to acces memory
-function touchHead() {
-  session.service("ALMemory").done(function (ALMemory) {
-    ALMemory.subscriber("FrontTactilTouched").done(function (subscriber) {
-      // subscriber.signal is a signal associated to "FrontTactilTouched"
-      subscriber.signal.connect(function (state) {
-        state == 1 ? speak() : speak2();
-      });
-    });
-  });
-}
-
 
 //Loading behaviors from memory
-function answer1() {
+function answer(answerNumber) {
   session.service("ALBehaviorManager").done(function(tts)
   {
-    tts.runBehavior("answer3");
-  });
-  $('#stopAll').removeClass("disabled");
-}
-
-function answer2() {
-  session.service("ALBehaviorManager").done(function(tts)
-  {
-    tts.runBehavior("answer2");
-  });
-  $('#stopAll').removeClass("disabled");
-}
-
-
-function answer3() {
-  session.service("ALBehaviorManager").done(function(tts)
-  {
-    tts.runBehavior("answer1");
+    tts.runBehavior("answer"+answerNumber+"");
   });
   $('#stopAll').removeClass("disabled");
 }
