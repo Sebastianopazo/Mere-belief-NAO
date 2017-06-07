@@ -36,6 +36,7 @@
             <div  id="controls"class="col s6 center">
               <a id="sleep" class="waves-effect waves-purple btn-large purple darken-2" onclick= "sleep()"><i class="material-icons left">brightness_3</i>Sleep</a>
               <a id="wakeUp" class="waves-effect waves-purple btn-large  yellow darken-1" onclick= "wakeUp()"><i class="material-icons left">brightness_7</i>Wake Up</a>
+              <a id="stand" class="waves-effect waves-purple btn-large cyan lighten-1" onclick= "stand()">Stand</a>
             </div>
           </div>
             <div id="controls2">
@@ -355,6 +356,14 @@ function answer(answerNumber) {
   $('#stopAll').removeClass("disabled");
 }
 
+//Stand
+
+function stand() {
+  session.service("ALBehaviorManager").done(function(tts){
+    tts.runBehavior("stand1");
+  })
+}
+
 //sleep and wake up.
 function sleep() {
   session.service("ALMotion").done(function(tts)
@@ -381,7 +390,6 @@ function getStatus() {
     tts.getStiffnesses("body");
     });
   }
-
 
 //Movement keys
 function moveForward(){
