@@ -56,8 +56,8 @@
   flex: 0 0 32%;
 }
 
-.redText {
-  color: red !important;
+.yellowText {
+  color: #fdd835 !important;
 }
 
 input[type=range]::-webkit-slider-thumb {
