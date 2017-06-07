@@ -18,7 +18,8 @@
         <ul class="tabs tabs-transparent">
           <li class="tab"><a class="active" href="#manualControl">Manual Control</a></li>
           <li id="tab2" class="tab disabled"><a href="#mereBelief">Mere Belief Answers</a></li>
-          <li id="tab3" class="tab disabled"><a href="#textToSpeech">Text to Speech</a></li>
+          <li id="tab3" class="tab disabled"><a href="#textToSpeech">Recursive Feedback</a></li>
+          <li id="tab4" class="tab disabled"><a href="#textToSpeech">Text to Speech</a></li>
         </ul>
       </div>
       </nav>
@@ -130,7 +131,7 @@
         </div>
       </div>
       <!-- THIRD TAB  -->
-      <div id="textToSpeech">
+      <div id="recursiveFeedback">
         <div class="container">
           <h4 class="purple-text text-darken-3 center-align">Write message on the form</h4>
           <div class="col 12 center">
@@ -150,8 +151,29 @@
           </div>
         </div>
       </div>
+    <!-- Fourth TAB  -->
+    <div id="textToSpeech">
+      <div class="container">
+        <h4 class="purple-text text-darken-3 center-align">Write message on the form</h4>
+        <div class="col 12 center">
+          <input id="inputText" type="text"/>
+          <a id="submitText" class="waves-effect waves-purple btn-large purple darken-2" onclick= "sleep()"><i class="material-icons left">unarchive</i>Submit</a>
+        </div>
+        <div class="col s6">
+          <div class="col s8 center">
+            <form action="#">
+              <h5 class="purple-text text-darken-3 center-align">Voice Control</h5>
+              <span>VOLUME</span>
+              <p class="range-field">
+                <input type="range" id="speechVolume" min="0" max="100" onchange="updateSpeechVolume(this.value)"/>
+              </p>
+            </form>
+          </div>
+        </div>
+      </div>
     </div>
-
+    <!---->
+  </div>
 
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
@@ -188,7 +210,7 @@ var session;
 //declare function to start QiSession
 function connect()
 {
-  session = new QiSession('192.168.10.106:80');
+  session = new QiSession('192.168.10.110:80');
   session.socket().on('connect', function()
   {
     console.log("Connected!");
@@ -196,6 +218,7 @@ function connect()
     $("#disconnect").removeClass('disabled');
     $("#tab2").removeClass('disabled');
     $("#tab3").removeClass('disabled');
+    $("#tab4").removeClass('disabled');
     $('#controls').slideDown('slow');
     $('#controls2').slideDown('slow');
     $('#redLight').fadeOut('fast');
@@ -213,6 +236,7 @@ function connect()
     $('#redLight').fadeIn('slow');
     $("#tab2").addClass('disabled');
     $("#tab3").addClass('disabled');
+    $("#tab4").addClass('disabled');
     console.log("QiSession disconnect");
   });
 }
@@ -223,10 +247,9 @@ function disconnect(){
 
 // Access the Robot
 $('#connect').on( 'click', function() {
-    $.getScript( 'http://nao:nao@192.168.10.106/libs/qimessaging/1.0/qimessaging.js', function( data, textStatus, jqxhr ) {
+    $.getScript( 'http://nao:nao@192.168.10.110/libs/qimessaging/1.0/qimessaging.js', function( data, textStatus, jqxhr ) {
       //Create QiSession
       connect();
-      // openCamera();
     });
 } );
 
@@ -430,30 +453,6 @@ function stopMove() {
     tts.wakeUp();
   });
 }
-
-// function openCamera(){
-//     session.service("ALVideoDevice").done(function(video)
-//     {
-//         var handle = video.subscribeCamera("Vision", 0, 0, 3,10);
-//         video.getImageRemote(handle).then(function (image) {
-//         if (image) {
-//             var width = image[0];
-//             var height = image[1];
-//             var imageData = image[6];
-//             var read = 0;
-//             for(var y = 0; y < height; y++) {
-//                 for(var x = 0; x < width; x++) {
-//                     var luminosity = imageData[read++];
-//                     // (then, do something with this point, e.g. put it in a buffer
-//                     // that you can put in the canvas...)
-//
-//                 }
-//             }
-//           }
-//         });
-//     });
-//
-// }
 
 
 
