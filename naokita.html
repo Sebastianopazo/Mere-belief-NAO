@@ -19,7 +19,7 @@
           <li class="tab"><a class="active" href="#manualControl">Manual Control</a></li>
           <li id="tab2" class="tab disabled"><a href="#mereBelief">Mere Belief Answers</a></li>
           <li id="tab3" class="tab disabled"><a href="#textToSpeech">Recursive Feedback</a></li>
-          <li id="tab4" class="tab disabled"><a href="#textToSpeech">Text to Speech</a></li>
+          <li id="tab4" class="tab disabled"><a href="#recursiveFeedback">Text to Speech</a></li>
         </ul>
       </div>
       </nav>
@@ -154,22 +154,7 @@
     <!-- Fourth TAB  -->
     <div id="textToSpeech">
       <div class="container">
-        <h4 class="purple-text text-darken-3 center-align">Write message on the form</h4>
-        <div class="col 12 center">
-          <input id="inputText" type="text"/>
-          <a id="submitText" class="waves-effect waves-purple btn-large purple darken-2" onclick= "sleep()"><i class="material-icons left">unarchive</i>Submit</a>
-        </div>
-        <div class="col s6">
-          <div class="col s8 center">
-            <form action="#">
-              <h5 class="purple-text text-darken-3 center-align">Voice Control</h5>
-              <span>VOLUME</span>
-              <p class="range-field">
-                <input type="range" id="speechVolume" min="0" max="100" onchange="updateSpeechVolume(this.value)"/>
-              </p>
-            </form>
-          </div>
-        </div>
+      </div>
       </div>
     </div>
     <!---->
@@ -453,8 +438,6 @@ function stopMove() {
     tts.wakeUp();
   });
 }
-
-
 
 </script>
 </body>
