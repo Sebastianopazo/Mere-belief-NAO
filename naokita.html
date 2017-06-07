@@ -204,6 +204,17 @@ function connect()
     {
        tts.say("Link established");
     });
+
+    //Stop awareness mode.
+    function stopAwareness() {
+      session.service("ALBasicAwareness").done(function(tts)
+      {
+        tts.stopAwareness();
+      })
+    }
+
+    stopAwareness();
+
   }).on('disconnect', function(){
     $("#disconnect").addClass('disabled');
     $("#connect").removeClass('disabled');
