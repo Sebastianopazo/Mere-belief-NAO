@@ -132,21 +132,39 @@
       </div>
       <!-- THIRD TAB  -->
       <div id="recursiveFeedback">
-        <div class="container">
-          <h4 class="purple-text text-darken-3 center-align">Write message on the form</h4>
-          <div class="col 12 center">
-            <input id="inputText" type="text"/>
-            <a id="submitText" class="waves-effect waves-purple btn-large purple darken-2" onclick= "sleep()"><i class="material-icons left">unarchive</i>Submit</a>
+        <div class="row">
+          <div class="col s5 pane">
+            <h4 class="purple-text text-darken-3 center-align">Animated Speech</h4>
+            <p>Write message on the form...<p>
+            <div class="center">
+              <input id="inputText" type="text"/>
+              <a id="submitText" class="waves-effect waves-purple btn-large purple darken-2" onclick= "sleep()"><i class="material-icons left">unarchive</i>Submit</a>
+            </div>
+              <div class="col s12">
+                <form action="#">
+                  <h5 class="purple-text text-darken-3 center-align">Voice Control</h5>
+                  <span>VOLUME</span>
+                  <p class="range-field">
+                    <input type="range" id="speechVolume" min="0" max="100" onchange="updateSpeechVolume(this.value)"/>
+                  </p>
+                </form>
+              </div>
           </div>
-          <div class="col s6">
-            <div class="col s8 center">
-              <form action="#">
-                <h5 class="purple-text text-darken-3 center-align">Voice Control</h5>
-                <span>VOLUME</span>
-                <p class="range-field">
-                  <input type="range" id="speechVolume" min="0" max="100" onchange="updateSpeechVolume(this.value)"/>
-                </p>
-              </form>
+          <div class="col s6 pane offset-s1">
+            <h5 class="purple-text text-darken-3 center-align">Recursive Feedback Answers</h5>
+            <div class="col s6">
+              <a class="waves-effect waves-purple btn  lime lighten-1" onclick= "$(this).addClass('greyText'); rfbAnswer(1)"><i class="material-icons left">play_arrow</i>Answer 1</a>
+              <a class="waves-effect waves-purple btn  lime lighten-1" onclick= "$(this).addClass('greyText'); rfbAnswer(2)"><i class="material-icons left">play_arrow</i>Answer 2</a>
+              <a class="waves-effect waves-purple btn  lime lighten-1" onclick= "$(this).addClass('greyText'); rfbAnswer(3)"><i class="material-icons left">play_arrow</i>Answer 3</a>
+              <a class="waves-effect waves-purple btn  lime lighten-1" onclick= "$(this).addClass('greyText'); rfbAnswer(4)"><i class="material-icons left">play_arrow</i>Answer 4</a>
+              <a class="waves-effect waves-purple btn  lime lighten-1" onclick= "$(this).addClass('greyText'); rfbAnswer(5)"><i class="material-icons left">play_arrow</i>Answer 5</a>
+            </div>
+            <div class="col s6">
+              <a class="waves-effect waves-purple btn  lime lighten-1" onclick= "$(this).addClass('greyText'); rfbAnswer(6)"><i class="material-icons left">play_arrow</i>Answer 6</a>
+              <a class="waves-effect waves-purple btn  lime lighten-1" onclick= "$(this).addClass('greyText'); rfbAnswer(7)"><i class="material-icons left">play_arrow</i>Answer 7</a>
+              <a class="waves-effect waves-purple btn  lime lighten-1" onclick= "$(this).addClass('greyText'); rfbAnswer(8)"><i class="material-icons left">play_arrow</i>Answer 8</a>
+              <a class="waves-effect waves-purple btn  lime lighten-1" onclick= "$(this).addClass('greyText'); rfbAnswer(9)"><i class="material-icons left">play_arrow</i>Answer 9</a>
+              <a class="waves-effect waves-purple btn  purple lighten-1" onclick= "hello()"><i class="material-icons left">play_arrow</i>Hello!</a>
             </div>
           </div>
         </div>
