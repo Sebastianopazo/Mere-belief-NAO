@@ -310,8 +310,9 @@ function testVoice(){
 //text on form to speech
 function speak(){
 
-  session.service("ALTextToSpeech").done(function(tts)
+  session.service("ALAnimatedSpeech").done(function(tts)
   {
+    tts.setBodyLanguageMode(1);
     tts.say(inputMessage);
   });
 }
