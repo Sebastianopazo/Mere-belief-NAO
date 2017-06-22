@@ -18,7 +18,7 @@
         <ul class="tabs tabs-transparent">
           <li class="tab"><a class="active" href="#manualControl">Manual Control</a></li>
           <li id="tab2" class="tab disabled"><a href="#mereBelief">Mere Belief Answers</a></li>
-          <li id="tab3" class="tab disabled"><a href="#recursiveFeedback">Recursive Feedback</a></li>
+          <li id="tab3" class="tab"><a href="#recursiveFeedback">Recursive Feedback</a></li>
         </ul>
       </div>
       </nav>
@@ -164,7 +164,7 @@
               <a class="waves-effect waves-purple btn  lime lighten-1" onclick= "$(this).addClass('greyText'); rfbAnswer(7)"><i class="material-icons left">play_arrow</i>Answer 7</a>
               <a class="waves-effect waves-purple btn  lime lighten-1" onclick= "$(this).addClass('greyText'); rfbAnswer(8)"><i class="material-icons left">play_arrow</i>Answer 8</a>
               <a class="waves-effect waves-purple btn  lime lighten-1" onclick= "$(this).addClass('greyText'); rfbAnswer(9)"><i class="material-icons left">play_arrow</i>Answer 9</a>
-              <a class="waves-effect waves-purple btn  purple lighten-1" onclick= "hello()"><i class="material-icons left">play_arrow</i>Hello!</a>
+              <a class="waves-effect waves-purple btn  purple lighten-1" onclick= "animatedSay('hello')"><i class="material-icons left">play_arrow</i>Hello!</a>
             </div>
           </div>
         </div>
@@ -322,6 +322,14 @@ function testVoice(){
   {
     tts.say("Testing voice!");
   });
+}
+
+//Text to speech
+function animatedSay(text){
+  session.service("ALAnimatedSpeech").done(function(tts){
+    tts.setBodyLanguageMode(1);
+    tts.say(text);
+  })
 }
 
 
