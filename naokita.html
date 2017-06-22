@@ -96,7 +96,7 @@
                     </form>
                   </div>
                   <div class="col s6 center">
-                    <a id="test" class="waves-effect waves-purple btn-large green" onclick="testVoice()"><i class="material-icons left"></i>Test</a>
+                    <a id="test" class="waves-effect waves-purple btn-large green" onclick="animatedSay('Testing voice')"><i class="material-icons left"></i>Test</a>
                   </div>
                 </div>
               </div>
@@ -181,7 +181,16 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/js/materialize.min.js"></script>
 <script>
 
-//make click events also touch events
+
+//Global variable declarations;
+var textToSpeech;
+var session;
+var inputMessage;
+var session;
+
+//Make touch events
+
+//Get elements from html
 var forward = $('#forward');
 var left = $('#left');
 var right = $('#right');
@@ -189,7 +198,7 @@ var back = $('#back');
 var rotateLeft = $('#rotateLeft');
 var rotateRight = $('#rotateRight');
 
-
+//Toucha events function
 function touchEvents (button, move1) {
   button.on("touchstart", move1);
   button.on("touchend", stopMove);
@@ -202,11 +211,8 @@ touchEvents(back, moveBackward);
 touchEvents(rotateLeft, leftRotation);
 touchEvents(rotateRight, rightRotation);
 
-var textToSpeech;
-var session;
-var inputMessage;
-var session;
 
+//=============================================================================//
 //Connecting to nao
 //declare function to start QiSession
 function connect()
@@ -256,8 +262,9 @@ function connect()
 function disconnect(){
   session.socket().disconnect();
 }
+//=============================================================================//
 
-// Access the Robot
+// Access the Robot on connected
 $('#connect').on( 'click', function() {
     $.getScript( 'http://nao:nao@192.168.10.110/libs/qimessaging/1.0/qimessaging.js', function( data, textStatus, jqxhr ) {
       //Create QiSession
@@ -270,159 +277,7 @@ $('#disconnect').on('click', function(){
 })
 //Robot behavior functions
 
-//Set Global volume
-$('#globalVolume').change(function() {
-  var currentVolume = $('#globalVolume').val();
-  var volumeNumber = Number(currentVolume);
-  session.service("ALAudioDevice").done(function(tts)
-  {
-    tts.setOutputVolume(volumeNumber);
-  });
-})
-
-//Set Speech volume
-
-function updateSpeechVolume(amount) {
-  var volumeNumber = Number(amount);
-        session.service("ALTextToSpeech").done(function(tts)
-        {
-          tts.setVolume(volumeNumber/100);
-        });
-    }
-
-function updatePitch(amount) {
-  var amountNumber = Number(amount);
-  session.service("ALTextToSpeech").done(function(tts)
-  {
-    tts.setParameter("pitchShift", amountNumber);
-  });
-}
-
-function updateDoubleVoice(amount) {
-  var amountNumber = Number(amount);
-  session.service("ALTextToSpeech").done(function(tts)
-  {
-    tts.setParameter("doubleVoice", amountNumber);
-  });
-}
-
-function updateDoubleVoiceLevel(amount) {
-  var amountNumber = Number(amount);
-  session.service("ALTextToSpeech").done(function(tts)
-  {
-    tts.setParameter("doubleVoiceLevel", amountNumber);
-  });
-}
-
-function updatedoubleVoiceTimeShift(amount) {
-  var amountNumber = Number(amount);
-  session.service("ALTextToSpeech").done(function(tts)
-  {
-    tts.setParameter("doubleVoiceTimeShift", amountNumber);
-  });
-}
-
-function testVoice(){
-  session.service("ALTextToSpeech").done(function(tts)
-  {
-    tts.say("Testing voice!");
-  });
-}
-
-//Text to speech
-function animatedSay(text){
-  session.service("ALAnimatedSpeech").done(function(tts){
-    tts.setBodyLanguageMode(1);
-    tts.say(text);
-  })
-}
-
-
-//text on form to speech
-function speak(){
-
-  session.service("ALAnimatedSpeech").done(function(tts)
-  {
-    tts.setBodyLanguageMode(1);
-    tts.say(inputMessage);
-  });
-}
-
-$("#submitText").click(function() {
-  inputMessage = $("#inputText").val();
-  speak();
-})
-
-document.getElementById('inputText').onkeydown = function(e){
-   if ( (window.event ? event.keyCode : e.which) == 13) {
-     inputMessage = $("#inputText").val();
-     speak();
-   }
-};
-
-function hello () {
-  session.service("ALBehaviorManager").done(function(tts)
-  {
-    tts.runBehavior("hello");
-  });
-  $('#stopAll').removeClass("disabled");
-}
-
-
-//stops all behaviors being executed
-function stopBehavior() {
-  session.service("ALBehaviorManager").done(function(tts)
-  {
-    tts.stopAllBehaviors();
-    $('#stopAll').addClass("disabled");
-  });
-}
-
-
-//Loading behaviors from memory
-function answer(answerNumber) {
-  session.service("ALBehaviorManager").done(function(tts)
-  {
-    tts.runBehavior("answer"+answerNumber+"");
-  });
-  $('#stopAll').removeClass("disabled");
-}
-
-//Stand
-
-function stand() {
-  session.service("ALBehaviorManager").done(function(tts){
-    tts.runBehavior("stand1");
-  })
-}
-
-//sleep and wake up.
-function sleep() {
-  session.service("ALMotion").done(function(tts)
-  {
-    tts.rest();
-    $('#wakeUp').removeClass("disabled");
-    $('#sleep').addClass("disabled");
-  });
-}
-
-function wakeUp() {
-  session.service("ALMotion").done(function(tts)
-  {
-    tts.wakeUp();
-    $('#sleep').removeClass("disabled");
-    $('#wakeUp').addClass("disabled");
-  });
-}
-
-//Detect robot status and enable/disable sleep/wakeUp buttons
-function getStatus() {
-  session.service("ALMotion").done(function(tts)
-  {
-    tts.getStiffnesses("body");
-    });
-  }
-
+//MANUAL CONTROLS ====================================================//
 //Movement keys
 function moveForward(){
   //pressing on cell changes opacity
@@ -481,8 +336,160 @@ function stopMove() {
     tts.wakeUp();
   });
 }
+//Sleep and wake up.
+function sleep() {
+  session.service("ALMotion").done(function(tts)
+  {
+    tts.rest();
+    $('#wakeUp').removeClass("disabled");
+    $('#sleep').addClass("disabled");
+  });
+}
+
+function wakeUp() {
+  session.service("ALMotion").done(function(tts)
+  {
+    tts.wakeUp();
+    $('#sleep').removeClass("disabled");
+    $('#wakeUp').addClass("disabled");
+  });
+}
+
+//Set Global volume
+$('#globalVolume').change(function() {
+  var currentVolume = $('#globalVolume').val();
+  var volumeNumber = Number(currentVolume);
+  session.service("ALAudioDevice").done(function(tts)
+  {
+    tts.setOutputVolume(volumeNumber);
+  });
+})
+
+//Set Speech volume
+function updateSpeechVolume(amount) {
+  var volumeNumber = Number(amount);
+        session.service("ALTextToSpeech").done(function(tts)
+        {
+          tts.setVolume(volumeNumber/100);
+        });
+    }
+//Set speech pitch
+function updatePitch(amount) {
+  var amountNumber = Number(amount);
+  session.service("ALTextToSpeech").done(function(tts)
+  {
+    tts.setParameter("pitchShift", amountNumber);
+  });
+}
+//Set double voice ratio
+function updateDoubleVoice(amount) {
+  var amountNumber = Number(amount);
+  session.service("ALTextToSpeech").done(function(tts)
+  {
+    tts.setParameter("doubleVoice", amountNumber);
+  });
+}
+//Set double voice Volume
+function updateDoubleVoiceLevel(amount) {
+  var amountNumber = Number(amount);
+  session.service("ALTextToSpeech").done(function(tts)
+  {
+    tts.setParameter("doubleVoiceLevel", amountNumber);
+  });
+}
+//Set double voice delay
+function updatedoubleVoiceTimeShift(amount) {
+  var amountNumber = Number(amount);
+  session.service("ALTextToSpeech").done(function(tts)
+  {
+    tts.setParameter("doubleVoiceTimeShift", amountNumber);
+  });
+}
+
+//============================================================================//
+
+//Text to speech with animations
+function animatedSay(text){
+  session.service("ALAnimatedSpeech").done(function(tts){
+    tts.setBodyLanguageMode(1);
+    tts.say(text);
+  })
+}
+
+//Text on the html form to speech ============================================//
+function speak(){
+
+  session.service("ALAnimatedSpeech").done(function(tts)
+  {
+    tts.setBodyLanguageMode(1);
+    tts.say(inputMessage);
+  });
+}
+
+//when submit button is pressed, submit
+$("#submitText").click(function() {
+  inputMessage = $("#inputText").val();
+  speak();
+})
+
+//hen 'enter' key is pressed, submit
+document.getElementById('inputText').onkeydown = function(e){
+   if ( (window.event ? event.keyCode : e.which) == 13) {
+     inputMessage = $("#inputText").val();
+     speak();
+   }
+};
+//=========================================================================//
 
 
+//Say hello with premade gesture
+function hello () {
+  session.service("ALBehaviorManager").done(function(tts)
+  {
+    tts.runBehavior("hello");
+  });
+  $('#stopAll').removeClass("disabled");
+}
+
+//=========================================================================//
+
+//Stop all behaviors being executed
+function stopBehavior() {
+  session.service("ALBehaviorManager").done(function(tts)
+  {
+    tts.stopAllBehaviors();
+    $('#stopAll').addClass("disabled");
+  });
+}
+
+//=========================================================================//
+
+//Use pre-made behaviors from robot memory
+function answer(answerNumber) {
+  session.service("ALBehaviorManager").done(function(tts)
+  {
+    tts.runBehavior("answer"+answerNumber+"");
+  });
+  $('#stopAll').removeClass("disabled");
+}
+//=========================================================================//
+
+//Stand in position (in the event of falling);
+
+function stand() {
+  session.service("ALBehaviorManager").done(function(tts){
+    tts.runBehavior("stand1");
+  })
+}
+
+
+//Detect robot status and enable/disable sleep/wakeUp buttons
+function getStatus() {
+  session.service("ALMotion").done(function(tts)
+  {
+    tts.getStiffnesses("body");
+    });
+  }
 
 </script>
 </body>
