@@ -153,15 +153,14 @@
           <div class="col s6 pane offset-s1">
             <h5 class="purple-text text-darken-3 center-align">Recursive Feedback Answers</h5>
             <div class="col s6">
-              <a class="waves-effect waves-purple btn  lime lighten-1" onclick= "$(this).addClass('greyText'); rfbAnswer(1)"><i class="material-icons left">play_arrow</i>Answer 1</a>
-              <a class="waves-effect waves-purple btn  lime lighten-1" onclick= "$(this).addClass('greyText'); rfbAnswer(2)"><i class="material-icons left">play_arrow</i>Answer 2</a>
-              <a class="waves-effect waves-purple btn  lime lighten-1" onclick= "$(this).addClass('greyText'); rfbAnswer(3)"><i class="material-icons left">play_arrow</i>Answer 3</a>
-              <a class="waves-effect waves-purple btn  lime lighten-1" onclick= "$(this).addClass('greyText'); rfbAnswer(4)"><i class="material-icons left">play_arrow</i>Answer 4</a>
-              <a class="waves-effect waves-purple btn  lime lighten-1" onclick= "$(this).addClass('greyText'); rfbAnswer(5)"><i class="material-icons left">play_arrow</i>Answer 5</a>
-              <a class="waves-effect waves-purple btn  lime lighten-1" onclick= "$(this).addClass('greyText'); rfbAnswer(6)"><i class="material-icons left">play_arrow</i>Answer 6</a>
-              <a class="waves-effect waves-purple btn  lime lighten-1" onclick= "$(this).addClass('greyText'); rfbAnswer(7)"><i class="material-icons left">play_arrow</i>Answer 7</a>
-              <a class="waves-effect waves-purple btn  lime lighten-1" onclick= "$(this).addClass('greyText'); rfbAnswer(8)"><i class="material-icons left">play_arrow</i>Answer 8</a>
-              <a class="waves-effect waves-purple btn  lime lighten-1" onclick= "$(this).addClass('greyText'); rfbAnswer(9)"><i class="material-icons left">play_arrow</i>Answer 9</a>
+              <a class="waves-effect waves-purple btn  lime lighten-1" onclick= "$(this).addClass('greyText'); video(1)"><i class="material-icons left">play_arrow</i>Video 1</a>
+              <a class="waves-effect waves-purple btn  lime lighten-1" onclick= "$(this).addClass('greyText'); video(2)"><i class="material-icons left">play_arrow</i>Video 2</a>
+              <a class="waves-effect waves-purple btn  lime lighten-1" onclick= "$(this).addClass('greyText'); video(3)"><i class="material-icons left">play_arrow</i>Video 3</a>
+              <a class="waves-effect waves-purple btn  lime lighten-1" onclick= "$(this).addClass('greyText'); video(4)"><i class="material-icons left">play_arrow</i>Video 4</a>
+              <a class="waves-effect waves-purple btn  lime lighten-1" onclick= "$(this).addClass('greyText'); answer(5)"><i class="material-icons left">play_arrow</i>Answer 5</a>
+              <a class="waves-effect waves-purple btn  lime lighten-1" onclick= "$(this).addClass('greyText'); answer(3)"><i class="material-icons left">play_arrow</i>Answer 3</a>
+              <a class="waves-effect waves-purple btn  lime lighten-1" onclick= "$(this).addClass('greyText'); answer(9)"><i class="material-icons left">play_arrow</i>Answer 9</a>
+              <a class="waves-effect waves-purple btn  lime lighten-1" onclick= "$(this).addClass('greyText'); answer(6)"><i class="material-icons left">play_arrow</i>Answer 6</a>
             </div>
             <div class="col s6">
               <a class="waves-effect waves-purple btn  purple lighten-1" onclick= "animatedSay('Well')"><i class="material-icons left">play_arrow</i>Well ...</a>
@@ -469,6 +468,15 @@ function answer(answerNumber) {
   session.service("ALBehaviorManager").done(function(tts)
   {
     tts.runBehavior("answer"+answerNumber+"");
+  });
+  $('#stopAll').removeClass("disabled");
+}
+
+//Use pre-made behaviors from robot memory
+function video(videoNumber) {
+  session.service("ALBehaviorManager").done(function(tts)
+  {
+    tts.runBehavior("video"+videoNumber+"");
   });
   $('#stopAll').removeClass("disabled");
 }
