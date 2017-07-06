@@ -265,7 +265,7 @@ function disconnect(){
 
 // Access the Robot on connected
 $('#connect').on( 'click', function() {
-    $.getScript( 'http://nao:nao@192.168.10.110/libs/qimessaging/1.0/qimessaging.js', function( data, textStatus, jqxhr ) {
+    $.getScript( 'http://192.168.10.110/libs/qimessaging/1.0/qimessaging.js', function( data, textStatus, jqxhr ) {
       //Create QiSession
       connect();
     });
