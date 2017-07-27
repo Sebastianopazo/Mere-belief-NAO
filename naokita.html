@@ -707,8 +707,9 @@ if (!('webkitSpeechRecognition' in window)) {
 
     for (var i = event.resultIndex; i < event.results.length; ++i) {
       if (event.results[i].isFinal) {
+        var poto_transcript = event.results[i][0].transcript;
         final_transcript += event.results[i][0].transcript;
-        animatedSay(final_transcript);
+        animatedSay(poto_transcript);
       } else {
         interim_transcript += event.results[i][0].transcript;
       }
