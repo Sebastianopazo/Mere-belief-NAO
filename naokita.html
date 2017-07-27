@@ -267,7 +267,7 @@ touchEvents(rotateRight, rightRotation);
 //declare function to start QiSession
 function connect()
 {
-  session = new QiSession('192.168.10.103:80');
+  session = new QiSession('192.168.10.101:80');
   session.socket().on('connect', function()
   {
     console.log("Connected!");
@@ -316,7 +316,7 @@ function disconnect(){
 
 // Access the Robot on connected
 $('#connect').on( 'click', function() {
-    $.getScript( 'http://192.168.10.103/libs/qimessaging/1.0/qimessaging.js', function( data, textStatus, jqxhr ) {
+    $.getScript( 'http://192.168.10.101/libs/qimessaging/1.0/qimessaging.js', function( data, textStatus, jqxhr ) {
       //Create QiSession
       connect();
     });
