@@ -14,6 +14,9 @@
   -webkit-transform: scaleX(-1);
 }
 
+.small{
+  font-size: 10px;
+}
 
 .btn-large {
   margin: 15px;
@@ -67,7 +70,9 @@
 
 .pane {
   margin-top: 10px;
-  background-color: #eceff1
+  background-color: #eceff1;
+  padding-bottom: 20px!important;
+  word-wrap: break-word;
 }
 
 input[type=range]::-webkit-slider-thumb {
