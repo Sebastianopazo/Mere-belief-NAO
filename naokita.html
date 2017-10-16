@@ -1,24 +1,26 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <link rel="shortcut icon" href="logogizmo_V8a_icon.ico">
-    <title>NAO CONTROL</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.1/css/materialize.min.css">
- <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <title>NAO CONTROL</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.1/css/materialize.min.css">
+  <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
+
 <body>
-    <nav class="nav-extended purple darken-3">
-      <div class="nav-wrapper">
-        <a class="brand-logo center"><img id="logo" src="naokita.png" width="30px">NAOKITA Control</a>
-      </div>
-      <div class="nav-content purple darken-3">
-        <ul class="tabs tabs-transparent">
-          <li class="tab"><a class="active" href="#manualControl">Manual Control</a></li>
-          <li id="tab2" class="tab disabled"><a href="#mereBelief">Mere Belief Answers</a></li>
-          <li id="tab3" class="tab"><a href="#recursiveFeedback">Recursive Feedback</a></li>
-        </ul>
+  <nav class="nav-extended purple darken-3">
+    <div class="nav-wrapper">
+      <a class="brand-logo center"><img id="logo" src="naokita.png" width="30px">NAOKITA Control</a>
+    </div>
+    <div class="nav-content purple darken-3">
+      <ul class="tabs tabs-transparent">
+        <li class="tab"><a class="active" href="#manualControl">Manual Control</a></li>
+        <li id="tab2" class="tab disabled"><a href="#mereBelief">Mere Belief Answers</a></li>
+        <li id="tab3" class="tab"><a href="#recursiveFeedback">Recursive Feedback</a></li>
+      </ul>
       </div>
       </nav>
     <div class="container">
@@ -153,7 +155,7 @@
               </div>
               <div class="col s12">
                 <h5 class="purple-text text-darken-3 center-align">Voice to Text</h5>
-                <h1 id="headline">
+                <h1 class="center" id="headline">
                 <div id="info">
                   <p id="info_start">Click on the microphone icon and begin speaking.</p>
                   <p id="info_speak_now">Speak now.</p>
@@ -179,25 +181,45 @@
                 <div id="results">
                   <span id="final_span" class="final"></span>
                   <span id="interim_span" class="interim"></span>
+                  <p>
                 </div>
               </div>
           </div>
 
           <div class="col s6 pane offset-s1">
             <h5 class="purple-text text-darken-3 center-align">Recursive Feedback Answers</h5>
-            <div class="col s6">
-              <a class="waves-effect waves-purple btn small  lime lighten-1" onclick= "$(this).addClass('greyText'); video(1)">Video 1</a>
-              <a class="waves-effect waves-purple btn small lime lighten-1" onclick= "$(this).addClass('greyText'); video(2)">Video 2</a>
-              <a class="waves-effect waves-purple btn small lime lighten-1" onclick= "$(this).addClass('greyText'); video(3)">Video 3</a>
-              <a class="waves-effect waves-purple btn small lime lighten-1" onclick= "$(this).addClass('greyText'); video(4)">Video 4</a>
+            <div class="row">
             </div>
-            <div class="col s6">
-              <a class="waves-effect waves-purple btn small purple lighten-1" onclick= "animatedSay('Well')">Well ...</a>
-              <a class="waves-effect waves-purple btn small purple lighten-1" onclick= "animatedSay('Hmmm')">Hmmm ...</a>
-              <a class="waves-effect waves-purple btn small purple lighten-1" onclick= "animatedSay('Give me a second')">Give me a second...</a>
-              <a class="waves-effect waves-purple btn small purple lighten-1" onclick= "animatedSay('I'm sorry')">I'm sorry?</a>
-              <a class="waves-effect waves-purple btn small purple lighten-1" onclick= "animatedSay('Can you repeat that?')">Can you repeat that?</a>
-              <a class="waves-effect waves-purple btn small purple lighten-1" onclick= "animatedSay('hello!')">Hello!</a>
+            <div class="row">
+              <div class="col s12">
+                <h5>Intro</h5>
+                <a class="waves-effect waves-green btn small green lighten-1" onclick= "$(this).addClass('greyText'); animatedSay('Yes, I can hear you...')">Yes, I can hear you...</a>
+                <a class="waves-effect waves-green btn small green lighten-1" onclick= "$(this).addClass('greyText'); intro()">Intro.</a>
+
+                <h5>Questions</h5>
+                <a class="waves-effect waves-blue btn small blue lighten-1" onclick= "$(this).addClass('greyText'); question(1)">Question 1</a>
+                <a class="waves-effect waves-blue btn small blue lighten-1" onclick= "$(this).addClass('greyText'); question(2)">Question 2</a>
+                <a class="waves-effect waves-blue btn small blue lighten-1" onclick= "$(this).addClass('greyText'); question(3)">Question 3</a>
+                <a class="waves-effect waves-blue btn small blue lighten-1" onclick= "$(this).addClass('greyText'); question(4)">Question 4</a>
+                <a class="waves-effect waves-blue btn small blue lighten-1" onclick= "$(this).addClass('greyText'); question(5)">Question 5</a>
+
+
+              </div>
+              <div class="col s12">
+                <h5>Misc remarks</h5>
+
+                <a class="waves-effect waves-purple btn small purple lighten-1" onclick= "animatedSay('Ahh ha')">A-ha 1</a>
+                <a class="waves-effect waves-purple btn small purple lighten-1" onclick= "animatedSay('Ahhha')">A-ha 2</a>
+                <a class="waves-effect waves-purple btn small purple lighten-1" onclick= "animatedSay('Ah')">Uuuuh! </a>
+                <a class="waves-effect waves-purple btn small purple lighten-1" onclick= "animatedSay('Well')">Ok </a>
+                <a class="waves-effect waves-purple btn small purple lighten-1" onclick= "animatedSay('Well')">Well ...</a>
+                <a class="waves-effect waves-purple btn small purple lighten-1" onclick= "animatedSay('Hmmm')">Hmmm ...</a>
+                <a class="waves-effect waves-purple btn small purple lighten-1" onclick= "animatedSay('Give me a second')">Give me a second...</a>
+                <a class="waves-effect waves-purple btn small purple lighten-1" onclick= "animatedSay('Can you repeat that?')">Can you repeat that?</a>
+
+                <a id="stopAll2" class="waves-effect waves-light btn-large disabled red" onclick= "stopBehavior()"><i class="material-icons left">stop</i>Stop Answer</a>
+
+              </div>
             </div>
           </div>
         </div>
@@ -208,9 +230,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.1/js/materialize.min.js"></script>
 <script>
-$(document).ready(function() {
-    $('select').material_select();
-});
+
 
 //Global variable declarations;
 var textToSpeech;
@@ -247,7 +267,7 @@ touchEvents(rotateRight, rightRotation);
 //declare function to start QiSession
 function connect()
 {
-  session = new QiSession('192.168.10.104:80');
+  session = new QiSession('192.168.10.102:80');
   session.socket().on('connect', function()
   {
     console.log("Connected!");
@@ -265,15 +285,15 @@ function connect()
        tts.say("Link established");
     });
 
-    // //Stop awareness mode.
-    // function stopAwareness() {
-    //   session.service("ALBasicAwareness").done(function(tts)
-    //   {
-    //     tts.stopAwareness();
-    //   })
-    // }
-    //
-    // stopAwareness();
+    //Stop awareness mode.
+    function stopAwareness() {
+      session.service("ALBasicAwareness").done(function(tts)
+      {
+        tts.startAwareness();
+      })
+    }
+
+    stopAwareness();
 
   }).on('disconnect', function(){
     $("#disconnect").addClass('disabled');
@@ -292,41 +312,119 @@ function connect()
 function disconnect(){
   session.socket().disconnect();
 }
+
+
+
+
+
 //=============================================================================//
 //Video feed Code
-//
+
 // function openCamera() {
-//     session.service("ALVideoDevice").done(function(video)
-//     {
-//         var handle = video.subscribeCamera("Vision", 0, 0, 3,10);
-//         img  = video.getImageRemote(handle).then(function (image) {
-//             if (image) {
+//   var videoCanvas = document.getElementById("video");
+//   var vidContext = videoCanvas.getContext("2d");
+//   var imgData = vidContext.createImageData(320,240);
+//   //for (var i=0;i<imgData.data.length;i+=4)
+//     // {
+//     // imgData.data[i+0]=255;
+//     // imgData.data[i+1]=0;
+//     // imgData.data[i+2]=0;
+//     // imgData.data[i+3]=255;
+//     // }
+//      session.service("ALVideoDevice").done(function(video)
+//      {
+//          var handle = video.subscribeCamera("Vision", 0, 1, 3, 10);
+//          video.getImageRemote(handle).then(function (image) {
+//              if (image) {
 //                 var width = image[0];
 //                 var height = image[1];
-//                 var imageData = image[6];
+//                 var naoImageData = image[6];
 //                 var read = 0;
 //                 for(var y = 0; y < height; y++) {
 //                     for(var x = 0; x < width; x++) {
 //                         // (assuming a black and white image)
-//                         var luminosity = imageData[read++];
-//                         // (then, do something with this point, e.g. put it in a buffer
-//                         // that you can put in the canvas...)
+//                         // var luminosity = naoImageData[read++];
+//                         // imgData.data[read]= naoImageData[read++];
+//                         imgData.data[i+0]=255;
+//                         imgData.data[i+1]=0;
+//                         imgData.data[i+2]=0;
+//                         imgData.data[i+3]=255;
+//
+//
+//
+//                         vidContext.putImageData(imgData, 0, 0);
 //                     }
 //                 }
-//             });
-//         videoCam = document.getElementById("video");
-//         videoCam.src = img;
+//            }
+//          })
+//        });
 //
-//     });
-//   }
+//
 // }
 
-
+// function openCamera() {
+//   session.service("ALVideoDevice").done(function(video) {
+//     var handle =video.subscribeCamera("Vision", 0, 1, 3,10);
+//     var imge = video.getImageRemote(handle);
+//     var a = decodeURIComponent(imge[6]);
+//     alert(a);
+//     var imageWidth = imge[0];
+//     var imgeHeight = imge[1];
+//     var canvas = document.getElementById("video");
+//     var context = canvas.getContext("2d");
+//     var imageData = context.getImageData(0, 0, 200, 200);
+//     var data = imageData.data;
+//     var read = 0;
+//     var flipX = false;
+//     var blackAndWhite = false;
+//     var getWritePos;
+//     if(flipX) {
+//       getWritePos = function(x, y) {
+//         return (imageWidth * y + (imgeWidth - x - 1))*4;
+//       };
+//     } else {
+//       getWritePos = function(x, y) {
+//         return (imageWidth * y + x) * 4;
+//       };
+//     }
+//
+//     var copyPixel;
+//            if (blackAndWhite)
+//    {
+//              copyPixel = function(writep) {
+//              var luminosity = t[a[read++]];
+//              data[writep + 0] = luminosity;
+//              data[writep + 1] = luminosity;
+//              data[writep + 2] = luminosity;
+//              data[writep + 3] = 255; // alpha
+//            };
+//    } else
+//    {
+//              copyPixel = function(writep) {
+//              data[writep + 0] = t[a[read++]];
+//              data[writep + 1] = t[a[read++]];
+//              data[writep + 2] = t[a[read++]];
+//              data[writep + 3] = 255; // alpha
+//        };
+//    }
+//
+//    for (var y = 0; y < imge.imageHeight; y++)
+// {
+//        for (var x = 0; x < imge.imageWidth; x++)
+//    {
+//                var writep = getWritePos(x, y);
+//                copyPixel(writep);
+//           }
+//    }
+//    context.putImageData(imageData, 0, 0, 0,0, canvas.width, canvas.height);
+//  });
+// }
 //=============================================================================//
 // Access the Robot on connected
 $('#connect').on( 'click', function() {
-    $.getScript( 'http://192.168.10.104/libs/qimessaging/1.0/qimessaging.js', function( data, textStatus, jqxhr ) {
+    $.getScript( 'http://192.168.10.102/libs/qimessaging/1.0/qimessaging.js', function( data, textStatus, jqxhr ) {
       //Create QiSession
+
       connect();
     });
 } );
@@ -338,6 +436,12 @@ $('#disconnect').on('click', function(){
 
 //MANUAL CONTROLS ====================================================//
 //Movement keys
+function moveHead(){
+  session.service("ALMotion").done(function(tts){
+    tts.setPosition("Head",[20,20,20,20,20,20], 0, .3, 56);
+    });
+}
+
 function moveForward(){
   //pressing on cell changes opacity
   session.service("ALMotion").done(function(tts)
@@ -518,6 +622,7 @@ function stopBehavior() {
   {
     tts.stopAllBehaviors();
     $('#stopAll').addClass("disabled");
+    $('#stopAll2').addClass("disabled");
   });
 }
 
@@ -538,7 +643,27 @@ function video(videoNumber) {
   {
     tts.runBehavior("video"+videoNumber+"");
   });
-  $('#stopAll').removeClass("disabled");
+}
+
+
+//Use pre-made behaviors from robot memory
+function intro() {
+  session.service("ALBehaviorManager").done(function(tts)
+  {
+    tts.runBehavior("intro");
+    $('#stopAll2').removeClass("disabled");
+  });
+
+}
+
+//Use pre-made behaviors from robot memory
+function question(questionNumber) {
+  session.service("ALBehaviorManager").done(function(tts)
+  {
+    tts.runBehavior("Question"+questionNumber+"");
+    $('#stopAll2').removeClass("disabled");
+  });
+
 }
 //=========================================================================//
 
@@ -564,8 +689,8 @@ function getStatus() {
 
 
 //Speech recognition code//=========================================================================//
-showInfo('info_start');
 
+showInfo('info_start');
 
 var final_transcript = '';
 var recognizing = false;
@@ -627,23 +752,18 @@ if (!('webkitSpeechRecognition' in window)) {
 
   recognition.onresult = function(event) {
     var interim_transcript = '';
-
     for (var i = event.resultIndex; i < event.results.length; ++i) {
       if (event.results[i].isFinal) {
         var nao_transcript = event.results[i][0].transcript;
         final_transcript += event.results[i][0].transcript;
-        animatedSay(nao_transcript);
+         animatedSay("\\rspd=75\\"+nao_transcript);
       } else {
         interim_transcript += event.results[i][0].transcript;
       }
     }
     final_transcript = capitalize(final_transcript);
-    final_span.innerHTML = linebreak(final_transcript);
-    interim_span.innerHTML = linebreak(interim_transcript);
-
-    if (final_transcript || interim_transcript) {
-      showButtons('inline-block');
-    }
+    final_span.innerHTML = linebreak(interim_transcript);
+    //interim_span.innerHTML = linebreak(interim_transcript);
   };
 }
 
@@ -663,21 +783,19 @@ function capitalize(s) {
   return s.replace(first_char, function(m) { return m.toUpperCase(); });
 }
 
-
 function startButton(event) {
   if (recognizing) {
     recognition.stop();
     return;
   }
   final_transcript = '';
-  recognition.lang ='en-US';
+  recognition.lang = 'en-US';
   recognition.start();
   ignore_onend = false;
   final_span.innerHTML = '';
   interim_span.innerHTML = '';
   start_img.src = 'mic-slash.gif';
   showInfo('info_allow');
-  showButtons('none');
   start_timestamp = event.timeStamp;
 }
 
@@ -694,13 +812,7 @@ function showInfo(s) {
   }
 }
 
-var current_style;
-function showButtons(style) {
-  if (style == current_style) {
-    return;
-  }
-  current_style = style;
-}
+
 </script>
 </body>
 </html>
