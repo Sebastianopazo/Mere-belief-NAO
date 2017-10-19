@@ -9,7 +9,6 @@
   <link rel="stylesheet" href="styles.css">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
-
 <body>
   <nav class="nav-extended purple darken-3">
     <div class="nav-wrapper">
@@ -142,7 +141,7 @@
                 <label for="inputText">Write Message</label>
               </div>
 
-              <a id="submitText" class="waves-effect waves-purple btn-large purple darken-2" onclick= "sleep()"><i class="material-icons left">unarchive</i>Submit</a>
+              <a id="submitText" class="waves-effect waves-purple btn-large purple darken-2"><i class="material-icons left">unarchive</i>Submit</a>
             </div>
               <div class="col s12">
                 <form action="#">
@@ -198,7 +197,8 @@
 
                 <h5>Questions</h5>
                 <a class="waves-effect waves-blue btn small blue lighten-1" onclick= "$(this).addClass('greyText'); question(1)">Question 1</a>
-                <a class="waves-effect waves-blue btn small blue lighten-1" onclick= "$(this).addClass('greyText'); question(2)">Question 2</a>
+                <a class="waves-effect waves-blue btn small blue darken-2" onclick= "$(this).addClass('greyText'); question(2)">Question 2</a> -->
+                <a class="waves-effect waves-blue btn small blue darken-2" onclick= "$(this).addClass('greyText'); remark()">Remarks for question 2</a>
                 <a class="waves-effect waves-blue btn small blue lighten-1" onclick= "$(this).addClass('greyText'); question(3)">Question 3</a>
                 <a class="waves-effect waves-blue btn small blue lighten-1" onclick= "$(this).addClass('greyText'); question(4)">Question 4</a>
                 <a class="waves-effect waves-blue btn small blue lighten-1" onclick= "$(this).addClass('greyText'); question(5)">Question 5</a>
@@ -211,7 +211,7 @@
                 <a class="waves-effect waves-purple btn small purple lighten-1" onclick= "animatedSay('Ahh ha')">A-ha 1</a>
                 <a class="waves-effect waves-purple btn small purple lighten-1" onclick= "animatedSay('Ahhha')">A-ha 2</a>
                 <a class="waves-effect waves-purple btn small purple lighten-1" onclick= "animatedSay('Ah')">Uuuuh! </a>
-                <a class="waves-effect waves-purple btn small purple lighten-1" onclick= "animatedSay('Well')">Ok </a>
+                <a class="waves-effect waves-purple btn small purple lighten-1" onclick= "animatedSay('Ok')">Ok </a>
                 <a class="waves-effect waves-purple btn small purple lighten-1" onclick= "animatedSay('Well')">Well ...</a>
                 <a class="waves-effect waves-purple btn small purple lighten-1" onclick= "animatedSay('Hmmm')">Hmmm ...</a>
                 <a class="waves-effect waves-purple btn small purple lighten-1" onclick= "animatedSay('Give me a second')">Give me a second...</a>
@@ -234,8 +234,6 @@
 
 //Global variable declarations;
 var textToSpeech;
-var session;
-var inputMessage;
 var session;
 
 //Make touch events
@@ -267,7 +265,7 @@ touchEvents(rotateRight, rightRotation);
 //declare function to start QiSession
 function connect()
 {
-  session = new QiSession('192.168.10.102:80');
+  session = new QiSession('10.56.68.132:80');
   session.socket().on('connect', function()
   {
     console.log("Connected!");
@@ -422,7 +420,7 @@ function disconnect(){
 //=============================================================================//
 // Access the Robot on connected
 $('#connect').on( 'click', function() {
-    $.getScript( 'http://192.168.10.102/libs/qimessaging/1.0/qimessaging.js', function( data, textStatus, jqxhr ) {
+    $.getScript( 'http://10.56.68.132/libs/qimessaging/1.0/qimessaging.js', function( data, textStatus, jqxhr ) {
       //Create QiSession
 
       connect();
@@ -580,7 +578,7 @@ function animatedSay(text){
 }
 
 //Text on the html form to speech ============================================//
-function speak(){
+function speak(inputMessage){
 
   session.service("ALAnimatedSpeech").done(function(tts)
   {
@@ -591,15 +589,19 @@ function speak(){
 
 //when submit button is pressed, submit
 $("#submitText").click(function() {
-  inputMessage = $("#inputText").val();
-  speak();
+  var speed = '\\rspd=75\\';
+  text = $("#inputText").val();
+  inputMessage = speed+text;
+  speak(inputMessage);
 })
 
 //hen 'enter' key is pressed, submit
 document.getElementById('inputText').onkeydown = function(e){
    if ( (window.event ? event.keyCode : e.which) == 13) {
-     inputMessage = $("#inputText").val();
-     speak();
+     var speed = '\\rspd=75\\';
+     text = $("#inputText").val();
+     inputMessage = speed+text;
+     speak(inputMessage);
    }
 };
 //=========================================================================//
@@ -651,6 +653,16 @@ function intro() {
   session.service("ALBehaviorManager").done(function(tts)
   {
     tts.runBehavior("intro");
+    $('#stopAll2').removeClass("disabled");
+  });
+
+}
+
+//Use pre-made behaviors from robot memory
+function remark() {
+  session.service("ALBehaviorManager").done(function(tts)
+  {
+    tts.runBehavior("remark");
     $('#stopAll2').removeClass("disabled");
   });
 
