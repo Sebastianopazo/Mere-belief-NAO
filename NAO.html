@@ -196,23 +196,30 @@
                 <a class="waves-effect waves-green btn small green lighten-1" onclick= "$(this).addClass('greyText'); intro()">Intro.</a>
 
                 <h5>Questions</h5>
-                <a class="waves-effect waves-blue btn small blue lighten-1" onclick= "$(this).addClass('greyText'); question(1)">Question 1</a>
+                <a class="waves-effect waves-blue btn small orange" onclick= "$(this).addClass('greyText'); animatedSay('Ok, first question')">Ok, first question:</a>-->
+                <a class="waves-effect waves-blue btn small blue lighten-1" onclick= "$(this).addClass('greyText'); question(1)">Question 1</a>-->
+                <a class="waves-effect waves-blue btn small orange" onclick= "$(this).addClass('greyText'); animatedSay('Alright, next question')">Alright, next question</a>-->
                 <a class="waves-effect waves-blue btn small blue darken-2" onclick= "$(this).addClass('greyText'); question(2)">Question 2</a> -->
-                <a class="waves-effect waves-blue btn small blue darken-2" onclick= "$(this).addClass('greyText'); remark()">Remarks for question 2</a>
-                <a class="waves-effect waves-blue btn small blue lighten-1" onclick= "$(this).addClass('greyText'); question(3)">Question 3</a>
-                <a class="waves-effect waves-blue btn small blue lighten-1" onclick= "$(this).addClass('greyText'); question(4)">Question 4</a>
+                <a class="waves-effect waves-blue btn small blue darken-2" onclick= "$(this).addClass('greyText'); remark()">Remarks for question 2</a> -->
+                <a class="waves-effect waves-blue btn small orange" onclick= "$(this).addClass('greyText'); animatedSay('Ok')">Ok</a>-->
+                <a class="waves-effect waves-blue btn small blue lighten-1" onclick= "$(this).addClass('greyText'); question(3)">Question 3</a> -->
+                <a class="waves-effect waves-blue btn small orange" onclick= "$(this).addClass('greyText'); animatedSay('Ok, so')">Ok, so</a>-->
+                <a class="waves-effect waves-blue btn small blue lighten-1" onclick= "$(this).addClass('greyText'); question(4)">Question 4</a> -->
+                <a class="waves-effect waves-blue btn small orange" onclick= "$(this).addClass('greyText'); animatedSay('Ok, final question')">Ok, final question:</a>-->
                 <a class="waves-effect waves-blue btn small blue lighten-1" onclick= "$(this).addClass('greyText'); question(5)">Question 5</a>
 
 
               </div>
               <div class="col s12">
                 <h5>Misc remarks</h5>
-
+                <a class="waves-effect waves-purple btn small purple lighten-1" onclick= "animatedSay('Yes')">Yes</a>
                 <a class="waves-effect waves-purple btn small purple lighten-1" onclick= "animatedSay('Ahh ha')">A-ha 1</a>
                 <a class="waves-effect waves-purple btn small purple lighten-1" onclick= "animatedSay('Ahhha')">A-ha 2</a>
                 <a class="waves-effect waves-purple btn small purple lighten-1" onclick= "animatedSay('Ah')">Uuuuh! </a>
-                <a class="waves-effect waves-purple btn small purple lighten-1" onclick= "animatedSay('Ok')">Ok </a>
-                <a class="waves-effect waves-purple btn small purple lighten-1" onclick= "animatedSay('Well')">Well ...</a>
+                <a class="waves-effect waves-purple btn small purple lighten-1" onclick= "animatedSay('Oh, I see')">Oh, I see</a>
+                <a class="waves-effect waves-purple btn small purple lighten-1" onclick= "animatedSay('Hmm. I think I got it')">Hmm. I think I've got it</a>
+                <a class="waves-effect waves-purple btn small purple lighten-1" onclick= "animatedSay('Ah, Ok')">Ah, ok </a>
+                <a class="waves-effect waves-purple btn small purple lighten-1" onclick= "animatedSay('Thank you')">Thank you ...</a>
                 <a class="waves-effect waves-purple btn small purple lighten-1" onclick= "animatedSay('Hmmm')">Hmmm ...</a>
                 <a class="waves-effect waves-purple btn small purple lighten-1" onclick= "animatedSay('Give me a second')">Give me a second...</a>
                 <a class="waves-effect waves-purple btn small purple lighten-1" onclick= "animatedSay('Can you repeat that?')">Can you repeat that?</a>
@@ -265,46 +272,56 @@ touchEvents(rotateRight, rightRotation);
 //declare function to start QiSession
 function connect()
 {
-  session = new QiSession('10.56.68.132:80');
-  session.socket().on('connect', function()
-  {
-    console.log("Connected!");
-    $("#connect").addClass('disabled');
-    $("#disconnect").removeClass('disabled');
-    $("#tab2").removeClass('disabled');
-    $("#tab3").removeClass('disabled');
-    $("#tab4").removeClass('disabled');
-    $('#controls').slideDown('slow');
-    $('#controls2').slideDown('slow');
-    $('#redLight').fadeOut('fast');
-    $('#status').text('Connected');
-    session.service("ALTextToSpeech").done(function(tts)
-    {
-       tts.say("Link established");
-    });
 
-    //Stop awareness mode.
-    function stopAwareness() {
-      session.service("ALBasicAwareness").done(function(tts)
-      {
-        tts.startAwareness();
-      })
-    }
+   var ipPrompt = prompt("Please provide Nao's Ip address:", "");
+   if (ipPrompt == null || ipPrompt == "") {
+       alert("You did not provide an Ip address");
+   } else {
+     $.getScript( 'http://'+ipPrompt+'/libs/qimessaging/1.0/qimessaging.js', function( data, textStatus, jqxhr ) {
+       //Create QiSession
+       session = new QiSession(ipPrompt+':80');
+       session.socket().on('connect', function()
+       {
+         console.log("Connected!");
+         $("#connect").addClass('disabled');
+         $("#disconnect").removeClass('disabled');
+         $("#tab2").removeClass('disabled');
+         $("#tab3").removeClass('disabled');
+         $("#tab4").removeClass('disabled');
+         $('#controls').slideDown('slow');
+         $('#controls2').slideDown('slow');
+         $('#redLight').fadeOut('fast');
+         $('#status').text('Connected');
+         session.service("ALTextToSpeech").done(function(tts)
+         {
+            tts.say("Link established");
+         });
 
-    stopAwareness();
+        //  //Stop awareness mode.
+        //  function stopAwareness() {
+        //    session.service("ALBasicAwareness").done(function(tts)
+        //    {
+        //      tts.startAwareness();
+        //    })
+        //  }
+         //
+        //  stopAwareness();
 
-  }).on('disconnect', function(){
-    $("#disconnect").addClass('disabled');
-    $("#connect").removeClass('disabled');
-    $('#controls').slideUp('slow');
-    $('#controls2').slideUp('slow');
-    $('#status').html('Disconnected');
-    $('#redLight').fadeIn('slow');
-    $("#tab2").addClass('disabled');
-    $("#tab3").addClass('disabled');
-    $("#tab4").addClass('disabled');
-    console.log("QiSession disconnect");
-  });
+       }).on('disconnect', function(){
+         $("#disconnect").addClass('disabled');
+         $("#connect").removeClass('disabled');
+         $('#controls').slideUp('slow');
+         $('#controls2').slideUp('slow');
+         $('#status').html('Disconnected');
+         $('#redLight').fadeIn('slow');
+         $("#tab2").addClass('disabled');
+         $("#tab3").addClass('disabled');
+         $("#tab4").addClass('disabled');
+         console.log("QiSession disconnect");
+       });
+
+     });
+   }
 }
 
 function disconnect(){
@@ -420,11 +437,7 @@ function disconnect(){
 //=============================================================================//
 // Access the Robot on connected
 $('#connect').on( 'click', function() {
-    $.getScript( 'http://10.56.68.132/libs/qimessaging/1.0/qimessaging.js', function( data, textStatus, jqxhr ) {
-      //Create QiSession
-
-      connect();
-    });
+    connect();
 } );
 
 $('#disconnect').on('click', function(){
