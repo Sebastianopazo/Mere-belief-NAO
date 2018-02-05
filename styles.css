@@ -14,6 +14,13 @@
   -webkit-transform: scaleX(-1);
 }
 
+.timer{
+  background-color: grey;
+  font-size: 35px;
+  padding-top: 14px;
+  padding-bottom: 14px;
+
+}
 .small{
   font-size: 10px;
 }

@@ -9,10 +9,11 @@
   <link rel="stylesheet" href="styles.css">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
+
 <body>
   <nav class="nav-extended purple darken-3">
     <div class="nav-wrapper">
-      <a class="brand-logo center"><img id="logo" src="naokita.png" width="30px">NAOKITA Control</a>
+      <a class="brand-logo center"><img id="logo" src="naokita.png" width="30px">NAO Control</a>
     </div>
     <div class="nav-content purple darken-3">
       <ul class="tabs tabs-transparent">
@@ -20,141 +21,160 @@
         <li id="tab2" class="tab disabled"><a href="#mereBelief">Mere Belief Answers</a></li>
         <li id="tab3" class="tab"><a href="#recursiveFeedback">Recursive Feedback</a></li>
       </ul>
-      </div>
-      </nav>
-    <div class="container">
-      <!-- FIRST TAB  -->
-      <div id="manualControl" class="col s10">
-        <div class="section">
-          <h4 class="purple-text text-darken-3 center-align">Manual Control</h4>
-          <div class="row">
-            <div class="col s6 center">
-              <a id="connect" class="waves-effect waves-light btn-large green lighten-2"><i class="material-icons left">settings_input_antenna</i>Connect to NAO</a>
-              <a id="disconnect" class="waves-effect waves-light btn-large red disabled"><i class="material-icons left">highlight_off</i>Disconnect NAO</a>
-              <div>STATUS: <span id="status">Disconnected</span><img id="greenLight" class="light" src="green_light.png" alt=""><img id="redLight"class="light" src="red_light.png" alt=""></div>
-            </div>
-            <div  id="controls"class="col s6 center">
-              <a id="sleep" class="waves-effect waves-purple btn-large purple darken-2" onclick= "sleep()"><i class="material-icons left">brightness_3</i>Sleep</a>
-              <a id="wakeUp" class="waves-effect waves-purple btn-large  yellow darken-1" onclick= "wakeUp()"><i class="material-icons left">brightness_7</i>Wake Up</a>
-              <a id="stand" class="waves-effect waves-purple btn-large cyan lighten-1" onclick= "stand()">Stand</a>
-            </div>
-          </div>
-            <div id="controls2">
-              <div class="row">
-                <div class="col s6">
-                  <h5 class="purple-text text-darken-3 center-align">Movement Control</h5>
-                  <div class="grid-container">
-                    <div class="grid">
-                      <a id="rotateLeft" class="btn-floating btn-large waves-effect waves-light purple darken-3"><i class="material-icons">replay</i></a>
-                      <a id="forward" class="btn-floating btn-large waves-effect waves-light orange lighten-1"><i class="material-icons">keyboard_arrow_up</i></a>
-                      <a id="rotateRight" class="btn-floating btn-large waves-effect waves-light purple darken-3"><i class="material-icons">replay</i></a>
-                      <a id="left" class="btn-floating btn-large waves-effect waves-light orange lighten-1"><i class="material-icons">keyboard_arrow_left</i></a>
-                      <img id="logo2" src="naokita.png" width="50px" height="50px">
-                      <a id="right" class="btn-floating btn-large waves-effect waves-light orange lighten-1"><i class="material-icons">keyboard_arrow_right</i></a>
-                      <div class="cell"></div>
-                      <a id="back" class="btn-floating btn-large waves-effect waves-light orange lighten-1"><i class="material-icons">keyboard_arrow_down</i></a>
-                      <div class="cell"></div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col s6 center">
-                  <h5 class="purple-text text-darken-3">Voice Control</h5>
-                  <div class="col s6 center">
-                    <form action="#">
-                      <p class="range-field">
-                        <input type="range" id="globalVolume" min="0" max="100"/>
-                        <span>GLOBAL VOLUME</span>
-                      </p>
-                    </form>
-                    <form action="#">
-                      <p class="range-field">
-                        <input type="range" step=0.1 id="speechVolume" min="1" max="4" onchange="updatePitch(this.value)"/>
-                        <span>PITCH SHIFT</span>
-                      </p>
-                    </form>
-                  </div>
-                  <div class="col s6 center">
-                    <form action="#">
-                      <p class="range-field">
-                        <input type="range" step=0.1 id="doubleVoice" min="1" max="4" onchange="updateDoubleVoice(this.value)"/>
-                        <span>DOUBLE VOICE PITCH</span>
-                      </p>
-                    </form>
-                    <form action="#">
-                      <p class="range-field">
-                        <input type="range" step=0.1 id="doubleVoiceLevel" min="0" max="4" onchange="updateDoubleVoiceLevel(this.value)"/>
-                        <span>DOUBLE VOICE LEVEL</span>
-                      </p>
-                    </form>
-                  </div>
-                  <div class="col s6 center">
-                    <form action="#">
-                      <p class="range-field">
-                        <input type="range" step=0.1 id="doubleVoiceTimeShift" min="0" max="0.5" onchange="updatedoubleVoiceTimeShift(this.value)"/>
-                        <span>DOUBLE VOICE TIME SHIFT</span>
-                      </p>
-                    </form>
-                  </div>
-                  <div class="col s6 center">
-                    <a id="test" class="waves-effect waves-purple btn-large green" onclick="animatedSay('Testing voice')"><i class="material-icons left"></i>Test</a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!-- SECOND TAB  -->
-      <div id="mereBelief" class="col s12">
-        <div class="section">
-          <h4 class="purple-text text-darken-3 center-align">Mere Belief Answers</h4>
-          <div class="row">
-            <div class="col s12 center">
-              <a class="waves-effect waves-purple btn-large orange lighten-1" onclick= "$(this).addClass('greyText'); answer(1)"><i class="material-icons left">play_arrow</i>Answer 1</a>
-              <a class="waves-effect waves-purple btn-large  orange lighten-1" onclick= "$(this).addClass('greyText'); answer(2)"><i class="material-icons left">play_arrow</i>Answer 2</a>
-              <a class="waves-effect waves-purple btn-large  orange lighten-1" onclick= "$(this).addClass('greyText'); answer(3)"><i class="material-icons left">play_arrow</i>Answer 3</a>
-              <a class="waves-effect waves-purple btn-large  orange lighten-1" onclick= "$(this).addClass('greyText'); answer(4)"><i class="material-icons left">play_arrow</i>Answer 4</a>
-              <a class="waves-effect waves-purple btn-large  orange lighten-1" onclick= "$(this).addClass('greyText'); answer(5)"><i class="material-icons left">play_arrow</i>Answer 5</a>
-              <a class="waves-effect waves-purple btn-large  orange lighten-1" onclick= "$(this).addClass('greyText'); answer(6)"><i class="material-icons left">play_arrow</i>Answer 6</a>
-              <a class="waves-effect waves-purple btn-large  orange lighten-1" onclick= "$(this).addClass('greyText'); answer(7)"><i class="material-icons left">play_arrow</i>Answer 7</a>
-              <a class="waves-effect waves-purple btn-large  orange lighten-1" onclick= "$(this).addClass('greyText'); answer(8)"><i class="material-icons left">play_arrow</i>Answer 8</a>
-              <a class="waves-effect waves-purple btn-large  orange lighten-1" onclick= "$(this).addClass('greyText'); answer(9)"><i class="material-icons left">play_arrow</i>Answer 9</a>
-              <a class="waves-effect waves-purple btn-large  purple lighten-1" onclick= "hello()"><i class="material-icons left">play_arrow</i>Hello!</a>
-            </div>
-          </div>
-          <div class="divider"></div>
-          <div class="row">
-            <div class="col s12 center">
-              <a id="stopAll" class="waves-effect waves-light btn-large disabled red" onclick= "stopBehavior()"><i class="material-icons left">stop</i>Stop Answer</a>
-            </div>
-          </div>
-          <div class="divider"></div>
-        </div>
-      </div>
-      <!-- THIRD TAB  -->
-      <div id="recursiveFeedback">
+    </div>
+  </nav>
+  <div class="container">
+    <!-- FIRST TAB  -->
+    <div id="manualControl" class="col s10">
+      <div class="section">
+        <h4 class="purple-text text-darken-3 center-align">Manual Control</h4>
         <div class="row">
-          <div class="col s5 pane">
-            <h5 class="purple-text text-darken-3 center-align">Text to Animated Speech</h5>
-            <div class="center">
-              <div class="input-field col s12">
-                <input id="inputText" type="text"/>
-                <label for="inputText">Write Message</label>
+          <div class="col s6 center">
+            <a id="connect" class="waves-effect waves-light btn-large green lighten-2"><i class="material-icons left">settings_input_antenna</i>Connect to NAO</a>
+            <a id="disconnect" class="waves-effect waves-light btn-large red disabled"><i class="material-icons left">highlight_off</i>Disconnect NAO</a>
+            <div>STATUS: <span id="status">Disconnected</span><img id="greenLight" class="light" src="green_light.png" alt=""><img id="redLight" class="light" src="red_light.png" alt=""></div>
+          </div>
+          <div id="controls" class="col s6 center">
+            <a id="sleep" class="waves-effect waves-purple btn-large purple darken-2" onclick="sleep()"><i class="material-icons left">brightness_3</i>Sleep</a>
+            <a id="wakeUp" class="waves-effect waves-purple btn-large  yellow darken-1" onclick="wakeUp()"><i class="material-icons left">brightness_7</i>Wake Up</a>
+            <a id="stand" class="waves-effect waves-purple btn-large cyan lighten-1" onclick="stand()">Stand</a>
+          </div>
+        </div>
+        <div id="controls2">
+          <div class="row">
+            <div class="col s6">
+              <h5 class="purple-text text-darken-3 center-align">Movement Control</h5>
+              <div class="grid-container">
+                <div class="grid">
+                  <a id="rotateLeft" class="btn-floating btn-large waves-effect waves-light purple darken-3"><i class="material-icons">replay</i></a>
+                  <a id="forward" class="btn-floating btn-large waves-effect waves-light orange lighten-1"><i class="material-icons">keyboard_arrow_up</i></a>
+                  <a id="rotateRight" class="btn-floating btn-large waves-effect waves-light purple darken-3"><i class="material-icons">replay</i></a>
+                  <a id="left" class="btn-floating btn-large waves-effect waves-light orange lighten-1"><i class="material-icons">keyboard_arrow_left</i></a>
+                  <img id="logo2" src="naokita.png" width="50px" height="50px">
+                  <a id="right" class="btn-floating btn-large waves-effect waves-light orange lighten-1"><i class="material-icons">keyboard_arrow_right</i></a>
+                  <div class="cell"></div>
+                  <a id="back" class="btn-floating btn-large waves-effect waves-light orange lighten-1"><i class="material-icons">keyboard_arrow_down</i></a>
+                  <div class="cell"></div>
+                </div>
               </div>
-
-              <a id="submitText" class="waves-effect waves-purple btn-large purple darken-2"><i class="material-icons left">unarchive</i>Submit</a>
             </div>
-              <div class="col s12">
+            <div class="col s6 center">
+              <h5 class="purple-text text-darken-3">Voice Control</h5>
+              <div class="col s6 center">
                 <form action="#">
-                  <h5 class="purple-text text-darken-3 center-align">Voice Control</h5>
-                  <span>VOLUME</span>
                   <p class="range-field">
-                    <input type="range" id="speechVolume" min="0" max="100" onchange="updateSpeechVolume(this.value)"/>
+                    <input type="range" id="globalVolume" min="0" max="100" />
+                    <span>GLOBAL VOLUME</span>
+                  </p>
+                </form>
+                <form action="#">
+                  <p class="range-field">
+                    <input type="range" step="0.1" id="speechVolume" min="1" max="4" onchange="updatePitch(this.value)" />
+                    <span>PITCH SHIFT</span>
                   </p>
                 </form>
               </div>
-              <div class="col s12">
-                <h5 class="purple-text text-darken-3 center-align">Voice to Text</h5>
-                <h1 class="center" id="headline">
+              <div class="col s6 center">
+                <form action="#">
+                  <p class="range-field">
+                    <input type="range" step="0.1" id="doubleVoice" min="1" max="4" onchange="updateDoubleVoice(this.value)" />
+                    <span>DOUBLE VOICE PITCH</span>
+                  </p>
+                </form>
+                <form action="#">
+                  <p class="range-field">
+                    <input type="range" step="0.1" id="doubleVoiceLevel" min="0" max="4" onchange="updateDoubleVoiceLevel(this.value)" />
+                    <span>DOUBLE VOICE LEVEL</span>
+                  </p>
+                </form>
+              </div>
+              <div class="col s6 center">
+                <form action="#">
+                  <p class="range-field">
+                    <input type="range" step="0.1" id="doubleVoiceTimeShift" min="0" max="0.5" onchange="updatedoubleVoiceTimeShift(this.value)" />
+                    <span>DOUBLE VOICE TIME SHIFT</span>
+                  </p>
+                </form>
+              </div>
+              <div class="col s6 center">
+                <a id="test" class="waves-effect waves-purple btn-large green" onclick="animatedSay('Testing voice')"><i class="material-icons left"></i>Test</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- SECOND TAB  -->
+    <div id="mereBelief" class="col s12">
+      <div class="section">
+        <h4 class="purple-text text-darken-3 center-align">Mere Belief Answers</h4>
+        <div class="row">
+          <div class="col s12 center">
+            <a class="waves-effect waves-purple btn-large orange lighten-1" onclick="$(this).addClass('greyText'); answer(1)"><i class="material-icons left">play_arrow</i>Answer 1</a>
+            <a class="waves-effect waves-purple btn-large  orange lighten-1" onclick="$(this).addClass('greyText'); answer(2)"><i class="material-icons left">play_arrow</i>Answer 2</a>
+            <a class="waves-effect waves-purple btn-large  orange lighten-1" onclick="$(this).addClass('greyText'); answer(3)"><i class="material-icons left">play_arrow</i>Answer 3</a>
+            <a class="waves-effect waves-purple btn-large  orange lighten-1" onclick="$(this).addClass('greyText'); answer(4)"><i class="material-icons left">play_arrow</i>Answer 4</a>
+            <a class="waves-effect waves-purple btn-large  orange lighten-1" onclick="$(this).addClass('greyText'); answer(5)"><i class="material-icons left">play_arrow</i>Answer 5</a>
+            <a class="waves-effect waves-purple btn-large  orange lighten-1" onclick="$(this).addClass('greyText'); answer(6)"><i class="material-icons left">play_arrow</i>Answer 6</a>
+            <a class="waves-effect waves-purple btn-large  orange lighten-1" onclick="$(this).addClass('greyText'); answer(7)"><i class="material-icons left">play_arrow</i>Answer 7</a>
+            <a class="waves-effect waves-purple btn-large  orange lighten-1" onclick="$(this).addClass('greyText'); answer(8)"><i class="material-icons left">play_arrow</i>Answer 8</a>
+            <a class="waves-effect waves-purple btn-large  orange lighten-1" onclick="$(this).addClass('greyText'); answer(9)"><i class="material-icons left">play_arrow</i>Answer 9</a>
+            <a class="waves-effect waves-purple btn-large  purple lighten-1" onclick="hello()"><i class="material-icons left">play_arrow</i>Hello!</a>
+          </div>
+        </div>
+        <div class="divider"></div>
+        <div class="row">
+          <div class="col s12 center">
+            <a id="stopAll" class="waves-effect waves-light btn-large disabled red" onclick="stopBehavior()"><i class="material-icons left">stop</i>Stop Answer</a>
+          </div>
+        </div>
+        <div class="divider"></div>
+      </div>
+    </div>
+    <!-- THIRD TAB  -->
+    <div id="recursiveFeedback">
+      <div class="row">
+        <div class="col s12 pane">
+          <h4 class="center-align">Timer</h4>
+          <div class="col s6">
+            <div class="input-field col s12">
+              <select id="minuteSelect">
+                  <option value="" disabled selected>Options...</option>
+                  <option value="5">5 Minutes</option>
+                  <option value="10">10 Minues</option>
+                </select>
+              <a id="startTimer" class="waves-effect waves-light btn">Start timer</a>
+            </div>
+          </div>
+          <div class="col s6 center-align">
+            <div class="timer" id="countdown">
+              00:00
+            </div>
+            <a id="resetTimer" class="waves-effect waves-light red btn">Reset timer</a>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col s6 pane">
+          <div class="col s12">
+            <h5 class="purple-text text-darken-3 center-align">Text to Animated Speech</h5>
+            <div class="input-field col s12">
+              <input id="inputText" type="text" />
+              <label for="inputText">Write Message</label>
+            </div>
+            <a id="submitText" class="waves-effect waves-purple btn-large purple darken-2"><i class="material-icons left">unarchive</i>Submit</a>
+          </div>
+          <div class="col s12">
+            <form action="#">
+              <h5 class="purple-text text-darken-3 center-align">Voice Control</h5>
+              <span>VOLUME</span>
+              <p class="range-field">
+                <input type="range" id="speechVolume2" min="0" max="100" onchange="updateSpeechVolume(this.value)" />
+              </p>
+            </form>
+          </div>
+          <div class="col s12">
+            <h5 class="purple-text text-darken-3 center-align">Voice to Text</h5>
                 <div id="info">
                   <p id="info_start">Click on the microphone icon and begin speaking.</p>
                   <p id="info_speak_now">Speak now.</p>
@@ -180,54 +200,46 @@
                 <div id="results">
                   <span id="final_span" class="final"></span>
                   <span id="interim_span" class="interim"></span>
-                  <p>
+                  <p></p>
                 </div>
               </div>
           </div>
-
-          <div class="col s6 pane offset-s1">
+          <div class="col s6 pane">
             <h5 class="purple-text text-darken-3 center-align">Recursive Feedback Answers</h5>
-            <div class="row">
-            </div>
             <div class="row">
               <div class="col s12">
                 <h5>Intro</h5>
                 <a class="waves-effect waves-green btn small green lighten-1" onclick= "$(this).addClass('greyText'); animatedSay('Yes, I can hear you...')">Yes, I can hear you...</a>
                 <a class="waves-effect waves-green btn small green lighten-1" onclick= "$(this).addClass('greyText'); intro()">Intro.</a>
-
                 <h5>Questions</h5>
-                <a class="waves-effect waves-blue btn small orange" onclick= "$(this).addClass('greyText'); animatedSay('Ok, first question')">Ok, first question:</a>-->
-                <a class="waves-effect waves-blue btn small blue lighten-1" onclick= "$(this).addClass('greyText'); question(1)">Question 1</a>-->
-                <a class="waves-effect waves-blue btn small orange" onclick= "$(this).addClass('greyText'); animatedSay('Alright, next question')">Alright, next question</a>-->
-                <a class="waves-effect waves-blue btn small blue darken-2" onclick= "$(this).addClass('greyText'); question(2)">Question 2</a> -->
-                <a class="waves-effect waves-blue btn small blue darken-2" onclick= "$(this).addClass('greyText'); remark()">Remarks for question 2</a> -->
-                <a class="waves-effect waves-blue btn small orange" onclick= "$(this).addClass('greyText'); animatedSay('Ok')">Ok</a>-->
-                <a class="waves-effect waves-blue btn small blue lighten-1" onclick= "$(this).addClass('greyText'); question(3)">Question 3</a> -->
-                <a class="waves-effect waves-blue btn small orange" onclick= "$(this).addClass('greyText'); animatedSay('Ok, so')">Ok, so</a>-->
-                <a class="waves-effect waves-blue btn small blue lighten-1" onclick= "$(this).addClass('greyText'); question(4)">Question 4</a> -->
-                <a class="waves-effect waves-blue btn small orange" onclick= "$(this).addClass('greyText'); animatedSay('Ok, final question')">Ok, final question:</a>-->
+                <a class="waves-effect waves-blue btn small orange" onclick= "$(this).addClass('greyText'); animatedSay('Ok, first question')">Ok, first question:</a>→
+                <a class="waves-effect waves-blue btn small blue lighten-1" onclick= "$(this).addClass('greyText'); question(1)">Question 1</a>→
+                <a class="waves-effect waves-blue btn small orange" onclick= "$(this).addClass('greyText'); animatedSay('Alright, next question')">Alright, next question</a>→
+                <a class="waves-effect waves-blue btn small blue darken-2" onclick= "$(this).addClass('greyText'); question(2)">Question 2</a> →
+                <a class="waves-effect waves-blue btn small blue darken-2" onclick= "$(this).addClass('greyText'); remark()">Remarks for question 2</a> →
+                <a class="waves-effect waves-blue btn small orange" onclick= "$(this).addClass('greyText'); animatedSay('Ok')">Ok</a>→
+                <a class="waves-effect waves-blue btn small blue lighten-1" onclick= "$(this).addClass('greyText'); question(3)">Question 3</a> →
+                <a class="waves-effect waves-blue btn small orange" onclick= "$(this).addClass('greyText'); animatedSay('Ok, so')">Ok, so</a>→
+                <a class="waves-effect waves-blue btn small blue lighten-1" onclick= "$(this).addClass('greyText'); question(4)">Question 4</a> →
+                <a class="waves-effect waves-blue btn small orange" onclick= "$(this).addClass('greyText'); animatedSay('Ok, final question')">Ok, final question:</a>→
                 <a class="waves-effect waves-blue btn small blue lighten-1" onclick= "$(this).addClass('greyText'); question(5)">Question 5</a>
-
-
-              </div>
-              <div class="col s12">
-                <h5>Misc remarks</h5>
-                <a class="waves-effect waves-purple btn small purple lighten-1" onclick= "animatedSay('Yes')">Yes</a>
-                <a class="waves-effect waves-purple btn small purple lighten-1" onclick= "animatedSay('Ahh ha')">A-ha 1</a>
-                <a class="waves-effect waves-purple btn small purple lighten-1" onclick= "animatedSay('Ahhha')">A-ha 2</a>
-                <a class="waves-effect waves-purple btn small purple lighten-1" onclick= "animatedSay('Ah')">Uuuuh! </a>
-                <a class="waves-effect waves-purple btn small purple lighten-1" onclick= "animatedSay('Oh, I see')">Oh, I see</a>
-                <a class="waves-effect waves-purple btn small purple lighten-1" onclick= "animatedSay('Hmm. I think I got it')">Hmm. I think I've got it</a>
-                <a class="waves-effect waves-purple btn small purple lighten-1" onclick= "animatedSay('Ah, Ok')">Ah, ok </a>
-                <a class="waves-effect waves-purple btn small purple lighten-1" onclick= "animatedSay('Thank you')">Thank you ...</a>
-                <a class="waves-effect waves-purple btn small purple lighten-1" onclick= "animatedSay('Hmmm')">Hmmm ...</a>
-                <a class="waves-effect waves-purple btn small purple lighten-1" onclick= "animatedSay('Give me a second')">Give me a second...</a>
-                <a class="waves-effect waves-purple btn small purple lighten-1" onclick= "animatedSay('Can you repeat that?')">Can you repeat that?</a>
-
-                <a id="stopAll2" class="waves-effect waves-light btn-large disabled red" onclick= "stopBehavior()"><i class="material-icons left">stop</i>Stop Answer</a>
-
               </div>
             </div>
+          </div>
+          <div class="col s12 pane">
+            <h5>Misc remarks</h5>
+            <a class="waves-effect waves-purple btn small purple lighten-1" onclick= "animatedSay('Yes')">Yes</a>
+            <a class="waves-effect waves-purple btn small purple lighten-1" onclick= "animatedSay('Ahh ha')">A-ha 1</a>
+            <a class="waves-effect waves-purple btn small purple lighten-1" onclick= "animatedSay('Ahhha')">A-ha 2</a>
+            <a class="waves-effect waves-purple btn small purple lighten-1" onclick= "animatedSay('Ah')">Uuuuh! </a>
+            <a class="waves-effect waves-purple btn small purple lighten-1" onclick= "animatedSay('Oh, I see')">Oh, I see</a>
+            <a class="waves-effect waves-purple btn small purple lighten-1" onclick= "animatedSay('Hmm. I think I got it')">Hmm. I think I've got it</a>
+            <a class="waves-effect waves-purple btn small purple lighten-1" onclick= "animatedSay('Ah, Ok')">Ah, ok </a>
+            <a class="waves-effect waves-purple btn small purple lighten-1" onclick= "animatedSay('Thank you')">Thank you ...</a>
+            <a class="waves-effect waves-purple btn small purple lighten-1" onclick= "animatedSay('Hmmm')">Hmmm ...</a>
+            <a class="waves-effect waves-purple btn small purple lighten-1" onclick= "animatedSay('Give me a second')">Give me a second...</a>
+            <a class="waves-effect waves-purple btn small purple lighten-1" onclick= "animatedSay('Can you repeat that?')">Can you repeat that?</a>
+            <a id="stopAll2" class="waves-effect waves-light btn-large disabled red" onclick= "stopBehavior()"><i class="material-icons left">stop</i>Stop Answer</a>
           </div>
         </div>
       </div>
@@ -237,6 +249,10 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.1/js/materialize.min.js"></script>
 <script>
+
+  $(document).ready(function() {
+    $('select').material_select();
+  });
 
 
 //Global variable declarations;
@@ -837,7 +853,42 @@ function showInfo(s) {
   }
 }
 
+var element, endTime, hours, mins, msLeft, time, timeout;
 
+function countdown( elementName, minutes)
+{
+  element = document.getElementById( elementName );
+    function twoDigits( n )
+    {
+        return (n <= 9 ? "0" + n : n);
+    }
+
+    function updateTimer()
+    {
+        msLeft = endTime - (+new Date);
+        if ( msLeft < 1000 ) {
+            window.alert("countdown's over!");
+        } else {
+            time = new Date( msLeft );
+            hours = time.getUTCHours();
+            mins = time.getUTCMinutes();
+            element.innerHTML = (hours ? hours + ':' + twoDigits( mins ) : mins) + ':' + twoDigits( time.getUTCSeconds() );
+            timeout = setTimeout( updateTimer, time.getUTCMilliseconds() + 500 );
+        }
+    }
+    if (minutes > 0) {
+      endTime = (+new Date) + 1000 * (60*minutes) + 500;
+      updateTimer();
+    }
+    }
+
+$('#startTimer').click(function(){
+  countdown( "countdown", $('#minuteSelect').val());
+})
+$('#resetTimer').click(function(){
+  clearTimeout(timeout);
+  $('#countdown').html('00:00');
+})
 </script>
 </body>
 </html>
