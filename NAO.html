@@ -5,12 +5,17 @@
   <link rel="shortcut icon" href="logogizmo_V8a_icon.ico">
   <title>NAO CONTROL</title>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.1/css/materialize.min.css">
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
+  <div class="fixed-action-btn">
+    <a id="stopAll" class="btn-floating btn-large tooltipped red disabled" data-position="left" data-delay="50" data-tooltip="Stop all behaviors" onclick="stopBehavior()">
+        <i class="large material-icons">stop</i>
+      </a>
+  </div>
   <nav class="nav-extended purple darken-3">
     <div class="nav-wrapper">
       <a class="brand-logo center"><img id="logo" src="naokita.png" width="30px">NAO Control</a>
@@ -20,123 +25,112 @@
         <li class="tab"><a class="active" href="#manualControl">Manual Control</a></li>
         <li id="tab2" class="tab disabled"><a href="#mereBelief">Mere Belief Answers</a></li>
         <li id="tab3" class="tab"><a href="#recursiveFeedback">Recursive Feedback</a></li>
-        <li id="tab4" class="tab"><a href="#video">Video</a></li>
+        <li id="tab4" class="tab disabled"><a href="#video">Video</a></li>
       </ul>
     </div>
   </nav>
-  <div class="container">
-    <!-- FIRST TAB  -->
-    <div id="manualControl" class="col s10">
-      <div class="section">
-        <h4 class="purple-text text-darken-3 center-align">Manual Control</h4>
-        <div class="row">
-          <div class="col s6 center">
-            <a id="connect" class="waves-effect waves-light btn-large green lighten-2"><i class="material-icons left">settings_input_antenna</i>Connect to NAO</a>
-            <a id="disconnect" class="waves-effect waves-light btn-large red disabled"><i class="material-icons left">highlight_off</i>Disconnect NAO</a>
-            <div>STATUS: <span id="status">Disconnected</span><img id="greenLight" class="light" src="green_light.png" alt=""><img id="redLight" class="light" src="red_light.png" alt=""></div>
-          </div>
-          <div id="controls" class="col s6 center">
-            <a id="sleep" class="waves-effect waves-purple btn-large purple darken-2" onclick="sleep()"><i class="material-icons left">brightness_3</i>Sleep</a>
-            <a id="wakeUp" class="waves-effect waves-purple btn-large  yellow darken-1" onclick="wakeUp()"><i class="material-icons left">brightness_7</i>Wake Up</a>
-            <a id="stand" class="waves-effect waves-purple btn-large cyan lighten-1" onclick="stand()">Stand</a>
-          </div>
-        </div>
-        <div id="controls2">
-          <div class="row">
-            <div class="col s6">
-              <h5 class="purple-text text-darken-3 center-align">Movement Control</h5>
-              <div class="grid-container">
-                <div class="grid">
-                  <a id="rotateLeft" class="btn-floating btn-large waves-effect waves-light purple darken-3"><i class="material-icons">replay</i></a>
-                  <a id="forward" class="btn-floating btn-large waves-effect waves-light orange lighten-1"><i class="material-icons">keyboard_arrow_up</i></a>
-                  <a id="rotateRight" class="btn-floating btn-large waves-effect waves-light purple darken-3"><i class="material-icons">replay</i></a>
-                  <a id="left" class="btn-floating btn-large waves-effect waves-light orange lighten-1"><i class="material-icons">keyboard_arrow_left</i></a>
-                  <img id="logo2" src="naokita.png" width="50px" height="50px">
-                  <a id="right" class="btn-floating btn-large waves-effect waves-light orange lighten-1"><i class="material-icons">keyboard_arrow_right</i></a>
-                  <div class="cell"></div>
-                  <a id="back" class="btn-floating btn-large waves-effect waves-light orange lighten-1"><i class="material-icons">keyboard_arrow_down</i></a>
-                  <div class="cell"></div>
-                </div>
-              </div>
-            </div>
-            <div class="col s6 center">
-              <h5 class="purple-text text-darken-3">Voice Control</h5>
-              <div class="col s6 center">
-                <form action="#">
-                  <p class="range-field">
-                    <input type="range" id="globalVolume" min="0" max="100" />
-                    <span>GLOBAL VOLUME</span>
-                  </p>
-                </form>
-                <form action="#">
-                  <p class="range-field">
-                    <input type="range" step="0.1" id="speechVolume" min="1" max="4" onchange="updatePitch(this.value)" />
-                    <span>PITCH SHIFT</span>
-                  </p>
-                </form>
-              </div>
-              <div class="col s6 center">
-                <form action="#">
-                  <p class="range-field">
-                    <input type="range" step="0.1" id="doubleVoice" min="1" max="4" onchange="updateDoubleVoice(this.value)" />
-                    <span>DOUBLE VOICE PITCH</span>
-                  </p>
-                </form>
-                <form action="#">
-                  <p class="range-field">
-                    <input type="range" step="0.1" id="doubleVoiceLevel" min="0" max="4" onchange="updateDoubleVoiceLevel(this.value)" />
-                    <span>DOUBLE VOICE LEVEL</span>
-                  </p>
-                </form>
-              </div>
-              <div class="col s6 center">
-                <form action="#">
-                  <p class="range-field">
-                    <input type="range" step="0.1" id="doubleVoiceTimeShift" min="0" max="0.5" onchange="updatedoubleVoiceTimeShift(this.value)" />
-                    <span>DOUBLE VOICE TIME SHIFT</span>
-                  </p>
-                </form>
-              </div>
-              <div class="col s6 center">
-                <a id="test" class="waves-effect waves-purple btn-large green" onclick="animatedSay('Testing voice')"><i class="material-icons left"></i>Test</a>
-              </div>
-            </div>
-          </div>
-        </div>
+  <!-- FIRST TAB  -->
+  <div id="manualControl" class="col s12">
+    <h4 class="purple-text text-darken-3 center-align">Manual Control</h4>
+    <div class="row">
+      <div class="col s6 center">
+        <a id="connect" class="waves-effect waves-light btn-large green lighten-2" onclick="connect()"><i class="material-icons left">settings_input_antenna</i>Connect to NAO</a>
+        <a id="disconnect" class="waves-effect waves-light btn-large red disabled" onclick="disconnect()"><i class="material-icons left">highlight_off</i>Disconnect NAO</a>
+        <div>STATUS: <span id="status">Disconnected</span><img id="greenLight" class="light" src="green_light.png" alt=""><img id="redLight" class="light" src="red_light.png" alt=""></div>
+      </div>
+      <div id="controls" class="col s6 center">
+        <a id="sleep" class="waves-effect waves-purple btn-large purple darken-2" onclick="sleep()"><i class="material-icons left">brightness_3</i>Sleep</a>
+        <a id="wakeUp" class="waves-effect waves-purple btn-large  yellow darken-1" onclick="wakeUp()"><i class="material-icons left">brightness_7</i>Wake Up</a>
+        <a id="stand" class="waves-effect waves-purple btn-large cyan lighten-1" onclick="stand()">Stand</a>
       </div>
     </div>
-    <!-- SECOND TAB  -->
-    <div id="mereBelief" class="col s12">
-      <div class="section">
-        <h4 class="purple-text text-darken-3 center-align">Mere Belief Answers</h4>
-        <div class="row">
-          <div class="col s12 center">
-            <a class="waves-effect waves-purple btn-large orange lighten-1" onclick="$(this).addClass('greyText'); answer(1)"><i class="material-icons left">play_arrow</i>Answer 1</a>
-            <a class="waves-effect waves-purple btn-large  orange lighten-1" onclick="$(this).addClass('greyText'); answer(2)"><i class="material-icons left">play_arrow</i>Answer 2</a>
-            <a class="waves-effect waves-purple btn-large  orange lighten-1" onclick="$(this).addClass('greyText'); answer(3)"><i class="material-icons left">play_arrow</i>Answer 3</a>
-            <a class="waves-effect waves-purple btn-large  orange lighten-1" onclick="$(this).addClass('greyText'); answer(4)"><i class="material-icons left">play_arrow</i>Answer 4</a>
-            <a class="waves-effect waves-purple btn-large  orange lighten-1" onclick="$(this).addClass('greyText'); answer(5)"><i class="material-icons left">play_arrow</i>Answer 5</a>
-            <a class="waves-effect waves-purple btn-large  orange lighten-1" onclick="$(this).addClass('greyText'); answer(6)"><i class="material-icons left">play_arrow</i>Answer 6</a>
-            <a class="waves-effect waves-purple btn-large  orange lighten-1" onclick="$(this).addClass('greyText'); answer(7)"><i class="material-icons left">play_arrow</i>Answer 7</a>
-            <a class="waves-effect waves-purple btn-large  orange lighten-1" onclick="$(this).addClass('greyText'); answer(8)"><i class="material-icons left">play_arrow</i>Answer 8</a>
-            <a class="waves-effect waves-purple btn-large  orange lighten-1" onclick="$(this).addClass('greyText'); answer(9)"><i class="material-icons left">play_arrow</i>Answer 9</a>
-            <a class="waves-effect waves-purple btn-large  purple lighten-1" onclick="hello()"><i class="material-icons left">play_arrow</i>Hello!</a>
-          </div>
-        </div>
-        <div class="divider"></div>
-        <div class="row">
-          <div class="col s12 center">
-            <a id="stopAll" class="waves-effect waves-light btn-large disabled red" onclick="stopBehavior()"><i class="material-icons left">stop</i>Stop Answer</a>
-          </div>
-        </div>
-        <div class="divider"></div>
-      </div>
-    </div>
-    <!-- THIRD TAB  -->
-    <div id="recursiveFeedback">
+    <div id="controls2">
       <div class="row">
+        <div class="col s6">
+          <h5 class="purple-text text-darken-3 center-align">Movement Control</h5>
+          <div class="grid-container">
+            <div class="grid">
+              <a id="rotateLeft" class="btn-floating btn-large waves-effect waves-light purple darken-3"><i class="material-icons">replay</i></a>
+              <a id="forward" class="btn-floating btn-large waves-effect waves-light orange lighten-1"><i class="material-icons">keyboard_arrow_up</i></a>
+              <a id="rotateRight" class="btn-floating btn-large waves-effect waves-light purple darken-3"><i class="material-icons">replay</i></a>
+              <a id="left" class="btn-floating btn-large waves-effect waves-light orange lighten-1"><i class="material-icons">keyboard_arrow_left</i></a>
+              <img id="logo2" src="naokita.png" width="50px" height="50px">
+              <a id="right" class="btn-floating btn-large waves-effect waves-light orange lighten-1"><i class="material-icons">keyboard_arrow_right</i></a>
+              <div class="cell"></div>
+              <a id="back" class="btn-floating btn-large waves-effect waves-light orange lighten-1"><i class="material-icons">keyboard_arrow_down</i></a>
+              <div class="cell"></div>
+            </div>
+          </div>
+        </div>
+        <div class="col s6 center">
+          <h5 class="purple-text text-darken-3">Voice Control</h5>
+          <div class="col s6 center">
+            <form action="#">
+              <p class="range-field">
+                <input type="range" id="globalVolume" min="0" max="100" />
+                <span>GLOBAL VOLUME</span>
+              </p>
+            </form>
+            <form action="#">
+              <p class="range-field">
+                <input type="range" step="0.1" id="speechVolume" min="1" max="4" onchange="updatePitch(this.value)" />
+                <span>PITCH SHIFT</span>
+              </p>
+            </form>
+          </div>
+          <div class="col s6 center">
+            <form action="#">
+              <p class="range-field">
+                <input type="range" step="0.1" id="doubleVoice" min="1" max="4" onchange="updateDoubleVoice(this.value)" />
+                <span>DOUBLE VOICE PITCH</span>
+              </p>
+            </form>
+            <form action="#">
+              <p class="range-field">
+                <input type="range" step="0.1" id="doubleVoiceLevel" min="0" max="4" onchange="updateDoubleVoiceLevel(this.value)" />
+                <span>DOUBLE VOICE LEVEL</span>
+              </p>
+            </form>
+          </div>
+          <div class="col s6 center">
+            <form action="#">
+              <p class="range-field">
+                <input type="range" step="0.1" id="doubleVoiceTimeShift" min="0" max="0.5" onchange="updatedoubleVoiceTimeShift(this.value)" />
+                <span>DOUBLE VOICE TIME SHIFT</span>
+              </p>
+            </form>
+          </div>
+          <div class="col s6 center">
+            <a id="test" class="waves-effect waves-purple btn-large green" onclick="animatedSay('Testing voice')"><i class="material-icons left"></i>Test</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- SECOND TAB  -->
+  <div id="mereBelief" class="col s12">
+    <div class="section">
+      <h4 class="purple-text text-darken-3 center-align">Mere Belief Answers</h4>
+      <div class="row">
+        <div class="col s12 center">
+          <a class="waves-effect waves-purple btn-large orange lighten-1" onclick="$(this).addClass('greyText'); answer(1)"><i class="material-icons left">play_arrow</i>Answer 1</a>
+          <a class="waves-effect waves-purple btn-large  orange lighten-1" onclick="$(this).addClass('greyText'); answer(2)"><i class="material-icons left">play_arrow</i>Answer 2</a>
+          <a class="waves-effect waves-purple btn-large  orange lighten-1" onclick="$(this).addClass('greyText'); answer(3)"><i class="material-icons left">play_arrow</i>Answer 3</a>
+          <a class="waves-effect waves-purple btn-large  orange lighten-1" onclick="$(this).addClass('greyText'); answer(4)"><i class="material-icons left">play_arrow</i>Answer 4</a>
+          <a class="waves-effect waves-purple btn-large  orange lighten-1" onclick="$(this).addClass('greyText'); answer(5)"><i class="material-icons left">play_arrow</i>Answer 5</a>
+          <a class="waves-effect waves-purple btn-large  orange lighten-1" onclick="$(this).addClass('greyText'); answer(6)"><i class="material-icons left">play_arrow</i>Answer 6</a>
+          <a class="waves-effect waves-purple btn-large  orange lighten-1" onclick="$(this).addClass('greyText'); answer(7)"><i class="material-icons left">play_arrow</i>Answer 7</a>
+          <a class="waves-effect waves-purple btn-large  orange lighten-1" onclick="$(this).addClass('greyText'); answer(8)"><i class="material-icons left">play_arrow</i>Answer 8</a>
+          <a class="waves-effect waves-purple btn-large  orange lighten-1" onclick="$(this).addClass('greyText'); answer(9)"><i class="material-icons left">play_arrow</i>Answer 9</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- THIRD TAB  -->
+  <div id="recursiveFeedback">
+    <!-- <div class="row">
         <div class="col s12 pane">
-          <h4 class="center-align">Timer</h4>
+          <h5 class="purple-text text-darken-3 center-align">Timer</h5>
           <div class="col s6">
             <div class="input-field col s12">
               <select id="minuteSelect">
@@ -154,757 +148,636 @@
             <a id="resetTimer" class="waves-effect waves-light red btn">Reset timer</a>
           </div>
         </div>
-      </div>
-      <div class="row">
-        <div class="col s6 pane">
-          <div class="col s12">
-            <h5 class="purple-text text-darken-3 center-align">Text to Animated Speech</h5>
-            <div class="input-field col s12">
-              <input id="inputText" type="text" />
-              <label for="inputText">Write Message</label>
-            </div>
-            <a id="submitText" class="waves-effect waves-purple btn-large purple darken-2"><i class="material-icons left">unarchive</i>Submit</a>
-          </div>
-          <div class="col s12">
-            <form action="#">
-              <h5 class="purple-text text-darken-3 center-align">Voice Control</h5>
-              <span>VOLUME</span>
-              <p class="range-field">
-                <input type="range" id="speechVolume2" min="0" max="100" onchange="updateSpeechVolume(this.value)" />
-              </p>
-            </form>
-          </div>
-          <div class="col s12">
-            <h5 class="purple-text text-darken-3 center-align">Voice to Text</h5>
-                <div id="info">
-                  <p id="info_start">Click on the microphone icon and begin speaking.</p>
-                  <p id="info_speak_now">Speak now.</p>
-                  <p id="info_no_speech">No speech was detected. You may need to adjust your
-                    <a href="//support.google.com/chrome/bin/answer.py?hl=en&amp;answer=1407892">
-                      microphone settings</a>.</p>
-                  <p id="info_no_microphone" style="display:none">
-                    No microphone was found. Ensure that a microphone is installed and that
-                    <a href="//support.google.com/chrome/bin/answer.py?hl=en&amp;answer=1407892">
-                    microphone settings</a> are configured correctly.</p>
-                  <p id="info_allow">Click the "Allow" button above to enable your microphone.</p>
-                  <p id="info_denied">Permission to use microphone was denied.</p>
-                  <p id="info_blocked">Permission to use microphone is blocked. To change,
-                    go to chrome://settings/contentExceptions#media-stream</p>
-                  <p id="info_upgrade">Web Speech API is not supported by this browser.
-                     Upgrade to <a href="//www.google.com/chrome">Chrome</a>
-                     version 25 or later.</p>
-                </div>
-                <div class="right">
-                  <button id="start_button" onclick="startButton(event)">
-                    <img id="start_img" src="mic.gif" alt="Start"></button>
-                </div>
-                <div id="results">
-                  <span id="final_span" class="final"></span>
-                  <span id="interim_span" class="interim"></span>
-                  <p></p>
-                </div>
-              </div>
-          </div>
-          <div class="col s6 pane">
-            <h5 class="purple-text text-darken-3 center-align">Recursive Feedback Answers</h5>
-            <div class="row">
-              <div class="col s12">
-                <h5>Intro</h5>
-                <a class="waves-effect waves-green btn small green lighten-1" onclick= "$(this).addClass('greyText'); animatedSay('Yes, I can hear you...')">Yes, I can hear you...</a>
-                <a class="waves-effect waves-green btn small green lighten-1" onclick= "$(this).addClass('greyText'); intro()">Intro.</a>
-                <h5>Questions</h5>
-                <a class="waves-effect waves-blue btn small orange" onclick= "$(this).addClass('greyText'); animatedSay('Ok, first question')">Ok, first question:</a>→
-                <a class="waves-effect waves-blue btn small blue lighten-1" onclick= "$(this).addClass('greyText'); question(1)">Question 1</a>→
-                <a class="waves-effect waves-blue btn small orange" onclick= "$(this).addClass('greyText'); animatedSay('Alright, next question')">Alright, next question</a>→
-                <a class="waves-effect waves-blue btn small blue darken-2" onclick= "$(this).addClass('greyText'); question(2)">Question 2</a> →
-                <a class="waves-effect waves-blue btn small blue darken-2" onclick= "$(this).addClass('greyText'); remark()">Remarks for question 2</a> →
-                <a class="waves-effect waves-blue btn small orange" onclick= "$(this).addClass('greyText'); animatedSay('Ok')">Ok</a>→
-                <a class="waves-effect waves-blue btn small blue lighten-1" onclick= "$(this).addClass('greyText'); question(3)">Question 3</a> →
-                <a class="waves-effect waves-blue btn small orange" onclick= "$(this).addClass('greyText'); animatedSay('Ok, so')">Ok, so</a>→
-                <a class="waves-effect waves-blue btn small blue lighten-1" onclick= "$(this).addClass('greyText'); question(4)">Question 4</a> →
-                <a class="waves-effect waves-blue btn small orange" onclick= "$(this).addClass('greyText'); animatedSay('Ok, final question')">Ok, final question:</a>→
-                <a class="waves-effect waves-blue btn small blue lighten-1" onclick= "$(this).addClass('greyText'); question(5)">Question 5</a>
-              </div>
-            </div>
-          </div>
-          <div class="col s12 pane">
-            <h5>Misc remarks</h5>
-            <a class="waves-effect waves-purple btn small purple lighten-1" onclick= "animatedSay('Yes')">Yes</a>
-            <a class="waves-effect waves-purple btn small purple lighten-1" onclick= "animatedSay('Ahh ha')">A-ha 1</a>
-            <a class="waves-effect waves-purple btn small purple lighten-1" onclick= "animatedSay('Ahhha')">A-ha 2</a>
-            <a class="waves-effect waves-purple btn small purple lighten-1" onclick= "animatedSay('Ah')">Uuuuh! </a>
-            <a class="waves-effect waves-purple btn small purple lighten-1" onclick= "animatedSay('Oh, I see')">Oh, I see</a>
-            <a class="waves-effect waves-purple btn small purple lighten-1" onclick= "animatedSay('Hmm. I think I got it')">Hmm. I think I've got it</a>
-            <a class="waves-effect waves-purple btn small purple lighten-1" onclick= "animatedSay('Ah, Ok')">Ah, ok </a>
-            <a class="waves-effect waves-purple btn small purple lighten-1" onclick= "animatedSay('Thank you')">Thank you ...</a>
-            <a class="waves-effect waves-purple btn small purple lighten-1" onclick= "animatedSay('Hmmm')">Hmmm ...</a>
-            <a class="waves-effect waves-purple btn small purple lighten-1" onclick= "animatedSay('Give me a second')">Give me a second...</a>
-            <a class="waves-effect waves-purple btn small purple lighten-1" onclick= "animatedSay('Can you repeat that?')">Can you repeat that?</a>
-            <a id="stopAll2" class="waves-effect waves-light btn-large disabled red" onclick= "stopBehavior()"><i class="material-icons left">stop</i>Stop Answer</a>
-          </div>
+      </div> -->
+    <div class="row">
+      <div class="col s12 pane">
+        <h5 class="purple-text text-darken-3 center-align">Questions</h5>
+        <div class="row">
+          <a class="waves-effect waves-green btn small green lighten-1" onclick="$(this).addClass('greyText'); animatedSay('Yes, I can hear you...')">Yes, I can hear you...</a>→
+          <a class="waves-effect waves-green btn small green lighten-1" onclick="$(this).addClass('greyText'); intro()">Intro.</a>→
+          <a class="waves-effect waves-blue btn small orange" onclick="$(this).addClass('greyText'); animatedSay('Ok, first question')">Ok, first question:</a>→
+          <a class="waves-effect waves-blue btn small blue lighten-1" onclick="$(this).addClass('greyText'); question(1)">Question 1</a>→
+          <a class="waves-effect waves-blue btn small orange" onclick="$(this).addClass('greyText'); animatedSay('Alright, next question')">Alright, next question</a>→
+          <a class="waves-effect waves-blue btn small blue darken-2" onclick="$(this).addClass('greyText'); question(2)">Question 2</a> →
+        </div>
+        <div class="row">
+          <a class="waves-effect waves-blue btn small blue darken-2" onclick="$(this).addClass('greyText'); remark()">Remarks for question 2</a> →
+          <a class="waves-effect waves-blue btn small orange" onclick="$(this).addClass('greyText'); animatedSay('Ok')">Ok</a>→
+          <a class="waves-effect waves-blue btn small blue lighten-1" onclick="$(this).addClass('greyText'); question(3)">Question 3</a> →
+          <a class="waves-effect waves-blue btn small orange" onclick="$(this).addClass('greyText'); animatedSay('Ok, so')">Ok, so</a>→
+          <a class="waves-effect waves-blue btn small blue lighten-1" onclick="$(this).addClass('greyText'); question(4)">Question 4</a> →
+          <a class="waves-effect waves-blue btn small orange" onclick="$(this).addClass('greyText'); animatedSay('Ok, final question')">Ok, final question:</a>→
+          <a class="waves-effect waves-blue btn small blue lighten-1" onclick="$(this).addClass('greyText'); question(5)">Question 5</a>
         </div>
       </div>
-      <!-- Fourth TAB  -->
-      <div id="video" class="col s12">
-        <div class="section">
-          <h4 class="purple-text text-darken-3 center-align">Video Answers</h4>
-          <div class="row">
-            <div class="col s12 center">
-              <a class="waves-effect waves-purple btn-large orange lighten-1" onclick="$(this).addClass('greyText'); video(1)"><i class="material-icons left">play_arrow</i>Video 1</a>
-              <a class="waves-effect waves-purple btn-large  orange lighten-1" onclick="$(this).addClass('greyText'); video(2)"><i class="material-icons left">play_arrow</i>Video 2</a>
-              <a class="waves-effect waves-purple btn-large  orange lighten-1" onclick="$(this).addClass('greyText'); video(3)"><i class="material-icons left">play_arrow</i>Video 3</a>
-              <a class="waves-effect waves-purple btn-large  orange lighten-1" onclick="$(this).addClass('greyText'); video(4)"><i class="material-icons left">play_arrow</i>Video 4</a>
-            </div>
+    </div>
+    <div class="row">
+      <div class="col s12 pane">
+        <h5 class="purple-text text-darken-3 center-align">Misc remarks</h5>
+        <a class="waves-effect waves-purple btn small purple lighten-1" onclick="animatedSay('Yes')">Yes</a>
+        <a class="waves-effect waves-purple btn small purple lighten-1" onclick="animatedSay('Ahh ha')">A-ha 1</a>
+        <a class="waves-effect waves-purple btn small purple lighten-1" onclick="animatedSay('Ahhha')">A-ha 2</a>
+        <a class="waves-effect waves-purple btn small purple lighten-1" onclick="animatedSay('Ah')">Uuuuh! </a>
+        <a class="waves-effect waves-purple btn small purple lighten-1" onclick="animatedSay('Oh, I see')">Oh, I see</a>
+        <a class="waves-effect waves-purple btn small purple lighten-1" onclick="animatedSay('Hmm. I think I got it')">Hmm. I think I've got it</a>
+        <a class="waves-effect waves-purple btn small purple lighten-1" onclick="animatedSay('Ah, Ok')">Ah, ok </a>
+        <a class="waves-effect waves-purple btn small purple lighten-1" onclick="animatedSay('Thank you')">Thank you ...</a>
+        <a class="waves-effect waves-purple btn small purple lighten-1" onclick="animatedSay('Hmmm')">Hmmm ...</a>
+        <a class="waves-effect waves-purple btn small purple lighten-1" onclick="animatedSay('Give me a second')">Give me a second...</a>
+        <a class="waves-effect waves-purple btn small purple lighten-1" onclick="animatedSay('Can you repeat that?')">Can you repeat that?</a>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col s12 pane">
+        <div class="col s6">
+          <h5 class="purple-text text-darken-3 center-align">Text to Animated Speech</h5>
+          <div class="input-field col s12">
+            <input id="inputText" type="text" />
+            <label for="inputText">Write Message</label>
           </div>
+          <a id="submitText" class="waves-effect waves-purple btn-large purple darken-2"><i class="material-icons left">unarchive</i>Submit</a>
+        </div>
+        <div class="col s6">
+          <form action="#">
+            <h5 class="purple-text text-darken-3 center-align">Voice Control</h5>
+            <span>VOLUME</span>
+            <p class="range-field">
+              <input type="range" id="speechVolume2" min="0" max="100" onchange="updateSpeechVolume(this.value)" />
+            </p>
+          </form>
         </div>
       </div>
+    </div>
+    <div class="row">
+      <div class="col s12">
+        <h5 class="purple-text text-darken-3 center-align">Voice to Text</h5>
+        <div id="info">
+          <p id="info_start">Click on the microphone icon and begin speaking.</p>
+          <p id="info_speak_now">Speak now.</p>
+          <p id="info_no_speech">No speech was detected. You may need to adjust your
+            <a href="//support.google.com/chrome/bin/answer.py?hl=en&amp;answer=1407892">
+                    microphone settings</a>.</p>
+          <p id="info_no_microphone" style="display:none">
+            No microphone was found. Ensure that a microphone is installed and that
+            <a href="//support.google.com/chrome/bin/answer.py?hl=en&amp;answer=1407892">
+                  microphone settings</a> are configured correctly.</p>
+          <p id="info_allow">Click the "Allow" button above to enable your microphone.</p>
+          <p id="info_denied">Permission to use microphone was denied.</p>
+          <p id="info_blocked">Permission to use microphone is blocked. To change, go to chrome://settings/contentExceptions#media-stream</p>
+          <p id="info_upgrade">Web Speech API is not supported by this browser. Upgrade to <a href="//www.google.com/chrome">Chrome</a> version 25 or later.</p>
+        </div>
+        <div class="right">
+          <button id="start_button" onclick="startButton(event)">
+                  <img id="start_img" src="mic.gif" alt="Start"></button>
+        </div>
+        <div id="results">
+          <span id="final_span" class="final"></span>
+          <span id="interim_span" class="interim"></span>
+          <p></p>
+        </div>
+      </div>
+    </div>
   </div>
+  <!-- Fourth TAB  -->
+  <div id="video" class="col s12">
+    <div class="section">
+      <h4 class="purple-text text-darken-3 center-align">Video Answers</h4>
+      <div class="row">
+        <div class="col s12 center">
+          <a class="waves-effect waves-purple btn-large orange lighten-1" onclick="$(this).addClass('greyText'); video(1)"><i class="material-icons left">play_arrow</i>Video 1</a>
+          <a class="waves-effect waves-purple btn-large  orange lighten-1" onclick="$(this).addClass('greyText'); video(2)"><i class="material-icons left">play_arrow</i>Video 2</a>
+          <a class="waves-effect waves-purple btn-large  orange lighten-1" onclick="$(this).addClass('greyText'); video(3)"><i class="material-icons left">play_arrow</i>Video 3</a>
+          <a class="waves-effect waves-purple btn-large  orange lighten-1" onclick="$(this).addClass('greyText'); video(4)"><i class="material-icons left">play_arrow</i>Video 4</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+  <script>
+    var session;
+    //////////////////////////////////////////////////////////////////////////////
+    // Layout code
+    //////////////////////////////////////////////////////////////////////////////
 
-
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.1/js/materialize.min.js"></script>
-<script>
-
-  $(document).ready(function() {
-    $('select').material_select();
-  });
-
-
-//Global variable declarations;
-var textToSpeech;
-var session;
-
-//Make touch events
-
-//Get elements from html
-var forward = $('#forward');
-var left = $('#left');
-var right = $('#right');
-var back = $('#back');
-var rotateLeft = $('#rotateLeft');
-var rotateRight = $('#rotateRight');
-
-//Toucha events function
-function touchEvents (button, move1) {
-  button.on("touchstart", move1);
-  button.on("touchend", stopMove);
-}
-
-touchEvents(forward, moveForward);
-touchEvents(left, moveLeft);
-touchEvents(right, moveRight);
-touchEvents(back, moveBackward);
-touchEvents(rotateLeft, leftRotation);
-touchEvents(rotateRight, rightRotation);
-
-
-//=============================================================================//
-//Connecting to nao
-//declare function to start QiSession
-function connect()
-{
-
-   var ipPrompt = prompt("Please provide Nao's Ip address:", "");
-   if (ipPrompt == null || ipPrompt == "") {
-       alert("You did not provide an Ip address");
-   } else {
-     $.getScript( 'http://'+ipPrompt+'/libs/qimessaging/1.0/qimessaging.js', function( data, textStatus, jqxhr ) {
-       //Create QiSession
-       session = new QiSession(ipPrompt+':80');
-       session.socket().on('connect', function()
-       {
-         console.log("Connected!");
-         $("#connect").addClass('disabled');
-         $("#disconnect").removeClass('disabled');
-         $("#tab2").removeClass('disabled');
-         $("#tab3").removeClass('disabled');
-         $("#tab4").removeClass('disabled');
-         $('#controls').slideDown('slow');
-         $('#controls2').slideDown('slow');
-         $('#redLight').fadeOut('fast');
-         $('#status').text('Connected');
-         session.service("ALTextToSpeech").done(function(tts)
-         {
-            tts.say("Link established");
-         });
-
-        //  //Stop awareness mode.
-        //  function stopAwareness() {
-        //    session.service("ALBasicAwareness").done(function(tts)
-        //    {
-        //      tts.startAwareness();
-        //    })
-        //  }
-         //
-        //  stopAwareness();
-
-       }).on('disconnect', function(){
-         $("#disconnect").addClass('disabled');
-         $("#connect").removeClass('disabled');
-         $('#controls').slideUp('slow');
-         $('#controls2').slideUp('slow');
-         $('#status').html('Disconnected');
-         $('#redLight').fadeIn('slow');
-         $("#tab2").addClass('disabled');
-         $("#tab3").addClass('disabled');
-         $("#tab4").addClass('disabled');
-         console.log("QiSession disconnect");
-       });
-
-     });
-   }
-}
-
-function disconnect(){
-  session.socket().disconnect();
-}
-
-
-
-
-
-//=============================================================================//
-//Video feed Code
-
-// function openCamera() {
-//   var videoCanvas = document.getElementById("video");
-//   var vidContext = videoCanvas.getContext("2d");
-//   var imgData = vidContext.createImageData(320,240);
-//   //for (var i=0;i<imgData.data.length;i+=4)
-//     // {
-//     // imgData.data[i+0]=255;
-//     // imgData.data[i+1]=0;
-//     // imgData.data[i+2]=0;
-//     // imgData.data[i+3]=255;
-//     // }
-//      session.service("ALVideoDevice").done(function(video)
-//      {
-//          var handle = video.subscribeCamera("Vision", 0, 1, 3, 10);
-//          video.getImageRemote(handle).then(function (image) {
-//              if (image) {
-//                 var width = image[0];
-//                 var height = image[1];
-//                 var naoImageData = image[6];
-//                 var read = 0;
-//                 for(var y = 0; y < height; y++) {
-//                     for(var x = 0; x < width; x++) {
-//                         // (assuming a black and white image)
-//                         // var luminosity = naoImageData[read++];
-//                         // imgData.data[read]= naoImageData[read++];
-//                         imgData.data[i+0]=255;
-//                         imgData.data[i+1]=0;
-//                         imgData.data[i+2]=0;
-//                         imgData.data[i+3]=255;
-//
-//
-//
-//                         vidContext.putImageData(imgData, 0, 0);
-//                     }
-//                 }
-//            }
-//          })
-//        });
-//
-//
-// }
-
-// function openCamera() {
-//   session.service("ALVideoDevice").done(function(video) {
-//     var handle =video.subscribeCamera("Vision", 0, 1, 3,10);
-//     var imge = video.getImageRemote(handle);
-//     var a = decodeURIComponent(imge[6]);
-//     alert(a);
-//     var imageWidth = imge[0];
-//     var imgeHeight = imge[1];
-//     var canvas = document.getElementById("video");
-//     var context = canvas.getContext("2d");
-//     var imageData = context.getImageData(0, 0, 200, 200);
-//     var data = imageData.data;
-//     var read = 0;
-//     var flipX = false;
-//     var blackAndWhite = false;
-//     var getWritePos;
-//     if(flipX) {
-//       getWritePos = function(x, y) {
-//         return (imageWidth * y + (imgeWidth - x - 1))*4;
-//       };
-//     } else {
-//       getWritePos = function(x, y) {
-//         return (imageWidth * y + x) * 4;
-//       };
-//     }
-//
-//     var copyPixel;
-//            if (blackAndWhite)
-//    {
-//              copyPixel = function(writep) {
-//              var luminosity = t[a[read++]];
-//              data[writep + 0] = luminosity;
-//              data[writep + 1] = luminosity;
-//              data[writep + 2] = luminosity;
-//              data[writep + 3] = 255; // alpha
-//            };
-//    } else
-//    {
-//              copyPixel = function(writep) {
-//              data[writep + 0] = t[a[read++]];
-//              data[writep + 1] = t[a[read++]];
-//              data[writep + 2] = t[a[read++]];
-//              data[writep + 3] = 255; // alpha
-//        };
-//    }
-//
-//    for (var y = 0; y < imge.imageHeight; y++)
-// {
-//        for (var x = 0; x < imge.imageWidth; x++)
-//    {
-//                var writep = getWritePos(x, y);
-//                copyPixel(writep);
-//           }
-//    }
-//    context.putImageData(imageData, 0, 0, 0,0, canvas.width, canvas.height);
-//  });
-// }
-//=============================================================================//
-// Access the Robot on connected
-$('#connect').on( 'click', function() {
-    connect();
-} );
-
-$('#disconnect').on('click', function(){
-    disconnect();
-})
-//Robot behavior functions
-
-//MANUAL CONTROLS ====================================================//
-//Movement keys
-function moveHead(){
-  session.service("ALMotion").done(function(tts){
-    tts.setPosition("Head",[20,20,20,20,20,20], 0, .3, 56);
+    //Initialize material design selects
+    $(document).ready(function() {
+      $('select').material_select();
     });
-}
 
-function moveForward(){
-  //pressing on cell changes opacity
-  session.service("ALMotion").done(function(tts)
-  {
-    tts.move(.2, 0, 0);
-  });
-}
+    //Get elements from html
+    var forward = $('#forward');
+    var left = $('#left');
+    var right = $('#right');
+    var back = $('#back');
+    var rotateLeft = $('#rotateLeft');
+    var rotateRight = $('#rotateRight');
 
-function moveBackward(){
-  //pressing on cell changes opacity
-  session.service("ALMotion").done(function(tts)
-  {
-    tts.move(-.2, 0, 0);
-  });
-}
+    //Make touch events for movement buttons
+    //Touch events function declaration
+    function touchEvents(button, move1) {
+      button.on("touchstart", move1);
+      button.on("touchend", stopMove);
+    }
+    //Assign functions to buttons
+    if (session != null) {
+      touchEvents(forward, move(.2, 0, 0));
+      touchEvents(left, move(0, .2, 0));
+      touchEvents(right, move(0, -.2, 0));
+      touchEvents(back, move(-.2, 0, 0));
+      touchEvents(rotateLeft, move(0, 0, .2));
+      touchEvents(rotateRight, move(0, 0, -.2));
+    }
 
-function moveLeft(){
-  //pressing on cell changes opacity
-  session.service("ALMotion").done(function(tts)
-  {
-    tts.move(0, .2, 0);
-  });
-}
-
-function moveRight(){
-  //pressing on cell changes opacity
-  session.service("ALMotion").done(function(tts)
-  {
-    tts.move(0, -.2, 0);
-  });
-}
-
-function leftRotation(){
-  //pressing on cell changes opacity
-  session.service("ALMotion").done(function(tts)
-  {
-    tts.move(0, 0, .2);
-  });
-}
-
-function rightRotation(){
-  //pressing on cell changes opacity
-  session.service("ALMotion").done(function(tts)
-  {
-    tts.move(0, 0, -.2);
-  });
-}
-
-function stopMove() {
-  //pressing on cell changes opacity
-  $(".cell").css('opacity', '1');
-  session.service("ALMotion").done(function(tts)
-  {
-    tts.stopMove();
-    tts.wakeUp();
-  });
-}
-//Sleep and wake up.
-function sleep() {
-  session.service("ALMotion").done(function(tts)
-  {
-    tts.rest();
-    $('#wakeUp').removeClass("disabled");
-    $('#sleep').addClass("disabled");
-  });
-}
-
-function wakeUp() {
-  session.service("ALMotion").done(function(tts)
-  {
-    tts.wakeUp();
-    $('#sleep').removeClass("disabled");
-    $('#wakeUp').addClass("disabled");
-  });
-}
-
-//Set Global volume
-$('#globalVolume').change(function() {
-  var currentVolume = $('#globalVolume').val();
-  var volumeNumber = Number(currentVolume);
-  session.service("ALAudioDevice").done(function(tts)
-  {
-    tts.setOutputVolume(volumeNumber);
-  });
-})
-
-//Set Speech volume
-function updateSpeechVolume(amount) {
-  var volumeNumber = Number(amount);
-        session.service("ALTextToSpeech").done(function(tts)
-        {
-          tts.setVolume(volumeNumber/100);
+    //////////////////////////////////////////////////////////////////////////////
+    // Web Socket connection to the robot
+    //////////////////////////////////////////////////////////////////////////////
+    //QiSession connect
+    function connect() {
+      //Ask for local ip address (push the robot chest button)
+      var ipPrompt = prompt("Please provide Nao's Ip address:", "");
+      if (ipPrompt == null || ipPrompt == "") {
+        alert("You did not provide an Ip address");
+      } else {
+        $.getScript('http://' + ipPrompt + '/libs/qimessaging/1.0/qimessaging.js', function(data, textStatus, jqxhr) {
+          //Create QiSession
+          session = new QiSession(ipPrompt + ':80');
+          session.socket().on('connect', function() {
+            console.log("Connected!");
+            $("#connect").addClass('disabled');
+            $("#disconnect").removeClass('disabled');
+            $("#tab2").removeClass('disabled');
+            $("#tab3").removeClass('disabled');
+            $("#tab4").removeClass('disabled');
+            $('#controls').slideDown('slow');
+            $('#controls2').slideDown('slow');
+            $('#redLight').fadeOut('fast');
+            $('#status').text('Connected');
+            session.service("ALTextToSpeech").done(function(tts) {
+              tts.say("Link established");
+            });
+          }).on('disconnect', function() {
+            $("#disconnect").addClass('disabled');
+            $("#connect").removeClass('disabled');
+            $('#controls').slideUp('slow');
+            $('#controls2').slideUp('slow');
+            $('#status').html('Disconnected');
+            $('#redLight').fadeIn('slow');
+            $("#tab2").addClass('disabled');
+            $("#tab3").addClass('disabled');
+            $("#tab4").addClass('disabled');
+            console.log("QiSession disconnect");
+          });
         });
-    }
-//Set speech pitch
-function updatePitch(amount) {
-  var amountNumber = Number(amount);
-  session.service("ALTextToSpeech").done(function(tts)
-  {
-    tts.setParameter("pitchShift", amountNumber);
-  });
-}
-//Set double voice ratio
-function updateDoubleVoice(amount) {
-  var amountNumber = Number(amount);
-  session.service("ALTextToSpeech").done(function(tts)
-  {
-    tts.setParameter("doubleVoice", amountNumber);
-  });
-}
-//Set double voice Volume
-function updateDoubleVoiceLevel(amount) {
-  var amountNumber = Number(amount);
-  session.service("ALTextToSpeech").done(function(tts)
-  {
-    tts.setParameter("doubleVoiceLevel", amountNumber);
-  });
-}
-//Set double voice delay
-function updatedoubleVoiceTimeShift(amount) {
-  var amountNumber = Number(amount);
-  session.service("ALTextToSpeech").done(function(tts)
-  {
-    tts.setParameter("doubleVoiceTimeShift", amountNumber);
-  });
-}
-
-//============================================================================//
-
-//Text to speech with animations
-function animatedSay(text){
-  session.service("ALAnimatedSpeech").done(function(tts){
-    tts.setBodyLanguageMode(1);
-    tts.say(text);
-  })
-}
-
-//Text on the html form to speech ============================================//
-function speak(inputMessage){
-
-  session.service("ALAnimatedSpeech").done(function(tts)
-  {
-    tts.setBodyLanguageMode(1);
-    tts.say(inputMessage);
-  });
-}
-
-//when submit button is pressed, submit
-$("#submitText").click(function() {
-  var speed = '\\rspd=75\\';
-  text = $("#inputText").val();
-  inputMessage = speed+text;
-  speak(inputMessage);
-})
-
-//hen 'enter' key is pressed, submit
-document.getElementById('inputText').onkeydown = function(e){
-   if ( (window.event ? event.keyCode : e.which) == 13) {
-     var speed = '\\rspd=75\\';
-     text = $("#inputText").val();
-     inputMessage = speed+text;
-     speak(inputMessage);
-   }
-};
-//=========================================================================//
-
-
-//Say hello with premade gesture
-function hello () {
-  session.service("ALBehaviorManager").done(function(tts)
-  {
-    tts.runBehavior("hello");
-  });
-  $('#stopAll').removeClass("disabled");
-}
-
-//=========================================================================//
-
-//Stop all behaviors being executed
-function stopBehavior() {
-  session.service("ALBehaviorManager").done(function(tts)
-  {
-    tts.stopAllBehaviors();
-    $('#stopAll').addClass("disabled");
-    $('#stopAll2').addClass("disabled");
-  });
-}
-
-//=========================================================================//
-
-//Use pre-made behaviors from robot memory
-function answer(answerNumber) {
-  session.service("ALBehaviorManager").done(function(tts)
-  {
-    tts.runBehavior("answer"+answerNumber+"");
-  });
-  $('#stopAll').removeClass("disabled");
-}
-
-//Use pre-made behaviors from robot memory
-function video(videoNumber) {
-  session.service("ALBehaviorManager").done(function(tts)
-  {
-    tts.runBehavior("video"+videoNumber+"");
-  });
-}
-
-
-//Use pre-made behaviors from robot memory
-function intro() {
-  session.service("ALBehaviorManager").done(function(tts)
-  {
-    tts.runBehavior("intro");
-    $('#stopAll2').removeClass("disabled");
-  });
-
-}
-
-//Use pre-made behaviors from robot memory
-function remark() {
-  session.service("ALBehaviorManager").done(function(tts)
-  {
-    tts.runBehavior("remark");
-    $('#stopAll2').removeClass("disabled");
-  });
-
-}
-
-//Use pre-made behaviors from robot memory
-function question(questionNumber) {
-  session.service("ALBehaviorManager").done(function(tts)
-  {
-    tts.runBehavior("Question"+questionNumber+"");
-    $('#stopAll2').removeClass("disabled");
-  });
-
-}
-//=========================================================================//
-
-//Stand in position (in the event of falling);
-
-function stand() {
-  session.service("ALBehaviorManager").done(function(tts){
-    tts.runBehavior("stand1");
-  })
-}
-
-
-//Detect robot status and enable/disable sleep/wakeUp buttons
-function getStatus() {
-  session.service("ALMotion").done(function(tts)
-  {
-    tts.getStiffnesses("body");
-    });
-  }
-  // =========================================================================//
-  // =========================================================================//
-  // =========================================================================//
-
-
-//Speech recognition code//=========================================================================//
-
-showInfo('info_start');
-
-var final_transcript = '';
-var recognizing = false;
-var ignore_onend;
-var start_timestamp;
-if (!('webkitSpeechRecognition' in window)) {
-  upgrade();
-} else {
-  start_button.style.display = 'inline-block';
-  var recognition = new webkitSpeechRecognition();
-  recognition.continuous = true;
-  recognition.interimResults = true;
-
-  recognition.onstart = function() {
-    recognizing = true;
-    showInfo('info_speak_now');
-    start_img.src = 'mic-animate.gif';
-  };
-
-  recognition.onerror = function(event) {
-    if (event.error == 'no-speech') {
-      start_img.src = 'mic.gif';
-      showInfo('info_no_speech');
-      ignore_onend = true;
-    }
-    if (event.error == 'audio-capture') {
-      start_img.src = 'mic.gif';
-      showInfo('info_no_microphone');
-      ignore_onend = true;
-    }
-    if (event.error == 'not-allowed') {
-      if (event.timeStamp - start_timestamp < 100) {
-        showInfo('info_blocked');
-      } else {
-        showInfo('info_denied');
-      }
-      ignore_onend = true;
-    }
-  };
-
-  recognition.onend = function() {
-    recognizing = false;
-    if (ignore_onend) {
-      return;
-    }
-    start_img.src = 'mic.gif';
-    if (!final_transcript) {
-      showInfo('info_start');
-      return;
-    }
-    showInfo('');
-    if (window.getSelection) {
-      window.getSelection().removeAllRanges();
-      var range = document.createRange();
-      range.selectNode(document.getElementById('final_span'));
-      window.getSelection().addRange(range);
-    }
-  };
-
-  recognition.onresult = function(event) {
-    var interim_transcript = '';
-    for (var i = event.resultIndex; i < event.results.length; ++i) {
-      if (event.results[i].isFinal) {
-        var nao_transcript = event.results[i][0].transcript;
-        final_transcript += event.results[i][0].transcript;
-         animatedSay("\\rspd=75\\"+nao_transcript);
-      } else {
-        interim_transcript += event.results[i][0].transcript;
       }
     }
-    final_transcript = capitalize(final_transcript);
-    final_span.innerHTML = linebreak(interim_transcript);
-    //interim_span.innerHTML = linebreak(interim_transcript);
-  };
-}
+    //QiSession disconnect function
+    function disconnect() {
+      session.socket().disconnect();
+    }
 
-function upgrade() {
-  start_button.style.visibility = 'hidden';
-  showInfo('info_upgrade');
-}
+    //////////////////////////////////////////////////////////////////////////////
+    // Robot Behavior
+    //////////////////////////////////////////////////////////////////////////////
 
-var two_line = /\n\n/g;
-var one_line = /\n/g;
-function linebreak(s) {
-  return s.replace(two_line, '<p></p>').replace(one_line, '<br>');
-}
+    //Movement keys
+    //Prarams: X and Y linear speed, and rotational speed around z-axis
+    function move(x, y, theta) {
+      session.service("ALMotion").done(function(tts) {
+        tts.move(x, y, theta);
+      });
+    }
 
-var first_char = /\S/;
-function capitalize(s) {
-  return s.replace(first_char, function(m) { return m.toUpperCase(); });
-}
+    function stopMove() {
+      $(".cell").css('opacity', '1');
+      session.service("ALMotion").done(function(tts) {
+        tts.stopMove();
+        tts.wakeUp();
+      });
+    }
 
-function startButton(event) {
-  if (recognizing) {
-    recognition.stop();
-    return;
-  }
-  final_transcript = '';
-  recognition.lang = 'en-US';
-  recognition.start();
-  ignore_onend = false;
-  final_span.innerHTML = '';
-  interim_span.innerHTML = '';
-  start_img.src = 'mic-slash.gif';
-  showInfo('info_allow');
-  start_timestamp = event.timeStamp;
-}
+    //Sleep and wake up.
+    function sleep() {
+      session.service("ALMotion").done(function(tts) {
+        tts.rest();
+        $('#wakeUp').removeClass("disabled");
+        $('#sleep').addClass("disabled");
+      });
+    }
 
-function showInfo(s) {
-  if (s) {
-    for (var child = info.firstChild; child; child = child.nextSibling) {
-      if (child.style) {
-        child.style.display = child.id == s ? 'inline' : 'none';
+    function wakeUp() {
+      session.service("ALMotion").done(function(tts) {
+        tts.wakeUp();
+        $('#sleep').removeClass("disabled");
+        $('#wakeUp').addClass("disabled");
+      });
+    }
+
+    //Set Global volume
+    $('#globalVolume').change(function() {
+      var currentVolume = $('#globalVolume').val();
+      var volumeNumber = Number(currentVolume);
+      session.service("ALAudioDevice").done(function(tts) {
+        tts.setOutputVolume(volumeNumber);
+      });
+    })
+
+    //Set Speech volume
+    function updateSpeechVolume(amount) {
+      var volumeNumber = Number(amount);
+      session.service("ALTextToSpeech").done(function(tts) {
+        tts.setVolume(volumeNumber / 100);
+      });
+    }
+    //Set speech pitch
+    function updatePitch(amount) {
+      var amountNumber = Number(amount);
+      session.service("ALTextToSpeech").done(function(tts) {
+        tts.setParameter("pitchShift", amountNumber);
+      });
+    }
+    //Set double voice ratio
+    function updateDoubleVoice(amount) {
+      var amountNumber = Number(amount);
+      session.service("ALTextToSpeech").done(function(tts) {
+        tts.setParameter("doubleVoice", amountNumber);
+      });
+    }
+    //Set double voice Volume
+    function updateDoubleVoiceLevel(amount) {
+      var amountNumber = Number(amount);
+      session.service("ALTextToSpeech").done(function(tts) {
+        tts.setParameter("doubleVoiceLevel", amountNumber);
+      });
+    }
+    //Set double voice delay
+    function updatedoubleVoiceTimeShift(amount) {
+      var amountNumber = Number(amount);
+      session.service("ALTextToSpeech").done(function(tts) {
+        tts.setParameter("doubleVoiceTimeShift", amountNumber);
+      });
+    }
+
+    //Text to speech with animation
+    function animatedSay(text) {
+      session.service("ALAnimatedSpeech").done(function(tts) {
+        tts.setBodyLanguageMode(1);
+        tts.say('\\rspd=75\\' + text);
+        $('#stopAll').removeClass("disabled");
+      })
+    }
+
+    //When SUBMIT button is pressed, submit input text
+    $("#submitText").click(function() {
+      var speed = '\\rspd=75\\';
+      text = $("#inputText").val();
+      inputMessage = speed + text;
+      animatedSay(inputMessage);
+    })
+
+    //When 'enter' key is pressed, submit
+    document.getElementById('inputText').onkeydown = function(e) {
+      if ((window.event ? event.keyCode : e.which) == 13) {
+        var speed = '\\rspd=75\\';
+        text = $("#inputText").val();
+        inputMessage = speed + text;
+        animatedSay(inputMessage);
       }
-    }
-    info.style.visibility = 'visible';
-  } else {
-    info.style.visibility = 'hidden';
-  }
-}
+    };
 
-var element, endTime, hours, mins, msLeft, time, timeout;
-
-function countdown( elementName, minutes)
-{
-  element = document.getElementById( elementName );
-    function twoDigits( n )
-    {
-        return (n <= 9 ? "0" + n : n);
+    //Stop all behaviors being executed
+    function stopBehavior() {
+      session.service("ALBehaviorManager").done(function(tts) {
+        tts.stopAllBehaviors();
+        $('#stopAll').addClass("disabled");
+      });
     }
 
-    function updateTimer()
-    {
-        msLeft = endTime - (+new Date);
-        if ( msLeft < 1000 ) {
-            window.alert("countdown's over!");
-        } else {
-            time = new Date( msLeft );
-            hours = time.getUTCHours();
-            mins = time.getUTCMinutes();
-            element.innerHTML = (hours ? hours + ':' + twoDigits( mins ) : mins) + ':' + twoDigits( time.getUTCSeconds() );
-            timeout = setTimeout( updateTimer, time.getUTCMilliseconds() + 500 );
+    //////////////////////////////////////////////////////////////////////////////
+    // Use pre-made behaviors from robot memory
+    //////////////////////////////////////////////////////////////////////////////
+    function answer(answerNumber) {
+      session.service("ALBehaviorManager").done(function(tts) {
+        tts.runBehavior("answer" + answerNumber + "");
+      });
+      $('#stopAll').removeClass("disabled");
+    }
+
+    function video(videoNumber) {
+      session.service("ALBehaviorManager").done(function(tts) {
+        tts.runBehavior("video" + videoNumber + "");
+      });
+    }
+
+    function intro() {
+      session.service("ALBehaviorManager").done(function(tts) {
+        tts.runBehavior("intro");
+        $('#stopAll').removeClass("disabled");
+      });
+
+    }
+
+    function remark() {
+      session.service("ALBehaviorManager").done(function(tts) {
+        tts.runBehavior("remark");
+        $('#stopAll').removeClass("disabled");
+      });
+
+    }
+
+    function question(questionNumber) {
+      session.service("ALBehaviorManager").done(function(tts) {
+        tts.runBehavior("Question" + questionNumber + "");
+        $('#stopAll').removeClass("disabled");
+      });
+
+    }
+
+    //Stand in position (in the event of falling);
+    function stand() {
+      session.service("ALBehaviorManager").done(function(tts) {
+        tts.runBehavior("stand1");
+      })
+    }
+    //Detect robot status and enable/disable sleep/wakeUp buttons
+    function getStatus() {
+      session.service("ALMotion").done(function(tts) {
+        tts.getStiffnesses("body");
+      });
+    }
+
+    //////////////////////////////////////////////////////////////////////////////
+    // Voice Recognition
+    //////////////////////////////////////////////////////////////////////////////
+    showInfo('info_start');
+
+    var final_transcript = '';
+    var recognizing = false;
+    var ignore_onend;
+    var start_timestamp;
+    if (!('webkitSpeechRecognition' in window)) {
+      upgrade();
+    } else {
+      start_button.style.display = 'inline-block';
+      var recognition = new webkitSpeechRecognition();
+      recognition.continuous = true;
+      recognition.interimResults = true;
+
+      recognition.onstart = function() {
+        recognizing = true;
+        showInfo('info_speak_now');
+        start_img.src = 'mic-animate.gif';
+      };
+
+      recognition.onerror = function(event) {
+        if (event.error == 'no-speech') {
+          start_img.src = 'mic.gif';
+          showInfo('info_no_speech');
+          ignore_onend = true;
         }
-    }
-    if (minutes > 0) {
-      endTime = (+new Date) + 1000 * (60*minutes) + 500;
-      updateTimer();
-    }
+        if (event.error == 'audio-capture') {
+          start_img.src = 'mic.gif';
+          showInfo('info_no_microphone');
+          ignore_onend = true;
+        }
+        if (event.error == 'not-allowed') {
+          if (event.timeStamp - start_timestamp < 100) {
+            showInfo('info_blocked');
+          } else {
+            showInfo('info_denied');
+          }
+          ignore_onend = true;
+        }
+      };
+
+      recognition.onend = function() {
+        recognizing = false;
+        if (ignore_onend) {
+          return;
+        }
+        start_img.src = 'mic.gif';
+        if (!final_transcript) {
+          showInfo('info_start');
+          return;
+        }
+        showInfo('');
+        if (window.getSelection) {
+          window.getSelection().removeAllRanges();
+          var range = document.createRange();
+          range.selectNode(document.getElementById('final_span'));
+          window.getSelection().addRange(range);
+        }
+      };
+
+      recognition.onresult = function(event) {
+        var interim_transcript = '';
+        for (var i = event.resultIndex; i < event.results.length; ++i) {
+          if (event.results[i].isFinal) {
+            var nao_transcript = event.results[i][0].transcript;
+            final_transcript += event.results[i][0].transcript;
+            animatedSay("\\rspd=75\\" + nao_transcript);
+          } else {
+            interim_transcript += event.results[i][0].transcript;
+          }
+        }
+        final_transcript = capitalize(final_transcript);
+        final_span.innerHTML = linebreak(interim_transcript);
+        //interim_span.innerHTML = linebreak(interim_transcript);
+      };
     }
 
-$('#startTimer').click(function(){
-  countdown( "countdown", $('#minuteSelect').val());
-})
-$('#resetTimer').click(function(){
-  clearTimeout(timeout);
-  $('#countdown').html('00:00');
-})
-</script>
+    function upgrade() {
+      start_button.style.visibility = 'hidden';
+      showInfo('info_upgrade');
+    }
+
+    var two_line = /\n\n/g;
+    var one_line = /\n/g;
+
+    function linebreak(s) {
+      return s.replace(two_line, '<p></p>').replace(one_line, '<br>');
+    }
+
+    var first_char = /\S/;
+
+    function capitalize(s) {
+      return s.replace(first_char, function(m) {
+        return m.toUpperCase();
+      });
+    }
+
+    function startButton(event) {
+      if (recognizing) {
+        recognition.stop();
+        return;
+      }
+      final_transcript = '';
+      recognition.lang = 'en-US';
+      recognition.start();
+      ignore_onend = false;
+      final_span.innerHTML = '';
+      interim_span.innerHTML = '';
+      start_img.src = 'mic-slash.gif';
+      showInfo('info_allow');
+      start_timestamp = event.timeStamp;
+    }
+
+    function showInfo(s) {
+      if (s) {
+        for (var child = info.firstChild; child; child = child.nextSibling) {
+          if (child.style) {
+            child.style.display = child.id == s ? 'inline' : 'none';
+          }
+        }
+        info.style.visibility = 'visible';
+      } else {
+        info.style.visibility = 'hidden';
+      }
+    }
+
+    //////////////////////////////////////////////////////////////////////////////
+    // Timer TODO: make float action, smaller
+    //////////////////////////////////////////////////////////////////////////////
+    // var element, endTime, hours, mins, msLeft, time, timeout;
+    //
+    // function countdown(elementName, minutes) {
+    //   element = document.getElementById(elementName);
+    //
+    //   function twoDigits(n) {
+    //     return (n <= 9 ? "0" + n : n);
+    //   }
+    //
+    //   function updateTimer() {
+    //     msLeft = endTime - (+new Date);
+    //     if (msLeft < 1000) {
+    //       window.alert("countdown's over!");
+    //     } else {
+    //       time = new Date(msLeft);
+    //       hours = time.getUTCHours();
+    //       mins = time.getUTCMinutes();
+    //       element.innerHTML = (hours ? hours + ':' + twoDigits(mins) : mins) + ':' + twoDigits(time.getUTCSeconds());
+    //       timeout = setTimeout(updateTimer, time.getUTCMilliseconds() + 500);
+    //     }
+    //   }
+    //   if (minutes > 0) {
+    //     endTime = (+new Date) + 1000 * (60 * minutes) + 500;
+    //     updateTimer();
+    //   }
+    // }
+    //
+    // $('#startTimer').click(function() {
+    //   countdown("countdown", $('#minuteSelect').val());
+    // })
+    // $('#resetTimer').click(function() {
+    //   clearTimeout(timeout);
+    //   $('#countdown').html('00:00');
+    // })
+
+    //////////////////////////////////////////////////////////////////////////////
+    // video Feed code
+    //////////////////////////////////////////////////////////////////////////////
+    // TODO: Fix dislay on canvas
+
+    // function openCamera() {
+    //   var videoCanvas = document.getElementById("video");
+    //   var vidContext = videoCanvas.getContext("2d");
+    //   var imgData = vidContext.createImageData(320,240);
+    //   //for (var i=0;i<imgData.data.length;i+=4)
+    //     // {
+    //     // imgData.data[i+0]=255;
+    //     // imgData.data[i+1]=0;
+    //     // imgData.data[i+2]=0;
+    //     // imgData.data[i+3]=255;
+    //     // }
+    //      session.service("ALVideoDevice").done(function(video)
+    //      {
+    //          var handle = video.subscribeCamera("Vision", 0, 1, 3, 10);
+    //          video.getImageRemote(handle).then(function (image) {
+    //              if (image) {
+    //                 var width = image[0];
+    //                 var height = image[1];
+    //                 var naoImageData = image[6];
+    //                 var read = 0;
+    //                 for(var y = 0; y < height; y++) {
+    //                     for(var x = 0; x < width; x++) {
+    //                         // (assuming a black and white image)
+    //                         // var luminosity = naoImageData[read++];
+    //                         // imgData.data[read]= naoImageData[read++];
+    //                         imgData.data[i+0]=255;
+    //                         imgData.data[i+1]=0;
+    //                         imgData.data[i+2]=0;
+    //                         imgData.data[i+3]=255;
+    //
+    //
+    //
+    //                         vidContext.putImageData(imgData, 0, 0);
+    //                     }
+    //                 }
+    //            }
+    //          })
+    //        });
+    //
+    //
+    // }
+
+    // function openCamera() {
+    //   session.service("ALVideoDevice").done(function(video) {
+    //     var handle =video.subscribeCamera("Vision", 0, 1, 3,10);
+    //     var imge = video.getImageRemote(handle);
+    //     var a = decodeURIComponent(imge[6]);
+    //     alert(a);
+    //     var imageWidth = imge[0];
+    //     var imgeHeight = imge[1];
+    //     var canvas = document.getElementById("video");
+    //     var context = canvas.getContext("2d");
+    //     var imageData = context.getImageData(0, 0, 200, 200);
+    //     var data = imageData.data;
+    //     var read = 0;
+    //     var flipX = false;
+    //     var blackAndWhite = false;
+    //     var getWritePos;
+    //     if(flipX) {
+    //       getWritePos = function(x, y) {
+    //         return (imageWidth * y + (imgeWidth - x - 1))*4;
+    //       };
+    //     } else {
+    //       getWritePos = function(x, y) {
+    //         return (imageWidth * y + x) * 4;
+    //       };
+    //     }
+    //
+    //     var copyPixel;
+    //            if (blackAndWhite)
+    //    {
+    //              copyPixel = function(writep) {
+    //              var luminosity = t[a[read++]];
+    //              data[writep + 0] = luminosity;
+    //              data[writep + 1] = luminosity;
+    //              data[writep + 2] = luminosity;
+    //              data[writep + 3] = 255; // alpha
+    //            };
+    //    } else
+    //    {
+    //              copyPixel = function(writep) {
+    //              data[writep + 0] = t[a[read++]];
+    //              data[writep + 1] = t[a[read++]];
+    //              data[writep + 2] = t[a[read++]];
+    //              data[writep + 3] = 255; // alpha
+    //        };
+    //    }
+    //
+    //    for (var y = 0; y < imge.imageHeight; y++)
+    // {
+    //        for (var x = 0; x < imge.imageWidth; x++)
+    //    {
+    //                var writep = getWritePos(x, y);
+    //                copyPixel(writep);
+    //           }
+    //    }
+    //    context.putImageData(imageData, 0, 0, 0,0, canvas.width, canvas.height);
+    //  });
+    // }
+  </script>
 </body>
+
 </html>
