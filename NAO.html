@@ -18,7 +18,7 @@
   </div>
   <nav class="nav-extended purple darken-3">
     <div class="nav-wrapper">
-      <a class="brand-logo center"><img id="logo" src="naokita.png" width="30px">NAO Control</a>
+      <a class="brand-logo center"><img class="logo" src="naokita.png" width="30px">NAO Control</a>
     </div>
     <div class="nav-content purple darken-3">
       <ul class="tabs tabs-transparent">
@@ -38,13 +38,13 @@
         <a id="disconnect" class="waves-effect waves-light btn-large red disabled" onclick="disconnect()"><i class="material-icons left">highlight_off</i>Disconnect NAO</a>
         <div>STATUS: <span id="status">Disconnected</span><img id="greenLight" class="light" src="green_light.png" alt=""><img id="redLight" class="light" src="red_light.png" alt=""></div>
       </div>
-      <div id="controls" class="col s6 center">
+      <div id="controls" class="col s6 center controls">
         <a id="sleep" class="waves-effect waves-purple btn-large purple darken-2" onclick="sleep()"><i class="material-icons left">brightness_3</i>Sleep</a>
         <a id="wakeUp" class="waves-effect waves-purple btn-large  yellow darken-1" onclick="wakeUp()"><i class="material-icons left">brightness_7</i>Wake Up</a>
         <a id="stand" class="waves-effect waves-purple btn-large cyan lighten-1" onclick="stand()">Stand</a>
       </div>
     </div>
-    <div id="controls2">
+    <div id="controls2" class="controls2">
       <div class="row">
         <div class="col s6">
           <h5 class="purple-text text-darken-3 center-align">Movement Control</h5>
@@ -54,7 +54,7 @@
               <a id="forward" class="btn-floating btn-large waves-effect waves-light orange lighten-1"><i class="material-icons">keyboard_arrow_up</i></a>
               <a id="rotateRight" class="btn-floating btn-large waves-effect waves-light purple darken-3"><i class="material-icons">replay</i></a>
               <a id="left" class="btn-floating btn-large waves-effect waves-light orange lighten-1"><i class="material-icons">keyboard_arrow_left</i></a>
-              <img id="logo2" src="naokita.png" width="50px" height="50px">
+              <img class="logo2" src="naokita.png" width="50px" height="50px">
               <a id="right" class="btn-floating btn-large waves-effect waves-light orange lighten-1"><i class="material-icons">keyboard_arrow_right</i></a>
               <div class="cell"></div>
               <a id="back" class="btn-floating btn-large waves-effect waves-light orange lighten-1"><i class="material-icons">keyboard_arrow_down</i></a>
@@ -113,15 +113,15 @@
       <h4 class="purple-text text-darken-3 center-align">Mere Belief Answers</h4>
       <div class="row">
         <div class="col s12 center">
-          <a class="waves-effect waves-purple btn-large orange lighten-1" onclick="$(this).addClass('greyText'); answer(1)"><i class="material-icons left">play_arrow</i>Answer 1</a>
-          <a class="waves-effect waves-purple btn-large  orange lighten-1" onclick="$(this).addClass('greyText'); answer(2)"><i class="material-icons left">play_arrow</i>Answer 2</a>
-          <a class="waves-effect waves-purple btn-large  orange lighten-1" onclick="$(this).addClass('greyText'); answer(3)"><i class="material-icons left">play_arrow</i>Answer 3</a>
-          <a class="waves-effect waves-purple btn-large  orange lighten-1" onclick="$(this).addClass('greyText'); answer(4)"><i class="material-icons left">play_arrow</i>Answer 4</a>
-          <a class="waves-effect waves-purple btn-large  orange lighten-1" onclick="$(this).addClass('greyText'); answer(5)"><i class="material-icons left">play_arrow</i>Answer 5</a>
-          <a class="waves-effect waves-purple btn-large  orange lighten-1" onclick="$(this).addClass('greyText'); answer(6)"><i class="material-icons left">play_arrow</i>Answer 6</a>
-          <a class="waves-effect waves-purple btn-large  orange lighten-1" onclick="$(this).addClass('greyText'); answer(7)"><i class="material-icons left">play_arrow</i>Answer 7</a>
-          <a class="waves-effect waves-purple btn-large  orange lighten-1" onclick="$(this).addClass('greyText'); answer(8)"><i class="material-icons left">play_arrow</i>Answer 8</a>
-          <a class="waves-effect waves-purple btn-large  orange lighten-1" onclick="$(this).addClass('greyText'); answer(9)"><i class="material-icons left">play_arrow</i>Answer 9</a>
+          <a class="waves-effect waves-purple btn-large orange lighten-1" onclick="$(this).addClass('used'); answer(1)"><i class="material-icons left">play_arrow</i>Answer 1</a>
+          <a class="waves-effect waves-purple btn-large  orange lighten-1" onclick="$(this).addClass('used'); answer(2)"><i class="material-icons left">play_arrow</i>Answer 2</a>
+          <a class="waves-effect waves-purple btn-large  orange lighten-1" onclick="$(this).addClass('used'); answer(3)"><i class="material-icons left">play_arrow</i>Answer 3</a>
+          <a class="waves-effect waves-purple btn-large  orange lighten-1" onclick="$(this).addClass('used'); answer(4)"><i class="material-icons left">play_arrow</i>Answer 4</a>
+          <a class="waves-effect waves-purple btn-large  orange lighten-1" onclick="$(this).addClass('used'); answer(5)"><i class="material-icons left">play_arrow</i>Answer 5</a>
+          <a class="waves-effect waves-purple btn-large  orange lighten-1" onclick="$(this).addClass('used'); answer(6)"><i class="material-icons left">play_arrow</i>Answer 6</a>
+          <a class="waves-effect waves-purple btn-large  orange lighten-1" onclick="$(this).addClass('used'); answer(7)"><i class="material-icons left">play_arrow</i>Answer 7</a>
+          <a class="waves-effect waves-purple btn-large  orange lighten-1" onclick="$(this).addClass('used'); answer(8)"><i class="material-icons left">play_arrow</i>Answer 8</a>
+          <a class="waves-effect waves-purple btn-large  orange lighten-1" onclick="$(this).addClass('used'); answer(9)"><i class="material-icons left">play_arrow</i>Answer 9</a>
         </div>
       </div>
     </div>
@@ -153,21 +153,21 @@
       <div class="col s12 pane">
         <h5 class="purple-text text-darken-3 center-align">Questions</h5>
         <div class="row">
-          <a class="waves-effect waves-green btn small green lighten-1" onclick="$(this).addClass('greyText'); animatedSay('Yes, I can hear you...')">Yes, I can hear you...</a>→
-          <a class="waves-effect waves-green btn small green lighten-1" onclick="$(this).addClass('greyText'); intro()">Intro.</a>→
-          <a class="waves-effect waves-blue btn small orange" onclick="$(this).addClass('greyText'); animatedSay('Ok, first question')">Ok, first question:</a>→
-          <a class="waves-effect waves-blue btn small blue lighten-1" onclick="$(this).addClass('greyText'); question(1)">Question 1</a>→
-          <a class="waves-effect waves-blue btn small orange" onclick="$(this).addClass('greyText'); animatedSay('Alright, next question')">Alright, next question</a>→
-          <a class="waves-effect waves-blue btn small blue darken-2" onclick="$(this).addClass('greyText'); question(2)">Question 2</a> →
+          <a class="waves-effect waves-green btn small green lighten-1" onclick="$(this).addClass('used'); animatedSay('Yes, I can hear you...')">Yes, I can hear you...</a>→
+          <a class="waves-effect waves-green btn small green lighten-1" onclick="$(this).addClass('used'); intro()">Intro.</a>→
+          <a class="waves-effect waves-blue btn small orange" onclick="$(this).addClass('used'); animatedSay('Ok, first question')">Ok, first question:</a>→
+          <a class="waves-effect waves-blue btn small blue lighten-1" onclick="$(this).addClass('used'); question(1)">Question 1</a>→
+          <a class="waves-effect waves-blue btn small orange" onclick="$(this).addClass('used'); animatedSay('Alright, next question')">Alright, next question</a>→
+          <a class="waves-effect waves-blue btn small blue darken-2" onclick="$(this).addClass('used'); question(2)">Question 2</a> →
         </div>
         <div class="row">
-          <a class="waves-effect waves-blue btn small blue darken-2" onclick="$(this).addClass('greyText'); remark()">Remarks for question 2</a> →
-          <a class="waves-effect waves-blue btn small orange" onclick="$(this).addClass('greyText'); animatedSay('Ok')">Ok</a>→
-          <a class="waves-effect waves-blue btn small blue lighten-1" onclick="$(this).addClass('greyText'); question(3)">Question 3</a> →
-          <a class="waves-effect waves-blue btn small orange" onclick="$(this).addClass('greyText'); animatedSay('Ok, so')">Ok, so</a>→
-          <a class="waves-effect waves-blue btn small blue lighten-1" onclick="$(this).addClass('greyText'); question(4)">Question 4</a> →
-          <a class="waves-effect waves-blue btn small orange" onclick="$(this).addClass('greyText'); animatedSay('Ok, final question')">Ok, final question:</a>→
-          <a class="waves-effect waves-blue btn small blue lighten-1" onclick="$(this).addClass('greyText'); question(5)">Question 5</a>
+          <a class="waves-effect waves-blue btn small blue darken-2" onclick="$(this).addClass('used'); remark()">Remarks for question 2</a> →
+          <a class="waves-effect waves-blue btn small orange" onclick="$(this).addClass('used'); animatedSay('Ok')">Ok</a>→
+          <a class="waves-effect waves-blue btn small blue lighten-1" onclick="$(this).addClass('used'); question(3)">Question 3</a> →
+          <a class="waves-effect waves-blue btn small orange" onclick="$(this).addClass('used'); animatedSay('Ok, so')">Ok, so</a>→
+          <a class="waves-effect waves-blue btn small blue lighten-1" onclick="$(this).addClass('used'); question(4)">Question 4</a> →
+          <a class="waves-effect waves-blue btn small orange" onclick="$(this).addClass('used'); animatedSay('Ok, final question')">Ok, final question:</a>→
+          <a class="waves-effect waves-blue btn small blue lighten-1" onclick="$(this).addClass('used'); question(5)">Question 5</a>
         </div>
       </div>
     </div>
@@ -244,10 +244,10 @@
       <h4 class="purple-text text-darken-3 center-align">Video Answers</h4>
       <div class="row">
         <div class="col s12 center">
-          <a class="waves-effect waves-purple btn-large orange lighten-1" onclick="$(this).addClass('greyText'); video(1)"><i class="material-icons left">play_arrow</i>Video 1</a>
-          <a class="waves-effect waves-purple btn-large  orange lighten-1" onclick="$(this).addClass('greyText'); video(2)"><i class="material-icons left">play_arrow</i>Video 2</a>
-          <a class="waves-effect waves-purple btn-large  orange lighten-1" onclick="$(this).addClass('greyText'); video(3)"><i class="material-icons left">play_arrow</i>Video 3</a>
-          <a class="waves-effect waves-purple btn-large  orange lighten-1" onclick="$(this).addClass('greyText'); video(4)"><i class="material-icons left">play_arrow</i>Video 4</a>
+          <a class="waves-effect waves-purple btn-large orange lighten-1" onclick="$(this).addClass('used'); video(1)"><i class="material-icons left">play_arrow</i>Video 1</a>
+          <a class="waves-effect waves-purple btn-large  orange lighten-1" onclick="$(this).addClass('used'); video(2)"><i class="material-icons left">play_arrow</i>Video 2</a>
+          <a class="waves-effect waves-purple btn-large  orange lighten-1" onclick="$(this).addClass('used'); video(3)"><i class="material-icons left">play_arrow</i>Video 3</a>
+          <a class="waves-effect waves-purple btn-large  orange lighten-1" onclick="$(this).addClass('used'); video(4)"><i class="material-icons left">play_arrow</i>Video 4</a>
         </div>
       </div>
     </div>
