@@ -177,17 +177,29 @@
           <li>
             <div class="collapsible-header"><i class="material-icons grey-text">mms</i>Misc Remarks</div>
             <div class="collapsible-body">
-              <a class="waves-effect waves-purple btn small purple lighten-1" onclick="animatedSay('Yes')">Yes</a>
-              <a class="waves-effect waves-purple btn small purple lighten-1" onclick="animatedSay('Ahh ha')">A-ha 1</a>
-              <a class="waves-effect waves-purple btn small purple lighten-1" onclick="animatedSay('Ahhha')">A-ha 2</a>
-              <a class="waves-effect waves-purple btn small purple lighten-1" onclick="animatedSay('Ah')">Uuuuh! </a>
-              <a class="waves-effect waves-purple btn small purple lighten-1" onclick="animatedSay('Oh, I see')">Oh, I see</a>
-              <a class="waves-effect waves-purple btn small purple lighten-1" onclick="animatedSay('Hmm. I think I got it')">Hmm. I think I've got it</a>
-              <a class="waves-effect waves-purple btn small purple lighten-1" onclick="animatedSay('Ah, Ok')">Ah, ok </a>
-              <a class="waves-effect waves-purple btn small purple lighten-1" onclick="animatedSay('Thank you')">Thank you ...</a>
-              <a class="waves-effect waves-purple btn small purple lighten-1" onclick="animatedSay('Hmmm')">Hmmm ...</a>
-              <a class="waves-effect waves-purple btn small purple lighten-1" onclick="animatedSay('Give me a second')">Give me a second...</a>
-              <a class="waves-effect waves-purple btn small purple lighten-1" onclick="animatedSay('Can you repeat that?')">Can you repeat that?</a>
+              <div class="row">
+                <div class="col s12">
+                  <a class="waves-effect waves-purple btn small purple lighten-1" onclick="animatedSay('Yes')">Yes</a>
+                  <a class="waves-effect waves-purple btn small purple lighten-1" onclick="animatedSay('Ahh ha')">A-ha 1</a>
+                  <a class="waves-effect waves-purple btn small purple lighten-1" onclick="animatedSay('Ahhha')">A-ha 2</a>
+                  <a class="waves-effect waves-purple btn small purple lighten-1" onclick="animatedSay('Ah')">Uuuuh! </a>
+                  <a class="waves-effect waves-purple btn small purple lighten-1" onclick="animatedSay('Oh, I see')">Oh, I see</a>
+                  <a class="waves-effect waves-purple btn small purple lighten-1" onclick="animatedSay('Hmm. I think I got it')">Hmm. I think I've got it</a>
+                  <a class="waves-effect waves-purple btn small purple lighten-1" onclick="animatedSay('Ah, Ok')">Ah, ok </a>
+                  <a class="waves-effect waves-purple btn small purple lighten-1" onclick="animatedSay('Thank you')">Thank you ...</a>
+                  <a class="waves-effect waves-purple btn small purple lighten-1" onclick="animatedSay('Hmmm')">Hmmm ...</a>
+                  <a class="waves-effect waves-purple btn small purple lighten-1" onclick="animatedSay('Give me a second')">Give me a second...</a>
+                  <a class="waves-effect waves-purple btn small purple lighten-1" onclick="animatedSay('Can you repeat that?')">Can you repeat that?</a>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col s12">
+                  <h6 class="purple-text text-darken-3">Quick expressions</h6>
+                  <div id="newExpressions" class="col s12 center"></div>
+                  <input id="newExpressionText" type="text" />
+                  <a onclick="newExpression();" class="waves-effect waves-purple btn small blue lighten-2"><i class="material-icons left">chat</i>Create Expression</a>
+                </div>
+              </div>
             </div>
           </li>
           <li>
@@ -272,30 +284,13 @@
       $('select').material_select();
     });
 
-    //Get elements from html
-    var forward = $('#forward');
-    var left = $('#left');
-    var right = $('#right');
-    var back = $('#back');
-    var rotateLeft = $('#rotateLeft');
-    var rotateRight = $('#rotateRight');
-
-    //Make touch events for movement buttons
-    //Touch events function declaration
-    // function touchEvents(button, move1) {
-    //   button.on("touchstart", move1);
-    //   button.on("touchend", stopMove);
-    // }
-    // //Assign functions to buttons
-    // if (session != null) {
-    //   touchEvents(forward, move(.2, 0, 0));
-    //   touchEvents(left, move(0, .2, 0));
-    //   touchEvents(right, move(0, -.2, 0));
-    //   touchEvents(back, move(-.2, 0, 0));
-    //   touchEvents(rotateLeft, move(0, 0, .2));
-    //   touchEvents(rotateRight, move(0, 0, -.2));
-    // }
-
+    //Handle new expression button creation
+       function newExpression(){
+         var expressionText = $('#newExpressionText').val();
+         if (expressionText!='') {
+           $('#newExpressions').append("<a class='waves-effect waves-purple btn small blue darken-1' onclick=speak('"+expressionText+"')><i class='material-icons left'>chat_bubble</i>"+expressionText+"</a>");
+         }
+       }
     //////////////////////////////////////////////////////////////////////////////
     // Web Socket connection to the robot
     //////////////////////////////////////////////////////////////////////////////
