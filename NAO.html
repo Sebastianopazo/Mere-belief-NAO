@@ -55,7 +55,7 @@
               <a id="rotateRight" class="btn-floating btn-large waves-effect waves-light purple darken-3" onmousedown="move(0, 0, -.2)" onmouseup="stopMove()" onmouseout="stopMove()" ontouchstart="move(0, 0, -.2)" ontouchend="stopMove()"><i class="material-icons">replay</i></a>
               <a id="left" class="btn-floating btn-large waves-effect waves-light orange lighten-1" onmousedown="move(0, .2, 0)" onmouseup="stopMove()" onmouseout="stopMove()" ontouchstart="move(0, .2, 0)" ontouchend="stopMove()"><i class="material-icons">keyboard_arrow_left</i></a>
               <img class="logo2" src="naokita.png" width="50px" height="50px">
-              <a id="right" class="btn-floating btn-large waves-effect waves-light orange lighten-1" onmousedown="move(0, -.2, 0)" onmouseup="stopMove()" onmouseout="stopMove()"  ontouchstart="move(0, -.2, 0)" ontouchend="stopMove()"><i class="material-icons">keyboard_arrow_right</i></a>
+              <a id="right" class="btn-floating btn-large waves-effect waves-light orange lighten-1" onmousedown="move(0, -.2, 0)" onmouseup="stopMove()" onmouseout="stopMove()" ontouchstart="move(0, -.2, 0)" ontouchend="stopMove()"><i class="material-icons">keyboard_arrow_right</i></a>
               <div class="cell"></div>
               <a id="back" class="btn-floating btn-large waves-effect waves-light orange lighten-1" onmousedown="move(-.2, 0, 0)" onmouseup="stopMove()" onmouseout="stopMove()" ontouchstart="move(-.2, 0, 0)" ontouchend="stopMove()"><i class="material-icons">keyboard_arrow_down</i></a>
               <div class="cell"></div>
@@ -150,91 +150,98 @@
         </div>
       </div> -->
     <div class="row">
-      <div class="col s12 pane">
-        <h5 class="purple-text text-darken-3 center-align">Questions</h5>
-        <div class="row">
-          <a class="waves-effect waves-green btn small green lighten-1" onclick="$(this).addClass('used'); animatedSay('Yes, I can hear you...')">Yes, I can hear you...</a>→
-          <a class="waves-effect waves-green btn small green lighten-1" onclick="$(this).addClass('used'); intro()">Intro.</a>→
-          <a class="waves-effect waves-blue btn small orange" onclick="$(this).addClass('used'); animatedSay('Ok, first question')">Ok, first question:</a>→
-          <a class="waves-effect waves-blue btn small blue lighten-1" onclick="$(this).addClass('used'); question(1)">Question 1</a>→
-          <a class="waves-effect waves-blue btn small orange" onclick="$(this).addClass('used'); animatedSay('Alright, next question')">Alright, next question</a>→
-          <a class="waves-effect waves-blue btn small blue darken-2" onclick="$(this).addClass('used'); question(2)">Question 2</a> →
-        </div>
-        <div class="row">
-          <a class="waves-effect waves-blue btn small blue darken-2" onclick="$(this).addClass('used'); remark()">Remarks for question 2</a> →
-          <a class="waves-effect waves-blue btn small orange" onclick="$(this).addClass('used'); animatedSay('Ok')">Ok</a>→
-          <a class="waves-effect waves-blue btn small blue lighten-1" onclick="$(this).addClass('used'); question(3)">Question 3</a> →
-          <a class="waves-effect waves-blue btn small orange" onclick="$(this).addClass('used'); animatedSay('Ok, so')">Ok, so</a>→
-          <a class="waves-effect waves-blue btn small blue lighten-1" onclick="$(this).addClass('used'); question(4)">Question 4</a> →
-          <a class="waves-effect waves-blue btn small orange" onclick="$(this).addClass('used'); animatedSay('Ok, final question')">Ok, final question:</a>→
-          <a class="waves-effect waves-blue btn small blue lighten-1" onclick="$(this).addClass('used'); question(5)">Question 5</a>
-        </div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col s12 pane">
-        <h5 class="purple-text text-darken-3 center-align">Misc remarks</h5>
-        <a class="waves-effect waves-purple btn small purple lighten-1" onclick="animatedSay('Yes')">Yes</a>
-        <a class="waves-effect waves-purple btn small purple lighten-1" onclick="animatedSay('Ahh ha')">A-ha 1</a>
-        <a class="waves-effect waves-purple btn small purple lighten-1" onclick="animatedSay('Ahhha')">A-ha 2</a>
-        <a class="waves-effect waves-purple btn small purple lighten-1" onclick="animatedSay('Ah')">Uuuuh! </a>
-        <a class="waves-effect waves-purple btn small purple lighten-1" onclick="animatedSay('Oh, I see')">Oh, I see</a>
-        <a class="waves-effect waves-purple btn small purple lighten-1" onclick="animatedSay('Hmm. I think I got it')">Hmm. I think I've got it</a>
-        <a class="waves-effect waves-purple btn small purple lighten-1" onclick="animatedSay('Ah, Ok')">Ah, ok </a>
-        <a class="waves-effect waves-purple btn small purple lighten-1" onclick="animatedSay('Thank you')">Thank you ...</a>
-        <a class="waves-effect waves-purple btn small purple lighten-1" onclick="animatedSay('Hmmm')">Hmmm ...</a>
-        <a class="waves-effect waves-purple btn small purple lighten-1" onclick="animatedSay('Give me a second')">Give me a second...</a>
-        <a class="waves-effect waves-purple btn small purple lighten-1" onclick="animatedSay('Can you repeat that?')">Can you repeat that?</a>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col s12 pane">
-        <div class="col s6">
-          <h5 class="purple-text text-darken-3 center-align">Text to Animated Speech</h5>
-          <div class="input-field col s12">
-            <input id="inputText" type="text" />
-            <label for="inputText">Write Message</label>
-          </div>
-          <a id="submitText" class="waves-effect waves-purple btn-large purple darken-2"><i class="material-icons left">unarchive</i>Submit</a>
-        </div>
-        <div class="col s6">
-          <form action="#">
-            <h5 class="purple-text text-darken-3 center-align">Voice Control</h5>
-            <span>VOLUME</span>
-            <p class="range-field">
-              <input type="range" id="speechVolume2" min="0" max="100" onchange="updateSpeechVolume(this.value)" />
-            </p>
-          </form>
-        </div>
-      </div>
-    </div>
-    <div class="row">
       <div class="col s12">
-        <h5 class="purple-text text-darken-3 center-align">Voice to Text</h5>
-        <div id="info">
-          <p id="info_start">Click on the microphone icon and begin speaking.</p>
-          <p id="info_speak_now">Speak now.</p>
-          <p id="info_no_speech">No speech was detected. You may need to adjust your
-            <a href="//support.google.com/chrome/bin/answer.py?hl=en&amp;answer=1407892">
-                    microphone settings</a>.</p>
-          <p id="info_no_microphone" style="display:none">
-            No microphone was found. Ensure that a microphone is installed and that
-            <a href="//support.google.com/chrome/bin/answer.py?hl=en&amp;answer=1407892">
-                  microphone settings</a> are configured correctly.</p>
-          <p id="info_allow">Click the "Allow" button above to enable your microphone.</p>
-          <p id="info_denied">Permission to use microphone was denied.</p>
-          <p id="info_blocked">Permission to use microphone is blocked. To change, go to chrome://settings/contentExceptions#media-stream</p>
-          <p id="info_upgrade">Web Speech API is not supported by this browser. Upgrade to <a href="//www.google.com/chrome">Chrome</a> version 25 or later.</p>
-        </div>
-        <div class="right">
-          <button id="start_button" onclick="startButton(event)">
-                  <img id="start_img" src="mic.gif" alt="Start"></button>
-        </div>
-        <div id="results">
-          <span id="final_span" class="final"></span>
-          <span id="interim_span" class="interim"></span>
-          <p></p>
-        </div>
+        <ul class="collapsible" data-collapsible="expandable">
+          <li>
+            <div class="collapsible-header"><i class="material-icons grey-text">help</i>Questions</div>
+            <div class="collapsible-body">
+              <div class="row">
+                <a class="waves-effect waves-green btn small green lighten-1" onclick="$(this).addClass('used'); animatedSay('Yes, I can hear you...')">Yes, I can hear you...</a>→
+                <a class="waves-effect waves-green btn small green lighten-1" onclick="$(this).addClass('used'); intro()">Intro.</a>→
+                <a class="waves-effect waves-blue btn small orange" onclick="$(this).addClass('used'); animatedSay('Ok, first question')">Ok, first question:</a>→
+                <a class="waves-effect waves-blue btn small blue lighten-1" onclick="$(this).addClass('used'); question(1)">Question 1</a>→
+                <a class="waves-effect waves-blue btn small orange" onclick="$(this).addClass('used'); animatedSay('Alright, next question')">Alright, next question</a>→
+                <a class="waves-effect waves-blue btn small blue darken-2" onclick="$(this).addClass('used'); question(2)">Question 2</a> →
+              </div>
+              <div class="row">
+                <a class="waves-effect waves-blue btn small blue darken-2" onclick="$(this).addClass('used'); remark()">Remarks for question 2</a> →
+                <a class="waves-effect waves-blue btn small orange" onclick="$(this).addClass('used'); animatedSay('Ok')">Ok</a>→
+                <a class="waves-effect waves-blue btn small blue lighten-1" onclick="$(this).addClass('used'); question(3)">Question 3</a> →
+                <a class="waves-effect waves-blue btn small orange" onclick="$(this).addClass('used'); animatedSay('Ok, so')">Ok, so</a>→
+                <a class="waves-effect waves-blue btn small blue lighten-1" onclick="$(this).addClass('used'); question(4)">Question 4</a> →
+                <a class="waves-effect waves-blue btn small orange" onclick="$(this).addClass('used'); animatedSay('Ok, final question')">Ok, final question:</a>→
+                <a class="waves-effect waves-blue btn small blue lighten-1" onclick="$(this).addClass('used'); question(5)">Question 5</a>
+              </div>
+            </div>
+          </li>
+          <li>
+            <div class="collapsible-header"><i class="material-icons grey-text">mms</i>Misc Remarks</div>
+            <div class="collapsible-body">
+              <a class="waves-effect waves-purple btn small purple lighten-1" onclick="animatedSay('Yes')">Yes</a>
+              <a class="waves-effect waves-purple btn small purple lighten-1" onclick="animatedSay('Ahh ha')">A-ha 1</a>
+              <a class="waves-effect waves-purple btn small purple lighten-1" onclick="animatedSay('Ahhha')">A-ha 2</a>
+              <a class="waves-effect waves-purple btn small purple lighten-1" onclick="animatedSay('Ah')">Uuuuh! </a>
+              <a class="waves-effect waves-purple btn small purple lighten-1" onclick="animatedSay('Oh, I see')">Oh, I see</a>
+              <a class="waves-effect waves-purple btn small purple lighten-1" onclick="animatedSay('Hmm. I think I got it')">Hmm. I think I've got it</a>
+              <a class="waves-effect waves-purple btn small purple lighten-1" onclick="animatedSay('Ah, Ok')">Ah, ok </a>
+              <a class="waves-effect waves-purple btn small purple lighten-1" onclick="animatedSay('Thank you')">Thank you ...</a>
+              <a class="waves-effect waves-purple btn small purple lighten-1" onclick="animatedSay('Hmmm')">Hmmm ...</a>
+              <a class="waves-effect waves-purple btn small purple lighten-1" onclick="animatedSay('Give me a second')">Give me a second...</a>
+              <a class="waves-effect waves-purple btn small purple lighten-1" onclick="animatedSay('Can you repeat that?')">Can you repeat that?</a>
+            </div>
+          </li>
+          <li>
+            <div class="collapsible-header"><i class="material-icons grey-text">message</i>Text To Animated Speech</div>
+            <div class="collapsible-body">
+              <div class="row">
+                <div class="col s6">
+                  <div class="input-field col s12">
+                    <input id="inputText" type="text" />
+                    <label for="inputText">Write Message</label>
+                  </div>
+                  <a id="submitText" class="waves-effect waves-purple btn-large purple darken-2"><i class="material-icons left">unarchive</i>Submit</a>
+                </div>
+                <div class="col s6">
+                  <form action="#">
+                    <span>VOLUME</span>
+                    <p class="range-field">
+                      <input type="range" id="speechVolume2" min="0" max="100" onchange="updateSpeechVolume(this.value)" />
+                    </p>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </li>
+          <li>
+            <div class="collapsible-header"><i class="material-icons grey-text">mic</i>Speech to Text</div>
+            <div class="collapsible-body">
+              <div id="info">
+                <p id="info_start">Click on the microphone icon and begin speaking.</p>
+                <p id="info_speak_now">Speak now.</p>
+                <p id="info_no_speech">No speech was detected. You may need to adjust your
+                  <a href="//support.google.com/chrome/bin/answer.py?hl=en&amp;answer=1407892">
+                          microphone settings</a>.</p>
+                <p id="info_no_microphone" style="display:none">
+                  No microphone was found. Ensure that a microphone is installed and that
+                  <a href="//support.google.com/chrome/bin/answer.py?hl=en&amp;answer=1407892">
+                        microphone settings</a> are configured correctly.</p>
+                <p id="info_allow">Click the "Allow" button above to enable your microphone.</p>
+                <p id="info_denied">Permission to use microphone was denied.</p>
+                <p id="info_blocked">Permission to use microphone is blocked. To change, go to chrome://settings/contentExceptions#media-stream</p>
+                <p id="info_upgrade">Web Speech API is not supported by this browser. Upgrade to <a href="//www.google.com/chrome">Chrome</a> version 25 or later.</p>
+              </div>
+              <div class="right">
+                <button id="start_button" onclick="startButton(event)">
+                        <img id="start_img" src="mic.gif" alt="Start"></button>
+              </div>
+              <div id="results">
+                <span id="final_span" class="final"></span>
+                <span id="interim_span" class="interim"></span>
+                <p></p>
+              </div>
+            </div>
+          </li>
+        </ul>
       </div>
     </div>
   </div>
