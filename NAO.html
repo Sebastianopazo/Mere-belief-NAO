@@ -50,14 +50,14 @@
           <h5 class="purple-text text-darken-3 center-align">Movement Control</h5>
           <div class="grid-container">
             <div class="grid">
-              <a id="rotateLeft" class="btn-floating btn-large waves-effect waves-light purple darken-3" onmousedown="move(0, 0, .2)" onmouseup="stopMove()" onmouseout="stopMove()"><i class="material-icons">replay</i></a>
-              <a id="forward" class="btn-floating btn-large waves-effect waves-light orange lighten-1" onmousedown="move(.2, 0, 0)" onmouseup="stopMove()" onmouseout="stopMove()"><i class="material-icons">keyboard_arrow_up</i></a>
-              <a id="rotateRight" class="btn-floating btn-large waves-effect waves-light purple darken-3" onmousedown="move(0, 0, -.2)" onmouseup="stopMove()" onmouseout="stopMove()"><i class="material-icons">replay</i></a>
-              <a id="left" class="btn-floating btn-large waves-effect waves-light orange lighten-1" onmousedown="move(0, .2, 0)" onmouseup="stopMove()" onmouseout="stopMove()"><i class="material-icons">keyboard_arrow_left</i></a>
+              <a id="rotateLeft" class="btn-floating btn-large waves-effect waves-light purple darken-3" onmousedown="move(0, 0, .2)" onmouseup="stopMove()" onmouseout="stopMove()" ontouchstart="move(0, 0, .2)" ontouchend="stopMove()"><i class="material-icons">replay</i></a>
+              <a id="forward" class="btn-floating btn-large waves-effect waves-light orange lighten-1" onmousedown="move(.2, 0, 0)" onmouseup="stopMove()" onmouseout="stopMove()" ontouchstart="move(.2, 0, 0)" ontouchend="stopMove()"><i class="material-icons">keyboard_arrow_up</i></a>
+              <a id="rotateRight" class="btn-floating btn-large waves-effect waves-light purple darken-3" onmousedown="move(0, 0, -.2)" onmouseup="stopMove()" onmouseout="stopMove()" ontouchstart="move(0, 0, -.2)" ontouchend="stopMove()"><i class="material-icons">replay</i></a>
+              <a id="left" class="btn-floating btn-large waves-effect waves-light orange lighten-1" onmousedown="move(0, .2, 0)" onmouseup="stopMove()" onmouseout="stopMove()" ontouchstart="move(0, .2, 0)" ontouchend="stopMove()"><i class="material-icons">keyboard_arrow_left</i></a>
               <img class="logo2" src="naokita.png" width="50px" height="50px">
-              <a id="right" class="btn-floating btn-large waves-effect waves-light orange lighten-1" onmousedown="move(0, -.2, 0)" onmouseup="stopMove()" onmouseout="stopMove()"><i class="material-icons">keyboard_arrow_right</i></a>
+              <a id="right" class="btn-floating btn-large waves-effect waves-light orange lighten-1" onmousedown="move(0, -.2, 0)" onmouseup="stopMove()" onmouseout="stopMove()"  ontouchstart="move(0, -.2, 0)" ontouchend="stopMove()"><i class="material-icons">keyboard_arrow_right</i></a>
               <div class="cell"></div>
-              <a id="back" class="btn-floating btn-large waves-effect waves-light orange lighten-1" onmousedown="move(-.2, 0, 0)" onmouseup="stopMove()" onmouseout="stopMove()"><i class="material-icons">keyboard_arrow_down</i></a>
+              <a id="back" class="btn-floating btn-large waves-effect waves-light orange lighten-1" onmousedown="move(-.2, 0, 0)" onmouseup="stopMove()" onmouseout="stopMove()" ontouchstart="move(-.2, 0, 0)" ontouchend="stopMove()"><i class="material-icons">keyboard_arrow_down</i></a>
               <div class="cell"></div>
             </div>
           </div>
@@ -275,19 +275,19 @@
 
     //Make touch events for movement buttons
     //Touch events function declaration
-    function touchEvents(button, move1) {
-      button.on("touchstart", move1);
-      button.on("touchend", stopMove);
-    }
-    //Assign functions to buttons
-    if (session != null) {
-      touchEvents(forward, move(.2, 0, 0));
-      touchEvents(left, move(0, .2, 0));
-      touchEvents(right, move(0, -.2, 0));
-      touchEvents(back, move(-.2, 0, 0));
-      touchEvents(rotateLeft, move(0, 0, .2));
-      touchEvents(rotateRight, move(0, 0, -.2));
-    }
+    // function touchEvents(button, move1) {
+    //   button.on("touchstart", move1);
+    //   button.on("touchend", stopMove);
+    // }
+    // //Assign functions to buttons
+    // if (session != null) {
+    //   touchEvents(forward, move(.2, 0, 0));
+    //   touchEvents(left, move(0, .2, 0));
+    //   touchEvents(right, move(0, -.2, 0));
+    //   touchEvents(back, move(-.2, 0, 0));
+    //   touchEvents(rotateLeft, move(0, 0, .2));
+    //   touchEvents(rotateRight, move(0, 0, -.2));
+    // }
 
     //////////////////////////////////////////////////////////////////////////////
     // Web Socket connection to the robot
