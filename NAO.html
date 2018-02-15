@@ -44,20 +44,20 @@
         <a id="stand" class="waves-effect waves-purple btn-large cyan lighten-1" onclick="stand()">Stand</a>
       </div>
     </div>
-    <div id="controls2" class="controls2">
+    <div id="controls2" class="controls">
       <div class="row">
         <div class="col s6">
           <h5 class="purple-text text-darken-3 center-align">Movement Control</h5>
           <div class="grid-container">
             <div class="grid">
-              <a id="rotateLeft" class="btn-floating btn-large waves-effect waves-light purple darken-3"><i class="material-icons">replay</i></a>
-              <a id="forward" class="btn-floating btn-large waves-effect waves-light orange lighten-1"><i class="material-icons">keyboard_arrow_up</i></a>
-              <a id="rotateRight" class="btn-floating btn-large waves-effect waves-light purple darken-3"><i class="material-icons">replay</i></a>
-              <a id="left" class="btn-floating btn-large waves-effect waves-light orange lighten-1"><i class="material-icons">keyboard_arrow_left</i></a>
+              <a id="rotateLeft" class="btn-floating btn-large waves-effect waves-light purple darken-3" onmousedown="move(0, 0, .2)" onmouseup="stopMove()" onmouseout="stopMove()"><i class="material-icons">replay</i></a>
+              <a id="forward" class="btn-floating btn-large waves-effect waves-light orange lighten-1" onmousedown="move(.2, 0, 0)" onmouseup="stopMove()" onmouseout="stopMove()"><i class="material-icons">keyboard_arrow_up</i></a>
+              <a id="rotateRight" class="btn-floating btn-large waves-effect waves-light purple darken-3" onmousedown="move(0, 0, -.2)" onmouseup="stopMove()" onmouseout="stopMove()"><i class="material-icons">replay</i></a>
+              <a id="left" class="btn-floating btn-large waves-effect waves-light orange lighten-1" onmousedown="move(0, .2, 0)" onmouseup="stopMove()" onmouseout="stopMove()"><i class="material-icons">keyboard_arrow_left</i></a>
               <img class="logo2" src="naokita.png" width="50px" height="50px">
-              <a id="right" class="btn-floating btn-large waves-effect waves-light orange lighten-1"><i class="material-icons">keyboard_arrow_right</i></a>
+              <a id="right" class="btn-floating btn-large waves-effect waves-light orange lighten-1" onmousedown="move(0, -.2, 0)" onmouseup="stopMove()" onmouseout="stopMove()"><i class="material-icons">keyboard_arrow_right</i></a>
               <div class="cell"></div>
-              <a id="back" class="btn-floating btn-large waves-effect waves-light orange lighten-1"><i class="material-icons">keyboard_arrow_down</i></a>
+              <a id="back" class="btn-floating btn-large waves-effect waves-light orange lighten-1" onmousedown="move(-.2, 0, 0)" onmouseup="stopMove()" onmouseout="stopMove()"><i class="material-icons">keyboard_arrow_down</i></a>
               <div class="cell"></div>
             </div>
           </div>
