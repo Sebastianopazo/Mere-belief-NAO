@@ -180,6 +180,7 @@
               <div class="row">
                 <div class="col s12">
                   <a class="waves-effect waves-purple btn small purple lighten-1" onclick="animatedSay('Yes')">Yes</a>
+                  <a class="waves-effect waves-purple btn small purple lighten-1" onclick="animatedSay('No')">No</a>
                   <a class="waves-effect waves-purple btn small purple lighten-1" onclick="animatedSay('My name is Nicola')">My name is Nicola</a>
                   <a class="waves-effect waves-purple btn small purple lighten-1" onclick="animatedSay('My name is Yipu')">My name is Yipu</a>
                   <a class="waves-effect waves-purple btn small purple lighten-1" onclick="animatedSay('Wait')">Wait</a>
@@ -188,7 +189,7 @@
                   <a class="waves-effect waves-purple btn small purple lighten-1" onclick="animatedSay('Ahhha')">A-ha 2</a>
                   <a class="waves-effect waves-purple btn small purple lighten-1" onclick="animatedSay('Ah')">Uuuuh! </a>
                   <a class="waves-effect waves-purple btn small purple lighten-1" onclick="animatedSay('Oh, I see')">Oh, I see</a>
-                  <a class="waves-effect waves-purple btn small purple lighten-1" onclick="animatedSay('Hmm. I think I got it')">Hmm. I think I've got it</a>
+                  <a class="waves-effect waves-purple btn small purple lighten-1" onclick="animatedSay('I think I got it')">I think I've got it</a>
                   <a class="waves-effect waves-purple btn small purple lighten-1" onclick="animatedSay('Ah, Ok')">Ah, ok </a>
                   <a class="waves-effect waves-purple btn small purple lighten-1" onclick="animatedSay('Thank you')">Thank you ...</a>
                   <a class="waves-effect waves-purple btn small purple lighten-1" onclick="animatedSay('Hmmm')">Hmmm ...</a>
@@ -293,7 +294,7 @@
        function newExpression(){
          var expressionText = $('#newExpressionText').val();
          if (expressionText!='') {
-           $('#newExpressions').append("<a class='waves-effect waves-purple btn small blue darken-1' onclick=speak('"+expressionText+"')><i class='material-icons left'>chat_bubble</i>"+expressionText+"</a>");
+           $('#newExpressions').append("<a class='waves-effect waves-purple btn small blue darken-1' onclick=animatedSay('"+expressionText+"')><i class='material-icons left'>chat_bubble</i>"+expressionText+"</a>");
          }
        }
     //////////////////////////////////////////////////////////////////////////////
