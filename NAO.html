@@ -128,10 +128,10 @@
   </div>
   <!-- THIRD TAB  -->
   <div id="recursiveFeedback">
-    <!-- <div class="row">
-        <div class="col s12 pane">
-          <h5 class="purple-text text-darken-3 center-align">Timer</h5>
-          <div class="col s6">
+    <div class="row">
+        <div class="col s2 pane">
+          <h5 class="purple-text text-darken-3 center-align">Current Question Timer</h5>
+          <!-- <div class="col s6">
             <div class="input-field col s12">
               <select id="minuteSelect">
                   <option value="" disabled selected>Options...</option>
@@ -140,15 +140,16 @@
                 </select>
               <a id="startTimer" class="waves-effect waves-light btn">Start timer</a>
             </div>
-          </div>
-          <div class="col s6 center-align">
+          </div> -->
+          <div class="col s12 center-align">
             <div class="timer" id="countdown">
-              00:00
+              <span id="minutes">00</span>:
+              <span id="seconds">00</span>
             </div>
-            <a id="resetTimer" class="waves-effect waves-light red btn">Reset timer</a>
+            <!-- <a id="resetTimer" class="waves-effect waves-light red btn">Reset timer</a> -->
           </div>
         </div>
-      </div> -->
+      </div>
     <div class="row">
       <div class="col s12">
         <ul class="collapsible" data-collapsible="expandable">
@@ -159,18 +160,18 @@
                 <a class="waves-effect waves-green btn small green lighten-1" onclick="$(this).addClass('used'); animatedSay('Yes, I can hear you...')">Yes, I can hear you...</a>→
                 <a class="waves-effect waves-green btn small green lighten-1" onclick="$(this).addClass('used'); intro()">Intro.</a>→
                 <a class="waves-effect waves-blue btn small orange" onclick="$(this).addClass('used'); animatedSay('Ok, first question')">Ok, first question:</a>→
-                <a class="waves-effect waves-blue btn small blue lighten-1" onclick="$(this).addClass('used'); question(1)">Question 1</a>→
+                <a class="waves-effect waves-blue btn small blue lighten-1 question" onclick="$(this).addClass('used'); question(1)">Question 1</a>→
                 <a class="waves-effect waves-blue btn small orange" onclick="$(this).addClass('used'); animatedSay('Alright, next question')">Alright, next question</a>→
-                <a class="waves-effect waves-blue btn small blue darken-2" onclick="$(this).addClass('used'); question(2)">Question 2</a> →
+                <a class="waves-effect waves-blue btn small blue darken-2 question" onclick="$(this).addClass('used'); question(2)">Question 2</a> →
               </div>
               <div class="row">
                 <a class="waves-effect waves-blue btn small blue darken-2" onclick="$(this).addClass('used'); remark()">Remarks for question 2</a> →
                 <a class="waves-effect waves-blue btn small orange" onclick="$(this).addClass('used'); animatedSay('Ok')">Ok</a>→
-                <a class="waves-effect waves-blue btn small blue lighten-1" onclick="$(this).addClass('used'); question(3)">Question 3</a> →
+                <a class="waves-effect waves-blue btn small blue lighten-1 question" onclick="$(this).addClass('used'); question(3)">Question 3</a> →
                 <a class="waves-effect waves-blue btn small orange" onclick="$(this).addClass('used'); animatedSay('Ok, so')">Ok, so</a>→
-                <a class="waves-effect waves-blue btn small blue lighten-1" onclick="$(this).addClass('used'); question(4)">Question 4</a> →
+                <a class="waves-effect waves-blue btn small blue lighten-1 question" onclick="$(this).addClass('used'); question(4)">Question 4</a> →
                 <a class="waves-effect waves-blue btn small orange" onclick="$(this).addClass('used'); animatedSay('Ok, final question')">Ok, final question:</a>→
-                <a class="waves-effect waves-blue btn small blue lighten-1" onclick="$(this).addClass('used'); question(5)">Question 5</a>
+                <a class="waves-effect waves-blue btn small blue lighten-1 question" onclick="$(this).addClass('used'); question(5)">Question 5</a>
               </div>
             </div>
           </li>
@@ -646,8 +647,33 @@
     }
 
     //////////////////////////////////////////////////////////////////////////////
-    // Timer TODO: make float action, smaller
+    // Timer
     //////////////////////////////////////////////////////////////////////////////
+    var totalSeconds;
+    var poto;
+
+    function setTime() {
+      ++totalSeconds;
+      $('#seconds').html(pad(totalSeconds % 60));
+      $('#minutes').html(pad(parseInt(totalSeconds / 60)));
+    }
+
+    function pad(val) {
+      var valString = val + "";
+      if (valString.length < 2) {
+        return "0" + valString;
+      } else {
+        return valString;
+      }
+    }
+
+    $('.question').click(function(){
+      $('#seconds').html('00');
+      $('#minutes').html('00');
+      totalSeconds = 0;
+      clearInterval(poto);
+      poto = setInterval(setTime, 1000);
+    });
     // var element, endTime, hours, mins, msLeft, time, timeout;
     //
     // function countdown(elementName, minutes) {
@@ -674,7 +700,7 @@
     //     updateTimer();
     //   }
     // }
-    //
+
     // $('#startTimer').click(function() {
     //   countdown("countdown", $('#minuteSelect').val());
     // })
@@ -682,6 +708,9 @@
     //   clearTimeout(timeout);
     //   $('#countdown').html('00:00');
     // })
+
+
+
 
     //////////////////////////////////////////////////////////////////////////////
     // video Feed code
